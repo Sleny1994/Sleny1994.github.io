@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="什么是JavaScript？JavaScript是由ECMAScript、DOM、BOM组成。  ECMAScript 描述了JS的语法和基本对象，是一种标准 DOM 文档对象模型（Document Object Model） BOM 浏览器对象模型（Browser Object Model）  什么是TypeScript？TypeScript是Microsoft开发和维护的一种面向对象的编程语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript和JavaScript的区别">
+<meta property="og:url" content="https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="什么是JavaScript？JavaScript是由ECMAScript、DOM、BOM组成。  ECMAScript 描述了JS的语法和基本对象，是一种标准 DOM 文档对象模型（Document Object Model） BOM 浏览器对象模型（Browser Object Model）  什么是TypeScript？TypeScript是Microsoft开发和维护的一种面向对象的编程语言">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-02T01:49:19.241Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>TypeScript和JavaScript的区别</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/06/06/VSCode%E4%B8%AD%E9%85%8D%E7%BD%AEC%20Sharp%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&text=TypeScript和JavaScript的区别"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&is_video=false&description=TypeScript和JavaScript的区别"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TypeScript和JavaScript的区别&body=Check out this article: https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&name=TypeScript和JavaScript的区别&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&t=TypeScript和JavaScript的区别"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFJavaScript%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是JavaScript？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTypeScript%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是TypeScript？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">TypeScript的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E4%B8%8EJS%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">4.</span> <span class="toc-text">TS与JS的差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">5.</span> <span class="toc-text">JS的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">6.</span> <span class="toc-text">TS的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">TypeScript的引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.</span> <span class="toc-text">TypeScript的基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E4%B8%AD%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%B0%83%E7%94%A8"><span class="toc-number">9.</span> <span class="toc-text">TS中函数的定义与调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E7%B1%BB"><span class="toc-number">10.</span> <span class="toc-text">TypeScript的类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">10.1.</span> <span class="toc-text">类的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8F%8A%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">10.2.</span> <span class="toc-text">实例化及构造函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">11.</span> <span class="toc-text">TypeScript的模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">11.1.</span> <span class="toc-text">模块化的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%9A%94%E6%A8%A1%E5%9D%97%E8%87%B3%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="toc-number">11.2.</span> <span class="toc-text">分隔模块至多个文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E7%BC%96%E8%AF%91"><span class="toc-number">12.</span> <span class="toc-text">TypeScript的编译</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        TypeScript和JavaScript的区别
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-05-31T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-06-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/TypeScript/">TypeScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/JavaScript/" rel="tag">JavaScript</a>, <a class="p-category" href="/tags/TypeScript/" rel="tag">TypeScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="什么是JavaScript？"><a href="#什么是JavaScript？" class="headerlink" title="什么是JavaScript？"></a>什么是JavaScript？</h2><p>JavaScript是由ECMAScript、DOM、BOM组成。</p>
+<ul>
+<li>ECMAScript 描述了JS的语法和基本对象，是一种标准</li>
+<li>DOM 文档对象模型（Document Object Model）</li>
+<li>BOM 浏览器对象模型（Browser Object Model）</li>
+</ul>
+<h2 id="什么是TypeScript？"><a href="#什么是TypeScript？" class="headerlink" title="什么是TypeScript？"></a>什么是TypeScript？</h2><p>TypeScript是Microsoft开发和维护的一种面向对象的编程语言。<br><br>TypeScript是JavaScript的超集，包含了JavaScript的所有元素，扩展了JavaScript的语法。</p>
+<h2 id="TypeScript的特点"><a href="#TypeScript的特点" class="headerlink" title="TypeScript的特点"></a>TypeScript的特点</h2><ul>
+<li>增加了静态类型、类、模块、接口和类型注解</li>
+<li>一般用于大型项目，易于维护</li>
+</ul>
+<h2 id="TS与JS的差异"><a href="#TS与JS的差异" class="headerlink" title="TS与JS的差异"></a>TS与JS的差异</h2><ul>
+<li>TS是JS的扩展，主要在核心语言方面和类概念的模塑方面</li>
+<li>JS可以在无需任何修改的情况下与TS一同工作，也可以将TS转换成JS</li>
+<li>TS通过类型注解提供编译时的静态类型检查</li>
+<li>TS中的数据要求带有明确的类型，JS不要求</li>
+<li>TS为函数提供了缺省参数值</li>
+<li>TS引入了类、模块的概念，可以把声明、数据、函数和类封装在模块中</li>
+</ul>
+<blockquote>
+<p>类型注解：TS提供了很多数据类型，通过类型对变量进行限制，就称之为类型注解，使用后，就不能随意改变变量的类型。<br><br>缺省参数：调用时只能从最后一个参数开始省略，即如果要省略一个参数，则必须省略其后面的所有参数</p>
+</blockquote>
+<h2 id="JS的优势"><a href="#JS的优势" class="headerlink" title="JS的优势"></a>JS的优势</h2><ul>
+<li>更适合简单的应用程序</li>
+<li>跨平台性更好且非常轻量级</li>
+</ul>
+<h2 id="TS的优势"><a href="#TS的优势" class="headerlink" title="TS的优势"></a>TS的优势</h2><ul>
+<li>更容易做代码重构</li>
+<li>更强调显示类型，易于掌握各种组件的交互方式</li>
+<li>适合代码的大小、复杂性和出错率增加时使用</li>
+</ul>
+<h2 id="TypeScript的引用"><a href="#TypeScript的引用" class="headerlink" title="TypeScript的引用"></a>TypeScript的引用</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/typescript&quot;</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">     <span class="comment">// TypeScript代码</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;lib/typescript.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;lib/typescript.compile.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="TypeScript的基本数据类型"><a href="#TypeScript的基本数据类型" class="headerlink" title="TypeScript的基本数据类型"></a>TypeScript的基本数据类型</h2><ul>
+<li>boolean<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="attr">isbool</span>: <span class="built_in">boolean</span> = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></li>
+<li>number<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JS和TS的所有数值都是浮点型</span></span><br><span class="line"><span class="comment">// TS中定义为number</span></span><br><span class="line"><span class="keyword">var</span> <span class="attr">isInt</span>:<span class="built_in">number</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="attr">isFloat</span>:<span class="built_in">number</span> = <span class="number">1.11</span>;</span><br></pre></td></tr></table></figure></li>
+<li>string<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用一对双引号或一对单引号来表示字符串</span></span><br><span class="line"><span class="keyword">var</span> <span class="attr">name</span>:<span class="built_in">string</span> = <span class="string">&#x27;Sam&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="attr">school</span>:<span class="built_in">string</span> = <span class="string">&quot;NNU&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>array<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组使用[]声明</span></span><br><span class="line"><span class="keyword">var</span> <span class="attr">num</span>:<span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> <span class="attr">name</span>:<span class="built_in">string</span>[] = [<span class="string">&#x27;Lilei&#x27;</span>, <span class="string">&#x27;Wangwu&#x27;</span>, <span class="string">&#x27;Hanmeimei&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问数组中的元素</span></span><br><span class="line"><span class="title function_">alter</span>(num[<span class="number">0</span>]);  <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义任何类型的数组，关键字Array</span></span><br><span class="line"><span class="keyword">var</span> <span class="attr">arr</span>:<span class="title class_">Array</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br></pre></td></tr></table></figure></li>
+<li>enum<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 枚举类型是TS中新增的</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Color</span>&#123;</span><br><span class="line">    <span class="title class_">Blue</span>,</span><br><span class="line">    <span class="title class_">Yellow</span>,</span><br><span class="line">    <span class="title class_">Red</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="attr">col</span>:<span class="title class_">Color</span> = <span class="title class_">Color</span>.<span class="property">Blue</span>;</span><br></pre></td></tr></table></figure></li>
+<li>any<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 和JS中变量的默认类型一样，指代动态的能够赋予任意类型</span></span><br><span class="line"><span class="keyword">var</span> <span class="attr">ex</span>:<span class="built_in">any</span> = <span class="number">1</span>;</span><br><span class="line">ex = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">ex = <span class="literal">false</span>;</span><br><span class="line"><span class="comment">// any可以配合数组使用</span></span><br><span class="line"><span class="keyword">var</span> <span class="attr">arr</span>:<span class="built_in">any</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;a&quot;</span>, <span class="literal">false</span>];</span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Tips:不要随意使用any类型，会导致数据类型泛滥</span></span><br></pre></td></tr></table></figure></li>
+<li>void<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// void表示没有任何类型，类似于空类型</span></span><br><span class="line"><span class="comment">// 一般用于定义空函数时，即当函数没有返回值时</span></span><br><span class="line"><span class="keyword">const</span> consoleText = (<span class="attr">text</span>:<span class="built_in">string</span>) : <span class="function"><span class="params">void</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(text);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// void类型的变量只能赋值为undefined和null</span></span><br></pre></td></tr></table></figure></li>
+<li>never<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// never指那些用不存在值的类型</span></span><br><span class="line"><span class="comment">// 是总会抛出异常或根本不会有返回值的函数表达式的返回值类型</span></span><br><span class="line"><span class="comment">// 当变量被永不为真的类型保护约束时，该变量也是never类型</span></span><br><span class="line"><span class="keyword">const</span> errFunc = (<span class="attr">message</span>:<span class="built_in">string</span>) : <span class="function"><span class="params">never</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(message);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> infFunc = () : <span class="function"><span class="params">never</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="TS中函数的定义与调用"><a href="#TS中函数的定义与调用" class="headerlink" title="TS中函数的定义与调用"></a>TS中函数的定义与调用</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常规函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">func_name</span>(<span class="params">arg1:<span class="built_in">number</span>, arg2:<span class="built_in">number</span>, ...</span>) : return_type&#123;</span><br><span class="line">    function_code;</span><br><span class="line">    <span class="keyword">return</span> &#123;data&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// function函数声明的关键字</span></span><br><span class="line"><span class="comment">// func_name函数名</span></span><br><span class="line"><span class="comment">// arg1,arg2,...参数</span></span><br><span class="line"><span class="comment">// return_type返回值的类型</span></span><br><span class="line"><span class="comment">// function_code函数的主体执行代码</span></span><br><span class="line"><span class="comment">// data返回的数据</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x:<span class="built_in">number</span>, y:<span class="built_in">number</span></span>) : <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">add</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//匿名函数</span></span><br><span class="line"><span class="comment">//没有名称只有主体的函数，不需要指定返回类型，其返回值由主题内的return而定</span></span><br><span class="line"><span class="keyword">var</span> <span class="title function_">nmadd</span>(<span class="params">x:<span class="built_in">number</span>, y:<span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">nmadd</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//可选参数</span></span><br><span class="line"><span class="comment">//在参数名后面，冒号前面添加一个问号</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">name</span>(<span class="params">firstName:<span class="built_in">string</span>, lastName?:<span class="built_in">string</span></span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(lastName) <span class="keyword">return</span> firstName + <span class="string">&quot; &quot;</span> + lastname;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> firstName;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> name1 = <span class="title function_">name</span>(<span class="string">&quot;Steven&quot;</span>);           <span class="comment">// Steven</span></span><br><span class="line"><span class="keyword">var</span> name2 = <span class="title function_">name</span>(<span class="string">&quot;Steven&quot;</span>, <span class="string">&quot;Job&quot;</span>);    <span class="comment">// Steven Job</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//默认参数</span></span><br><span class="line"><span class="comment">//在参数名后直接给定一个值，如果此参数没有传入值，则默认赋予该值</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">name</span>(<span class="params">firstName:<span class="built_in">string</span>, lastName = <span class="string">&quot;Meimei&quot;</span></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> firstName + <span class="string">&quot; &quot;</span> + lastName;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> name1 = <span class="title function_">name</span>(<span class="string">&quot;Steven&quot;</span>);           <span class="comment">// Steven Meimei</span></span><br><span class="line"><span class="keyword">var</span> name2 = <span class="title function_">name</span>(<span class="string">&quot;Steven&quot;</span>, <span class="string">&quot;Job&quot;</span>);    <span class="comment">// Steven Job</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="TypeScript的类"><a href="#TypeScript的类" class="headerlink" title="TypeScript的类"></a>TypeScript的类</h2><h3 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> 类名&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="built_in">string</span>;    <span class="comment">// 定义类的属性</span></span><br><span class="line">    <span class="title function_">fun</span>(<span class="params"></span>)&#123;          <span class="comment">// 定义类的方法</span></span><br><span class="line">                    <span class="comment">// 定义方法所要实现的功能       </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>类可以被继承，其方法和属性都可以在子类中被继承</li>
+<li>未定义任何方法的空类可以作为泛型类</li>
+</ul>
+<h3 id="实例化及构造函数"><a href="#实例化及构造函数" class="headerlink" title="实例化及构造函数"></a>实例化及构造函数</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">student</span>&#123;                     <span class="comment">// 定义student类</span></span><br><span class="line">    <span class="attr">name</span>:<span class="built_in">string</span>;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">myname:<span class="built_in">string</span></span>)&#123;    <span class="comment">// 定义构造函数</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = myname;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">study</span>(<span class="params"></span>)&#123;                       <span class="comment">// 定义类的方法</span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;h1&gt; My name is &quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&quot;.&lt;/h1&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">write</span>() : <span class="built_in">string</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;write name: &quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> <span class="title function_">student</span>(<span class="string">&quot;Bob&quot;</span>);       <span class="comment">// 类的实例化</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;h1&gt;&quot;</span> + s1.<span class="property">name</span> + <span class="string">&quot;&lt;/h1&gt;&quot;</span>);</span><br><span class="line">s1.<span class="title function_">study</span>();                        <span class="comment">// 调用类的方法</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;h1&gt;&quot;</span> + s1.<span class="title function_">write</span>() + <span class="string">&quot;&lt;/h1&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="TypeScript的模块"><a href="#TypeScript的模块" class="headerlink" title="TypeScript的模块"></a>TypeScript的模块</h2><h3 id="模块化的特点"><a href="#模块化的特点" class="headerlink" title="模块化的特点"></a>模块化的特点</h3><ul>
+<li>提高代码的可复用性</li>
+<li>分离类的内部类和类的内部方法，强化面向对象的特征</li>
+<li>使用module关键字定义模块</li>
+<li>使用export关键字使接口、类等成员对模块外可见<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 未模块化时的代码：</span></span><br><span class="line"><span class="comment">// 验证的封装</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">StringValidator</span> &#123;  </span><br><span class="line"><span class="comment">//定义验证接口</span></span><br><span class="line">  <span class="title function_">isAcceptable</span>(<span class="attr">s</span>:<span class="built_in">string</span>) : <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> lettersRegexp = <span class="regexp">/^[A-Za-z]+$/</span>;</span><br><span class="line"><span class="keyword">var</span> numberRegexp = <span class="regexp">/^[0-9]+$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LettersOnlyValidator</span> <span class="keyword">implements</span> <span class="title class_">StringValidator</span> &#123;　</span><br><span class="line"><span class="comment">//实现接口</span></span><br><span class="line">  <span class="title function_">isAcceptable</span>(<span class="params">s:<span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> lettersRegexp.<span class="title function_">test</span>(s);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ZipCodeValidator</span> <span class="keyword">implements</span> <span class="title class_">StringValidator</span> &#123;   </span><br><span class="line"><span class="comment">//实现接口</span></span><br><span class="line">  <span class="title function_">isAcceptable</span>(<span class="params">s:<span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> s.<span class="property">length</span> === <span class="number">5</span> &amp;&amp; numberRegexp.<span class="title function_">test</span>(s);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 验证的过程</span></span><br><span class="line"><span class="keyword">var</span> strings = [<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;98052&#x27;</span>, <span class="string">&#x27;101&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> <span class="attr">validators</span>: &#123; [<span class="attr">s</span>:<span class="built_in">string</span>]: <span class="title class_">StringValidator</span>; &#125; = &#123;&#125;;</span><br><span class="line">validators[<span class="string">&#x27;ZIP code&#x27;</span>] = <span class="keyword">new</span> <span class="title class_">ZipCodeValidator</span>();  </span><br><span class="line"><span class="comment">//实例化类</span></span><br><span class="line">validators[<span class="string">&#x27;Letters only&#x27;</span>] = <span class="keyword">new</span> <span class="title class_">LettersOnlyValidator</span>(); </span><br><span class="line"><span class="comment">//实例化类</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&amp;ltstrings.<span class="property">length</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> name <span class="keyword">in</span> validators) &#123;</span><br><span class="line">       <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&quot;&#x27;</span> + strings[i] + <span class="string">&#x27;&quot; &#x27;</span> + (validators[name].<span class="title function_">isAcceptable</span>(strings[i]) ? <span class="string">&#x27; matches &#x27;</span> : <span class="string">&#x27; does not match &#x27;</span>) + name+<span class="string">&quot;&lt;br&gt;&quot;</span>); </span><br><span class="line">        <span class="comment">//调用类的方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块化后的代码：</span></span><br><span class="line"><span class="variable language_">module</span> <span class="title class_">Validation</span> &#123;   </span><br><span class="line"><span class="comment">//定义模块</span></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">StringValidator</span> &#123;  </span><br><span class="line">  <span class="comment">//声明接口对外部可以使用</span></span><br><span class="line">    <span class="title function_">isAcceptable</span>(<span class="attr">s</span>:<span class="built_in">string</span>) : <span class="built_in">boolean</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> lettersRegexp = <span class="regexp">/^[A-Za-z]+$/</span>;</span><br><span class="line">  <span class="keyword">var</span> numberRegexp = <span class="regexp">/^[0-9]+$/</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">LettersOnlyValidator</span> <span class="keyword">implements</span> <span class="title class_">StringValidator</span>&#123;  </span><br><span class="line">  <span class="comment">//声明类对外部可用</span></span><br><span class="line">    <span class="title function_">isAcceptable</span>(<span class="params">s:<span class="built_in">string</span></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> lettersRegexp.<span class="title function_">test</span>(s);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">ZipCodeValidator</span> <span class="keyword">implements</span> <span class="title class_">StringValidator</span> &#123;</span><br><span class="line">    <span class="title function_">isAcceptable</span>(<span class="params">s:<span class="built_in">string</span></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> s.<span class="property">length</span> === <span class="number">5</span> &amp;&amp; numberRegexp.<span class="title function_">test</span>(s);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> strings = [<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;98052&#x27;</span>, <span class="string">&#x27;101&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> <span class="attr">validators</span>: &#123; [<span class="attr">s</span>:<span class="built_in">string</span>] : <span class="title class_">Validation</span>.<span class="property">StringValidator</span>; &#125; = &#123;&#125;;</span><br><span class="line">validators[<span class="string">&#x27;ZIP code&#x27;</span>] = <span class="keyword">new</span> <span class="title class_">Validation</span>.<span class="title class_">ZipCodeValidator</span>();  </span><br><span class="line"><span class="comment">//使用模块中的类</span></span><br><span class="line">validators[<span class="string">&#x27;Letters only&#x27;</span>] = <span class="keyword">new</span> <span class="title class_">Validation</span>.<span class="title class_">LettersOnlyValidator</span>();</span><br><span class="line"><span class="comment">// 显示匹配结果</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&amp;ltstrings.<span class="property">length</span>;i++)&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> name <span class="keyword">in</span> validators) &#123;</span><br><span class="line">     <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&quot;&#x27;</span> + strings[i] + <span class="string">&#x27;&quot; &#x27;</span> + (validators[name].<span class="title function_">isAcceptable</span>(strings[i]) ? <span class="string">&#x27; matches &#x27;</span> : <span class="string">&#x27; does not match &#x27;</span>) + name+<span class="string">&quot;&lt;br&gt;&quot;</span>); <span class="comment">// 使用方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="分隔模块至多个文件"><a href="#分隔模块至多个文件" class="headerlink" title="分隔模块至多个文件"></a>分隔模块至多个文件</h3><ul>
+<li>文件1：Validation.ts<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span> <span class="title class_">Validation</span> &#123;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">StringValidator</span> &#123;</span><br><span class="line">      <span class="title function_">isAcceptable</span>(<span class="attr">s</span>: <span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>文件2：LettersOnlyValidator.ts<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference path=&quot;Validation.ts&quot; /&gt;</span></span><br><span class="line"><span class="variable language_">module</span> <span class="title class_">Validation</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> lettersRegexp = <span class="regexp">/^[A-Za-z]+$/</span>;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">LettersOnlyValidator</span> <span class="keyword">implements</span> <span class="title class_">StringValidator</span> &#123;</span><br><span class="line">      <span class="title function_">isAcceptable</span>(<span class="params">s: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> lettersRegexp.<span class="title function_">test</span>(s);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>文件3：ZipCodeValidator.ts<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference path=&quot;Validation.ts&quot; /&gt;</span></span><br><span class="line"><span class="variable language_">module</span> <span class="title class_">Validation</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> numberRegexp = <span class="regexp">/^[0-9]+$/</span>;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">ZipCodeValidator</span> <span class="keyword">implements</span> <span class="title class_">StringValidator</span> &#123;</span><br><span class="line">    <span class="title function_">isAcceptable</span>(<span class="params">s: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> s.<span class="property">length</span> === <span class="number">5</span> &amp;&amp; numberRegexp.<span class="title function_">test</span>(s);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>文件4：Main.ts<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference path=&quot;Validation.ts&quot; /&gt;</span></span><br><span class="line"><span class="comment">/// &lt;reference path=&quot;LettersOnlyValidator.ts&quot; /&gt;</span></span><br><span class="line"><span class="comment">/// &lt;reference path=&quot;ZipCodeValidator.ts&quot; /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> strings = [<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;98052&#x27;</span>, <span class="string">&#x27;101&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> <span class="attr">validators</span>: &#123; [<span class="attr">s</span>: <span class="built_in">string</span>]: <span class="title class_">Validation</span>.<span class="property">StringValidator</span>; &#125; = &#123;&#125;;</span><br><span class="line">validators[<span class="string">&#x27;ZIP code&#x27;</span>] = <span class="keyword">new</span> <span class="title class_">Validation</span>.<span class="title class_">ZipCodeValidator</span>();</span><br><span class="line">validators[<span class="string">&#x27;Letters only&#x27;</span>] = <span class="keyword">new</span> <span class="title class_">Validation</span>.<span class="title class_">LettersOnlyValidator</span>();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&amp;ltstrings.<span class="property">length</span>;i++)&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> name <span class="keyword">in</span> validators) &#123;</span><br><span class="line">     <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&quot;&#x27;</span> + strings[i] + <span class="string">&#x27;&quot; &#x27;</span> + (validators[name].<span class="title function_">isAcceptable</span>(strings[i]) ? <span class="string">&#x27; matches &#x27;</span> : <span class="string">&#x27; does not match &#x27;</span>) + name+<span class="string">&quot;&lt;br&gt;&quot;</span>); <span class="comment">//调用类的方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt; reference path=“Validation.ts” /&gt;&lt;br&gt;</span></span><br><span class="line"><span class="comment">/// &lt; reference path=“LettersOnlyValidator.ts” /&gt;&lt;br&gt;</span></span><br><span class="line"><span class="comment">/// &lt; reference path=“ZipCodeValidator.ts” /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//文档注释一般用于告知TS编译器该文件依赖于哪些文件，若依赖文件不存在则编译失败，一般建议改注释最好加上</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="TypeScript的编译"><a href="#TypeScript的编译" class="headerlink" title="TypeScript的编译"></a>TypeScript的编译</h2><p>.js文件可以直接在浏览器内运行，但.ts则不行，所以Ibanez建议将稳定的module提前编译成js文件放至工程中，同时在引用编译生成的文件时，还需注意顺序。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFJavaScript%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是JavaScript？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTypeScript%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是TypeScript？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">TypeScript的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E4%B8%8EJS%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">4.</span> <span class="toc-text">TS与JS的差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">5.</span> <span class="toc-text">JS的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">6.</span> <span class="toc-text">TS的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">TypeScript的引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.</span> <span class="toc-text">TypeScript的基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E4%B8%AD%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%B0%83%E7%94%A8"><span class="toc-number">9.</span> <span class="toc-text">TS中函数的定义与调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E7%B1%BB"><span class="toc-number">10.</span> <span class="toc-text">TypeScript的类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">10.1.</span> <span class="toc-text">类的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8F%8A%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">10.2.</span> <span class="toc-text">实例化及构造函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">11.</span> <span class="toc-text">TypeScript的模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">11.1.</span> <span class="toc-text">模块化的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%9A%94%E6%A8%A1%E5%9D%97%E8%87%B3%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="toc-number">11.2.</span> <span class="toc-text">分隔模块至多个文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E7%9A%84%E7%BC%96%E8%AF%91"><span class="toc-number">12.</span> <span class="toc-text">TypeScript的编译</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&text=TypeScript和JavaScript的区别"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&is_video=false&description=TypeScript和JavaScript的区别"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TypeScript和JavaScript的区别&body=Check out this article: https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&title=TypeScript和JavaScript的区别"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&name=TypeScript和JavaScript的区别&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/&t=TypeScript和JavaScript的区别"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

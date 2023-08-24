@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Identity定义ASP.NET Core Identity是用于构建ASP.NET Core Web应用程序的身份认证系统，包括用户数据，用户身份以及注册登录信息数据存储，可以让您的应用拥有登录功能以及持续化存储登录用户相关的数据。  一个API，支持用户界面UI登录功能 管理用户、密码、配置文件数据、角色、声明、令牌、电子邮件确认等  用户可使用存储在 Identity 中的登录信息创建帐户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET Core MVC Identity">
+<meta property="og:url" content="https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="Identity定义ASP.NET Core Identity是用于构建ASP.NET Core Web应用程序的身份认证系统，包括用户数据，用户身份以及注册登录信息数据存储，可以让您的应用拥有登录功能以及持续化存储登录用户相关的数据。  一个API，支持用户界面UI登录功能 管理用户、密码、配置文件数据、角色、声明、令牌、电子邮件确认等  用户可使用存储在 Identity 中的登录信息创建帐户">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-24T07:47:08.869Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="CSharp">
+<meta property="article:tag" content="NET">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ASP.NET Core MVC Identity</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/08/24/ASP.NET%20Core%20MVC%20Filter/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&text=ASP.NET Core MVC Identity"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&is_video=false&description=ASP.NET Core MVC Identity"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASP.NET Core MVC Identity&body=Check out this article: https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&name=ASP.NET Core MVC Identity&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&t=ASP.NET Core MVC Identity"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Identity%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">Identity定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Identity%E5%BA%94%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">Identity应用步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Identity%E6%B5%8B%E8%AF%95"><span class="toc-number">3.</span> <span class="toc-text">Identity测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81"><span class="toc-number">4.</span> <span class="toc-text">身份验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%9F%BA%E6%9E%B6%E9%A1%B9%E7%9B%AE"><span class="toc-number">5.</span> <span class="toc-text">添加基架项目</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        ASP.NET Core MVC Identity
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-08-23T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-08-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSharp/">CSharp</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CSharp/" rel="tag">CSharp</a>, <a class="p-category" href="/tags/NET/" rel="tag">NET</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Identity定义"><a href="#Identity定义" class="headerlink" title="Identity定义"></a>Identity定义</h2><p>ASP.NET Core Identity是用于构建ASP.NET Core Web应用程序的身份认证系统，包括用户数据，用户身份以及注册登录信息数据存储，可以让您的应用拥有登录功能以及持续化存储登录用户相关的数据。</p>
+<ul>
+<li>一个API，支持用户界面UI登录功能</li>
+<li>管理用户、密码、配置文件数据、角色、声明、令牌、电子邮件确认等</li>
+</ul>
+<p>用户可使用存储在 Identity 中的登录信息创建帐户，或者可使用外部登录提供程序。支持的外部登录提供程序包括 Facebook、Google、Microsoft 帐户和 Twitter。</p>
+<p>Identity 通常使用 SQL Server 数据库进行配置，以存储用户名、密码和配置文件数据。或者，可使用其他持久性存储，例如 Azure 表存储。</p>
+<h2 id="Identity应用步骤"><a href="#Identity应用步骤" class="headerlink" title="Identity应用步骤"></a>Identity应用步骤</h2><ol>
+<li>通过模板创建项目 - ASP.NET Core Web应用（MVC），在其它信息页面，身份验证类型栏选择【个人账户】<ul>
+<li>生成的项目将 ASP.NET Core Identity作为Razor类库提供。IdentityRazor 类库公开具有 Identity 区域的终结点</li>
+</ul>
+</li>
+<li>创建数据库并迁移</li>
+<li>修改数据库连接字符串</li>
+<li>数据库更新迁移，在VS中打开视图-其它窗口-程序包管理器控制台，输入<code>Update-Database</code>，进行数据库迁移，再完成后打开数据库，会发现多出了几张表：<ul>
+<li>dbo._EFMigrationsHistory</li>
+<li>dbo.AspNetRoleClaims</li>
+<li>dbo.AspNetRoles</li>
+<li>dbo.AspNetUserClaims</li>
+<li>dbo.AspNetUserLogins</li>
+<li>dbo.AspNetUserRoles</li>
+<li>dbo.AspNetUsers</li>
+<li>dbo.AspNetUserTokens</li>
+</ul>
+</li>
+<li>配置Identity服务<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Program.cs</span></span><br><span class="line"><span class="keyword">using</span> DemoCoreIdentity.Data;</span><br><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Identity;</span><br><span class="line"><span class="keyword">using</span> Microsoft.EntityFrameworkCore;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> builder = WebApplication.CreateBuilder(args);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add services to the container.</span></span><br><span class="line"><span class="keyword">var</span> connectionString = builder.Configuration.GetConnectionString(<span class="string">&quot;DefaultConnection&quot;</span>);</span><br><span class="line">builder.Services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;</span><br><span class="line">    options.UseSqlServer(connectionString));</span><br><span class="line">builder.Services.AddDatabaseDeveloperPageExceptionFilter();</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">region</span> Identity</span></span><br><span class="line"></span><br><span class="line">builder.Services.AddDefaultIdentity&lt;IdentityUser&gt;(options =&gt; options.SignIn.RequireConfirmedAccount = <span class="literal">true</span>)</span><br><span class="line">    .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;();</span><br><span class="line">builder.Services.AddControllersWithViews();</span><br><span class="line"></span><br><span class="line">builder.Services.Configure&lt;IdentityOptions&gt;(options =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Password settings.</span></span><br><span class="line">    options.Password.RequireDigit = <span class="literal">true</span>;</span><br><span class="line">    options.Password.RequireLowercase = <span class="literal">true</span>;</span><br><span class="line">    options.Password.RequireNonAlphanumeric = <span class="literal">true</span>;</span><br><span class="line">    options.Password.RequireUppercase = <span class="literal">true</span>;</span><br><span class="line">    options.Password.RequiredLength = <span class="number">6</span>;</span><br><span class="line">    options.Password.RequiredUniqueChars = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Lockout settings.</span></span><br><span class="line">    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(<span class="number">5</span>);</span><br><span class="line">    options.Lockout.MaxFailedAccessAttempts = <span class="number">5</span>;</span><br><span class="line">    options.Lockout.AllowedForNewUsers = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// User settings.</span></span><br><span class="line">    options.User.AllowedUserNameCharacters =</span><br><span class="line">    <span class="string">&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+&quot;</span>;</span><br><span class="line">    options.User.RequireUniqueEmail = <span class="literal">false</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">builder.Services.ConfigureApplicationCookie(options =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Cookie settings</span></span><br><span class="line">    options.Cookie.HttpOnly = <span class="literal">true</span>;</span><br><span class="line">    options.ExpireTimeSpan = TimeSpan.FromMinutes(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    options.LoginPath = <span class="string">&quot;/Identity/Account/Login&quot;</span>;</span><br><span class="line">    options.AccessDeniedPath = <span class="string">&quot;/Identity/Account/AccessDenied&quot;</span>;</span><br><span class="line">    options.SlidingExpiration = <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = builder.Build();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Configure the HTTP request pipeline.</span></span><br><span class="line"><span class="keyword">if</span> (app.Environment.IsDevelopment())</span><br><span class="line">&#123;</span><br><span class="line">    app.UseMigrationsEndPoint();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    app.UseExceptionHandler(<span class="string">&quot;/Home/Error&quot;</span>);</span><br><span class="line">    <span class="comment">// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.</span></span><br><span class="line">    app.UseHsts();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.UseHttpsRedirection();</span><br><span class="line">app.UseStaticFiles();</span><br><span class="line"></span><br><span class="line">app.UseRouting();</span><br><span class="line"></span><br><span class="line">app.UseAuthentication();</span><br><span class="line">app.UseAuthorization();</span><br><span class="line"></span><br><span class="line">app.MapControllerRoute(</span><br><span class="line">    name: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">    pattern: <span class="string">&quot;&#123;controller=Home&#125;/&#123;action=Index&#125;/&#123;id?&#125;&quot;</span>);</span><br><span class="line">app.MapRazorPages();</span><br><span class="line"></span><br><span class="line">app.Run();</span><br></pre></td></tr></table></figure>
+ 上述代码用默认选项值来配置 Identity，可通过依赖关系注入向应用提供服务。通过调用 UseAuthentication 启用 Identity， UseAuthentication 向请求管道添加身份验证中间件。</li>
+</ol>
+<h2 id="Identity测试"><a href="#Identity测试" class="headerlink" title="Identity测试"></a>Identity测试</h2><ol>
+<li>运行程序，默认打开Home&#x2F;Index页面</li>
+<li>注册用户，点击注册链接（右上角Register），打开注册窗口，输入用户名&#x2F;密码，点击注册按钮即可（当注册校验不通过时，会有错误提示）</li>
+<li>用户登录，点击登录链接（右上角Login），登录成功后会显示用户名</li>
+<li>用户登出，点击登出链接（右上角Logout），会重新返回Home&#x2F;Index页面并显示未登录状态</li>
+</ol>
+<h2 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h2><p>通过模板创建的项目，默认情况下，Home&#x2F;Index是没有身份验证的，可以在HomeController增加Authorize特性，增加身份验证，当添加成功后，再次打开首页时，会自动跳转到登录页面。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controllers/HomeController.cs</span></span><br><span class="line"><span class="keyword">using</span> DemoCoreIdentity.Models;</span><br><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Authorization;</span><br><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Mvc;</span><br><span class="line"><span class="keyword">using</span> System.Diagnostics;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">DemoCoreIdentity.Controllers</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Authorize</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">HomeController</span> : <span class="title">Controller</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> ILogger&lt;HomeController&gt; _logger;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">HomeController</span>(<span class="params">ILogger&lt;HomeController&gt; logger</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _logger = logger;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> IActionResult <span class="title">Index</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> View();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> IActionResult <span class="title">Privacy</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> View();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        [<span class="meta">ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)</span>]</span><br><span class="line">        <span class="function"><span class="keyword">public</span> IActionResult <span class="title">Error</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> View(<span class="keyword">new</span> ErrorViewModel &#123; RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【注】：如果要对某一个Action增加验证，可以将Authorize特性添加在action上，进行更详细的身份验证。</p>
+<h2 id="添加基架项目"><a href="#添加基架项目" class="headerlink" title="添加基架项目"></a>添加基架项目</h2><ol>
+<li>右键项目-添加-新搭建基架的项目</li>
+<li>选择标识，点击添加</li>
+<li>勾选替代所有文件，数据上下文类：ApplicationDbContext，选择添加</li>
+<li>等待程序自动运行结束后，可以查看Account目录下多了很多文件，其中就包括Login.cshtml&#x2F;Register.cshtml等</li>
+<li>可以根据自己的需求修改定制开发身份验证类页面</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Identity%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">Identity定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Identity%E5%BA%94%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">Identity应用步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Identity%E6%B5%8B%E8%AF%95"><span class="toc-number">3.</span> <span class="toc-text">Identity测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81"><span class="toc-number">4.</span> <span class="toc-text">身份验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%9F%BA%E6%9E%B6%E9%A1%B9%E7%9B%AE"><span class="toc-number">5.</span> <span class="toc-text">添加基架项目</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&text=ASP.NET Core MVC Identity"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&is_video=false&description=ASP.NET Core MVC Identity"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASP.NET Core MVC Identity&body=Check out this article: https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&title=ASP.NET Core MVC Identity"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&name=ASP.NET Core MVC Identity&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Identity/&t=ASP.NET Core MVC Identity"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

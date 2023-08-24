@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="函数流程 根据需要的键值整理出需要排序的数组 设定是升序排序还是降序排序 根据排序后的数组重新排列原有数组  代码实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP-二维数组根据键值排序">
+<meta property="og:url" content="https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="函数流程 根据需要的键值整理出需要排序的数组 设定是升序排序还是降序排序 根据排序后的数组重新排列原有数组  代码实现">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-07T08:52:41.000Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>PHP-二维数组根据键值排序</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2020/03/05/Web%E6%B8%97%E9%80%8F/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&text=PHP-二维数组根据键值排序"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&is_video=false&description=PHP-二维数组根据键值排序"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP-二维数组根据键值排序&body=Check out this article: https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&name=PHP-二维数组根据键值排序&description=&lt;h2 id=&#34;函数流程&#34;&gt;&lt;a href=&#34;#函数流程&#34; class=&#34;headerlink&#34; title=&#34;函数流程&#34;&gt;&lt;/a&gt;函数流程&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;根据需要的键值整理出需要排序的数组&lt;/li&gt;
+&lt;li&gt;设定是升序排序还是降序排序&lt;/li&gt;
+&lt;li&gt;根据排序后的数组重新排列原有数组&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;代码实现&#34;&gt;&lt;a href=&#34;#代码实现&#34; class=&#34;headerlink&#34; title=&#34;代码实现&#34;&gt;&lt;/a&gt;代码实现&lt;/h2&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&t=PHP-二维数组根据键值排序"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">函数流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E6%98%BE%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">结果显示</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        PHP-二维数组根据键值排序
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-20T16:00:00.000Z" class="dt-published" itemprop="datePublished">2019-12-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/PHP/">PHP</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/PHP/" rel="tag">PHP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="函数流程"><a href="#函数流程" class="headerlink" title="函数流程"></a>函数流程</h2><ol>
+<li>根据需要的键值整理出需要排序的数组</li>
+<li>设定是升序排序还是降序排序</li>
+<li>根据排序后的数组重新排列原有数组</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><span id="more"></span>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据数组中某个键值的大小进行排序，仅支持二维数组。</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> array $array 排序数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> string $key 键值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bool $asc 默认正序，false为降序</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> array 排序后的数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">arraySortByKey</span>(<span class="params"><span class="variable">$array</span> = <span class="keyword">array</span>(<span class="params"></span>), <span class="variable">$key</span> = <span class="string">&quot; &quot;</span>, <span class="variable">$asc</span> = <span class="literal">true</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$result</span> = <span class="keyword">array</span>();</span><br><span class="line">        <span class="comment">/** 根据需要的键值整理出需要排序的数组 */</span></span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable">$array</span> <span class="keyword">as</span> <span class="variable">$k</span> =&gt; <span class="variable">$v</span>) &#123;</span><br><span class="line">            <span class="comment"># code...</span></span><br><span class="line">            <span class="variable">$values</span>[<span class="variable">$k</span>] = <span class="keyword">isset</span>(<span class="variable">$v</span>[<span class="variable">$key</span>]) ? <span class="variable">$v</span>[<span class="variable">$key</span>] : <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//print_r($values);</span></span><br><span class="line">        <span class="comment">//echo &#x27;&lt;br&gt;&#x27;;</span></span><br><span class="line">        <span class="keyword">unset</span>(<span class="variable">$v</span>);  <span class="comment">//销毁变量</span></span><br><span class="line">        <span class="variable">$asc</span> ? <span class="title function_ invoke__">asort</span>(<span class="variable">$values</span>) : <span class="title function_ invoke__">arsort</span>(<span class="variable">$values</span>);  </span><br><span class="line">        <span class="comment">//对需要排序的键值进行排序 $asc = true -&gt; asort(); $asc = false -&gt; arsort()</span></span><br><span class="line">        <span class="comment">//print_r($values);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/** 重新排列原有数组 */</span></span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable">$values</span> <span class="keyword">as</span> <span class="variable">$k</span> =&gt; <span class="variable">$v</span>)&#123;</span><br><span class="line">            <span class="variable">$result</span>[<span class="variable">$k</span>] = <span class="variable">$array</span>[<span class="variable">$k</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 定义数组 */</span></span><br><span class="line">    <span class="variable">$data</span> = <span class="keyword">array</span>(</span><br><span class="line">        <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">&#x27;post_id&#x27;</span> =&gt; <span class="number">1</span>,</span><br><span class="line">            <span class="string">&#x27;title&#x27;</span> =&gt; <span class="string">&#x27;如何学好PHP&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;reply_num&#x27;</span> =&gt; <span class="number">582</span></span><br><span class="line">        ),</span><br><span class="line">        <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">&#x27;post_id&#x27;</span> =&gt; <span class="number">2</span>,</span><br><span class="line">            <span class="string">&#x27;title&#x27;</span> =&gt; <span class="string">&#x27;PHP数组常用函数汇总&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;reply_num&#x27;</span> =&gt; <span class="number">182</span></span><br><span class="line">        ),</span><br><span class="line">        <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">&#x27;post_id&#x27;</span> =&gt; <span class="number">3</span>,</span><br><span class="line">            <span class="string">&#x27;title&#x27;</span> =&gt; <span class="string">&#x27;PHP字符串常用函数汇总&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;reply_num&#x27;</span> =&gt; <span class="number">982</span></span><br><span class="line">        )</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="variable">$new_array</span> = <span class="title function_ invoke__">arraySortByKey</span>(<span class="variable">$data</span>, <span class="string">&#x27;reply_num&#x27;</span>, <span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;&lt;pre&gt;&#x27;</span>;</span><br><span class="line">    <span class="title function_ invoke__">print_r</span>(<span class="variable">$new_array</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="结果显示"><a href="#结果显示" class="headerlink" title="结果显示"></a>结果显示</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [2] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [post_id] =&gt; 3</span><br><span class="line">            [title] =&gt; PHP字符串常用函数汇总</span><br><span class="line">            [reply_num] =&gt; 982</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [0] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [post_id] =&gt; 1</span><br><span class="line">            [title] =&gt; 如何学好PHP</span><br><span class="line">            [reply_num] =&gt; 582</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [1] =&gt; Array</span><br><span class="line">        (</span><br><span class="line">            [post_id] =&gt; 2</span><br><span class="line">            [title] =&gt; PHP数组常用函数汇总</span><br><span class="line">            [reply_num] =&gt; 182</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">函数流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E6%98%BE%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">结果显示</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&text=PHP-二维数组根据键值排序"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&is_video=false&description=PHP-二维数组根据键值排序"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP-二维数组根据键值排序&body=Check out this article: https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&title=PHP-二维数组根据键值排序"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&name=PHP-二维数组根据键值排序&description=&lt;h2 id=&#34;函数流程&#34;&gt;&lt;a href=&#34;#函数流程&#34; class=&#34;headerlink&#34; title=&#34;函数流程&#34;&gt;&lt;/a&gt;函数流程&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;根据需要的键值整理出需要排序的数组&lt;/li&gt;
+&lt;li&gt;设定是升序排序还是降序排序&lt;/li&gt;
+&lt;li&gt;根据排序后的数组重新排列原有数组&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;代码实现&#34;&gt;&lt;a href=&#34;#代码实现&#34; class=&#34;headerlink&#34; title=&#34;代码实现&#34;&gt;&lt;/a&gt;代码实现&lt;/h2&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/&t=PHP-二维数组根据键值排序"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

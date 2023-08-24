@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="获取自定义的BAQ12345select Company ,QueryID ,AuthorID ,Description ,DisplayPhrase ,IsGlobal,IsShared ,SystemFlag ,Version ,Updatable ,SystemFlag from Ice.QueryHdr where SystemFlag &#x3D; 0 and IsShared &#x3D; 1 order">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Get Epicor Customizations by SQL">
+<meta property="og:url" content="https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="获取自定义的BAQ12345select Company ,QueryID ,AuthorID ,Description ,DisplayPhrase ,IsGlobal,IsShared ,SystemFlag ,Version ,Updatable ,SystemFlag from Ice.QueryHdr where SystemFlag &#x3D; 0 and IsShared &#x3D; 1 order">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-19T05:32:09.969Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="ERP">
+<meta property="article:tag" content="Epicor">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Get Epicor Customizations by SQL</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/07/01/Power%20Shell/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/06/08/C%20Sharp%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&text=Get Epicor Customizations by SQL"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&is_video=false&description=Get Epicor Customizations by SQL"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Get Epicor Customizations by SQL&body=Check out this article: https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&name=Get Epicor Customizations by SQL&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&t=Get Epicor Customizations by SQL"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84BAQ"><span class="toc-number">1.</span> <span class="toc-text">获取自定义的BAQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84BPM"><span class="toc-number">2.</span> <span class="toc-text">获取自定义的BPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84Dashboard"><span class="toc-number">3.</span> <span class="toc-text">获取自定义的Dashboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84Customization-Form"><span class="toc-number">4.</span> <span class="toc-text">获取自定义的Customization Form</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84Quick-Search"><span class="toc-number">5.</span> <span class="toc-text">获取自定义的Quick Search</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84Posting-Rules"><span class="toc-number">6.</span> <span class="toc-text">获取自定义的Posting Rules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84BAQ-amp-WhereUsed"><span class="toc-number">7.</span> <span class="toc-text">获取自定义的BAQ &amp; WhereUsed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96UD-Field"><span class="toc-number">8.</span> <span class="toc-text">获取UD Field</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Get Epicor Customizations by SQL
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-06-18T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-06-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/ERP/">ERP</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/ERP/" rel="tag">ERP</a>, <a class="p-category" href="/tags/Epicor/" rel="tag">Epicor</a>, <a class="p-category" href="/tags/SQL/" rel="tag">SQL</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="获取自定义的BAQ"><a href="#获取自定义的BAQ" class="headerlink" title="获取自定义的BAQ"></a>获取自定义的BAQ</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> Company ,QueryID ,AuthorID ,Description ,DisplayPhrase ,IsGlobal</span><br><span class="line">,IsShared ,SystemFlag ,Version ,Updatable ,SystemFlag </span><br><span class="line"><span class="keyword">from</span> Ice.QueryHdr </span><br><span class="line"><span class="keyword">where</span> SystemFlag <span class="operator">=</span> <span class="number">0</span> <span class="keyword">and</span> IsShared <span class="operator">=</span> <span class="number">1</span> </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> QueryID, AuthorID</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取自定义的BPM"><a href="#获取自定义的BPM" class="headerlink" title="获取自定义的BPM"></a>获取自定义的BPM</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 待验证</span></span><br><span class="line"><span class="keyword">select</span> Company,</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">when</span> Source <span class="operator">=</span> <span class="string">&#x27;BO&#x27;</span> <span class="keyword">then</span> <span class="string">&#x27;BPM&#x27;</span> </span><br><span class="line">     <span class="keyword">when</span> Source <span class="operator">=</span> <span class="string">&#x27;DB&#x27;</span> <span class="keyword">then</span> <span class="string">&#x27;DataDirectives&#x27;</span></span><br><span class="line">     <span class="keyword">when</span> Source <span class="operator">=</span> <span class="string">&#x27;DQ&#x27;</span> <span class="keyword">then</span> <span class="string">&#x27;BAQMethod&#x27;</span> </span><br><span class="line"><span class="keyword">else</span> <span class="string">&#x27;Other&#x27;</span> <span class="keyword">end</span> Source,</span><br><span class="line">DirectiveGroup ,BpMethodCode ,DirectiveType ,Name ,[<span class="keyword">Order</span>] ,</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">when</span> IsEnabled <span class="operator">=</span> <span class="number">1</span> <span class="keyword">then</span> <span class="string">&#x27;InUse&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;Obsolete&#x27;</span> <span class="keyword">end</span> [Status] ,Body </span><br><span class="line"><span class="keyword">from</span> Ice.BpDirective </span><br><span class="line"><span class="keyword">where</span> Thumbnail<span class="operator">&lt;&gt;</span><span class="string">&#x27;&#x27;</span> </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> DirectiveGroup <span class="keyword">desc</span>,BpMethodCode,[<span class="keyword">Order</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取自定义的Dashboard"><a href="#获取自定义的Dashboard" class="headerlink" title="获取自定义的Dashboard"></a>获取自定义的Dashboard</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> Company ,ProductID ,DefinitionID ,Description ,DashBdVersion ,DataBaseVersion</span><br><span class="line">,LastDeployedBy ,LastDeployedDate ,LastUpdatedBy ,LastUpdated</span><br><span class="line">,DashboardSchema ,DashboardAssembly ,HasDashboardAssembly </span><br><span class="line"><span class="keyword">from</span> Ice.DashBdDef </span><br><span class="line"><span class="keyword">where</span> SystemFlag <span class="operator">=</span> <span class="number">0</span> </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> DefinitionID</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取自定义的Customization-Form"><a href="#获取自定义的Customization-Form" class="headerlink" title="获取自定义的Customization Form"></a>获取自定义的Customization Form</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> Company ,ProductID ,TypeCode ,Key1 <span class="keyword">as</span> CustIDOrName ,Description</span><br><span class="line">,Key2 <span class="keyword">as</span> AppForm ,LastUpdatedBy ,LastUpdated ,SysCharacter04 <span class="keyword">as</span> [Status]</span><br><span class="line">,CommentText</span><br><span class="line"><span class="keyword">from</span> Ice.XXXDef </span><br><span class="line"><span class="keyword">where</span> SystemFlag <span class="operator">=</span> <span class="number">0</span> <span class="keyword">and</span> TypeCode <span class="keyword">in</span> (<span class="string">&#x27;Customization&#x27;</span>) <span class="keyword">and</span> Key1 <span class="operator">&lt;&gt;</span> <span class="string">&#x27;CustomContextMenu&#x27;</span></span><br><span class="line"><span class="keyword">Order</span> <span class="keyword">by</span> Key1</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取自定义的Quick-Search"><a href="#获取自定义的Quick-Search" class="headerlink" title="获取自定义的Quick Search"></a>获取自定义的Quick Search</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> Company ,QuickSearchID ,Description ,ExportID ,LikeDataFieldTableID ,LikeDataFieldName</span><br><span class="line">,ReturnFieldTableID ,ReturnFieldName, CallFrom ,UserID ,Version ,IsShared ,BaseDefault</span><br><span class="line"> <span class="keyword">from</span> Ice.QuickSearch </span><br><span class="line"> <span class="keyword">where</span> SystemFlag <span class="operator">=</span> <span class="number">0</span> </span><br><span class="line"> <span class="keyword">order</span> <span class="keyword">by</span> QuickSearchID</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取自定义的Posting-Rules"><a href="#获取自定义的Posting-Rules" class="headerlink" title="获取自定义的Posting Rules"></a>获取自定义的Posting Rules</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> b.Company ,b.ACTTypeUID ,a.ACTRevisionUID ,b.DisplayName ,b.DetailedDescription</span><br><span class="line">       ,a.RevisionCode ,a.Description ,a.RevisionStatus</span><br><span class="line">       ,a.SendToReviewJournal ,a.IsDefault ,a.RType</span><br><span class="line">     <span class="keyword">from</span> Erp.ACTRevision <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> Erp.ACTType <span class="keyword">as</span> b </span><br><span class="line"><span class="keyword">on</span> a.ACTTypeUID <span class="operator">=</span> b.ACTTypeUID</span><br><span class="line"><span class="keyword">where</span> a.RevisionStatus <span class="operator">=</span> <span class="string">&#x27;Active&#x27;</span> <span class="keyword">and</span> a.RevisionCode <span class="operator">&lt;&gt;</span> <span class="string">&#x27;Base Std&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="获取自定义的BAQ-amp-WhereUsed"><a href="#获取自定义的BAQ-amp-WhereUsed" class="headerlink" title="获取自定义的BAQ &amp; WhereUsed"></a>获取自定义的BAQ &amp; WhereUsed</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.Company ,a.QueryID ,a.AuthorID ,a.Description ,a.DisplayPhrase ,a.IsGlobal</span><br><span class="line">       ,a.IsShared ,a.SystemFlag ,a.Version ,a.Updatable ,a.SystemFlag</span><br><span class="line">       ,b.Description <span class="keyword">as</span> WhereUsedQuickSearch</span><br><span class="line">       ,c.ReportID <span class="keyword">as</span> WhereUsedRptID</span><br><span class="line">       ,c.Description <span class="keyword">as</span> WhereUsedRptDesc</span><br><span class="line">       ,c.SSRSReportName <span class="keyword">as</span> SSRSReportName</span><br><span class="line">       ,d.DefinitionID <span class="keyword">as</span> WhereUsedDashBd</span><br><span class="line"><span class="keyword">from</span> Ice.QueryHdr <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> Ice.QuickSearch <span class="keyword">as</span> b </span><br><span class="line"><span class="keyword">on</span> a.QueryID <span class="operator">=</span> b.ExportID  </span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> Ice.BAQReport <span class="keyword">as</span> c </span><br><span class="line"><span class="keyword">on</span> a.QueryID <span class="operator">=</span> c.BAQRptID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> Ice.DashBdBAQ <span class="keyword">as</span> d </span><br><span class="line"><span class="keyword">on</span> a.QueryID <span class="operator">=</span> d.QueryID</span><br><span class="line"><span class="keyword">where</span> a.SystemFlag <span class="operator">=</span> <span class="number">0</span> <span class="keyword">and</span> a.IsShared <span class="operator">=</span> <span class="number">1</span> </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.QueryID, a.AuthorID</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取UD-Field"><a href="#获取UD-Field" class="headerlink" title="获取UD Field"></a>获取UD Field</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> SystemCode ,DataTableID ,DBTableName ,FieldName ,Seq ,Description ,DataType </span><br><span class="line">,UDRequired ,UDReadOnly ,FieldFormat</span><br><span class="line"><span class="keyword">from</span> Ice.ZDataField </span><br><span class="line"><span class="keyword">where</span> DataTableID <span class="keyword">in</span> (</span><br><span class="line">    <span class="keyword">select</span> DataTableID </span><br><span class="line">    <span class="keyword">from</span> Ice.ZDataTable </span><br><span class="line">    <span class="keyword">where</span> TableType<span class="operator">=</span><span class="string">&#x27;UD&#x27;</span>) </span><br><span class="line">    <span class="keyword">and</span> FieldName <span class="keyword">not</span> <span class="keyword">in</span> (<span class="string">&#x27;UD_SysRevID&#x27;</span>,<span class="string">&#x27;ForeignSysRowID&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>[本文转载自CSDN][1]: <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28756875/article/details/110448110">https://blog.csdn.net/qq_28756875/article/details/110448110</a> </p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84BAQ"><span class="toc-number">1.</span> <span class="toc-text">获取自定义的BAQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84BPM"><span class="toc-number">2.</span> <span class="toc-text">获取自定义的BPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84Dashboard"><span class="toc-number">3.</span> <span class="toc-text">获取自定义的Dashboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84Customization-Form"><span class="toc-number">4.</span> <span class="toc-text">获取自定义的Customization Form</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84Quick-Search"><span class="toc-number">5.</span> <span class="toc-text">获取自定义的Quick Search</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84Posting-Rules"><span class="toc-number">6.</span> <span class="toc-text">获取自定义的Posting Rules</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84BAQ-amp-WhereUsed"><span class="toc-number">7.</span> <span class="toc-text">获取自定义的BAQ &amp; WhereUsed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96UD-Field"><span class="toc-number">8.</span> <span class="toc-text">获取UD Field</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&text=Get Epicor Customizations by SQL"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&is_video=false&description=Get Epicor Customizations by SQL"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Get Epicor Customizations by SQL&body=Check out this article: https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&title=Get Epicor Customizations by SQL"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&name=Get Epicor Customizations by SQL&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/06/19/Get%20Epicor%20Customizations%20by%20SQL/&t=Get Epicor Customizations by SQL"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="定义如果一个变量后面有圆括号，PHP将寻找与变量的值同名的函数，并尝试执行它。 可变函数可以用来实现包括回调函数，函数表在内的一些用途。 可变函数不能用于例如echo,print,unset(),isset(),empty(),include,require以及类似的语言结构，需要使用自己的包装函数来将这些结构用作可变函数。 示例一：可变函数调用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP之可变函数（变量函数）">
+<meta property="og:url" content="https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="定义如果一个变量后面有圆括号，PHP将寻找与变量的值同名的函数，并尝试执行它。 可变函数可以用来实现包括回调函数，函数表在内的一些用途。 可变函数不能用于例如echo,print,unset(),isset(),empty(),include,require以及类似的语言结构，需要使用自己的包装函数来将这些结构用作可变函数。 示例一：可变函数调用">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-09-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-07T08:52:41.000Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>PHP之可变函数（变量函数）</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2019/10/19/%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E5%90%91%E5%90%8E%E7%AB%AF%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AE%80%E5%8D%95%E4%BC%A0%E5%80%BC/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/08/15/PHP%E4%B9%8B%E8%87%AA%E5%8A%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&text=PHP之可变函数（变量函数）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&is_video=false&description=PHP之可变函数（变量函数）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP之可变函数（变量函数）&body=Check out this article: https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&name=PHP之可变函数（变量函数）&description=&lt;h2 id=&#34;定义&#34;&gt;&lt;a href=&#34;#定义&#34; class=&#34;headerlink&#34; title=&#34;定义&#34;&gt;&lt;/a&gt;定义&lt;/h2&gt;&lt;p&gt;如果一个变量后面有圆括号，PHP将寻找与变量的值同名的函数，并尝试执行它。&lt;/p&gt;
+&lt;p&gt;可变函数可以用来实现包括回调函数，函数表在内的一些用途。&lt;/p&gt;
+&lt;p&gt;可变函数不能用于例如&lt;code&gt;echo&lt;/code&gt;,&lt;code&gt;print&lt;/code&gt;,&lt;code&gt;unset()&lt;/code&gt;,&lt;code&gt;isset()&lt;/code&gt;,&lt;code&gt;empty()&lt;/code&gt;,&lt;code&gt;include&lt;/code&gt;,&lt;code&gt;require&lt;/code&gt;以及类似的语言结构，需要使用自己的包装函数来将这些结构用作可变函数。&lt;/p&gt;
+&lt;h2 id=&#34;示例一：可变函数调用&#34;&gt;&lt;a href=&#34;#示例一：可变函数调用&#34; class=&#34;headerlink&#34; title=&#34;示例一：可变函数调用&#34;&gt;&lt;/a&gt;示例一：可变函数调用&lt;/h2&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&t=PHP之可变函数（变量函数）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%B8%80%EF%BC%9A%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">示例一：可变函数调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BA%8C%EF%BC%9A%E8%B0%83%E7%94%A8%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">示例二：调用一个对象方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%B8%89%EF%BC%9A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%AF%94%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7%E4%BC%98%E5%85%88"><span class="toc-number">4.</span> <span class="toc-text">示例三：函数调用比静态属性优先</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        PHP之可变函数（变量函数）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-09-06T16:00:00.000Z" class="dt-published" itemprop="datePublished">2019-09-07</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/PHP/">PHP</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/PHP/" rel="tag">PHP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>如果一个变量后面有圆括号，PHP将寻找与变量的值同名的函数，并尝试执行它。</p>
+<p>可变函数可以用来实现包括回调函数，函数表在内的一些用途。</p>
+<p>可变函数不能用于例如<code>echo</code>,<code>print</code>,<code>unset()</code>,<code>isset()</code>,<code>empty()</code>,<code>include</code>,<code>require</code>以及类似的语言结构，需要使用自己的包装函数来将这些结构用作可变函数。</p>
+<h2 id="示例一：可变函数调用"><a href="#示例一：可变函数调用" class="headerlink" title="示例一：可变函数调用"></a>示例一：可变函数调用</h2><span id="more"></span>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;In foo()&lt;br /&gt;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"><span class="variable">$arg</span> = <span class="string">&#x27;&#x27;</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;In bar(); argument was &#x27;<span class="subst">$arg</span>&#x27;.&lt;br /&gt;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 echo 的包装函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">echoit</span>(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$func</span> = <span class="string">&#x27;foo&#x27;</span>;</span><br><span class="line"><span class="variable">$func</span>();        <span class="comment">// This calls foo()</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$func</span> = <span class="string">&#x27;bar&#x27;</span>;</span><br><span class="line"><span class="variable">$func</span>(<span class="string">&#x27;test&#x27;</span>);  <span class="comment">// This calls bar()</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$func</span> = <span class="string">&#x27;echoit&#x27;</span>;</span><br><span class="line"><span class="variable">$func</span>(<span class="string">&#x27;test&#x27;</span>);  <span class="comment">// This calls echoit()</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="示例二：调用一个对象方法"><a href="#示例二：调用一个对象方法" class="headerlink" title="示例二：调用一个对象方法"></a>示例二：调用一个对象方法</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Variable</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$name</span> = <span class="string">&#x27;Bar&#x27;</span>;</span><br><span class="line">        <span class="variable language_">$this</span> -&gt; <span class="variable">$name</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;This is Bar.&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$foo</span> = <span class="keyword">new</span> <span class="title class_">Foo</span>();</span><br><span class="line"><span class="variable">$funcname</span> = <span class="string">&#x27;Variable&#x27;</span>;</span><br><span class="line"><span class="variable">$foo</span> -&gt; <span class="variable">$funcname</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="示例三：函数调用比静态属性优先"><a href="#示例三：函数调用比静态属性优先" class="headerlink" title="示例三：函数调用比静态属性优先"></a>示例三：函数调用比静态属性优先</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="built_in">static</span> <span class="variable">$variable</span> = <span class="string">&#x27;static properly&#x27;</span>;</span><br><span class="line">    <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">Variable</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;Method Variable called.&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title class_">Test</span>::<span class="variable">$variable</span>;   <span class="comment">//输出静态变量</span></span><br><span class="line"><span class="variable">$variable</span> = <span class="string">&quot;Variable&quot;</span>;</span><br><span class="line"><span class="title class_">Test</span>::<span class="variable">$variable</span>();    <span class="comment">//函数调用</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%B8%80%EF%BC%9A%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">示例一：可变函数调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BA%8C%EF%BC%9A%E8%B0%83%E7%94%A8%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">示例二：调用一个对象方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%B8%89%EF%BC%9A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%AF%94%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7%E4%BC%98%E5%85%88"><span class="toc-number">4.</span> <span class="toc-text">示例三：函数调用比静态属性优先</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&text=PHP之可变函数（变量函数）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&is_video=false&description=PHP之可变函数（变量函数）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP之可变函数（变量函数）&body=Check out this article: https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&title=PHP之可变函数（变量函数）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&name=PHP之可变函数（变量函数）&description=&lt;h2 id=&#34;定义&#34;&gt;&lt;a href=&#34;#定义&#34; class=&#34;headerlink&#34; title=&#34;定义&#34;&gt;&lt;/a&gt;定义&lt;/h2&gt;&lt;p&gt;如果一个变量后面有圆括号，PHP将寻找与变量的值同名的函数，并尝试执行它。&lt;/p&gt;
+&lt;p&gt;可变函数可以用来实现包括回调函数，函数表在内的一些用途。&lt;/p&gt;
+&lt;p&gt;可变函数不能用于例如&lt;code&gt;echo&lt;/code&gt;,&lt;code&gt;print&lt;/code&gt;,&lt;code&gt;unset()&lt;/code&gt;,&lt;code&gt;isset()&lt;/code&gt;,&lt;code&gt;empty()&lt;/code&gt;,&lt;code&gt;include&lt;/code&gt;,&lt;code&gt;require&lt;/code&gt;以及类似的语言结构，需要使用自己的包装函数来将这些结构用作可变函数。&lt;/p&gt;
+&lt;h2 id=&#34;示例一：可变函数调用&#34;&gt;&lt;a href=&#34;#示例一：可变函数调用&#34; class=&#34;headerlink&#34; title=&#34;示例一：可变函数调用&#34;&gt;&lt;/a&gt;示例一：可变函数调用&lt;/h2&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2019/09/07/PHP%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89/&t=PHP之可变函数（变量函数）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

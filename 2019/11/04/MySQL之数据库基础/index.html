@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="MySQL是目前最为流行的开源数据库，是完全网络化的跨平台关系型数据库系统。由MySQL AB公司开发，已从1995年至今，其象征符号是一只小海豚。如今已被Oracle收购，其创始人从现有MySQL程序代码中，开发出了另一个分支版本，名为MariaDB。官网地址：https:&#x2F;&#x2F;www.mysql.com&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL之数据库基础">
+<meta property="og:url" content="https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="MySQL是目前最为流行的开源数据库，是完全网络化的跨平台关系型数据库系统。由MySQL AB公司开发，已从1995年至今，其象征符号是一只小海豚。如今已被Oracle收购，其创始人从现有MySQL程序代码中，开发出了另一个分支版本，名为MariaDB。官网地址：https:&#x2F;&#x2F;www.mysql.com&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-07T08:52:41.000Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>MySQL之数据库基础</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2019/12/21/PHP-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%A0%B9%E6%8D%AE%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/10/19/%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E5%90%91%E5%90%8E%E7%AB%AF%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%AE%80%E5%8D%95%E4%BC%A0%E5%80%BC/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&text=MySQL之数据库基础"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&is_video=false&description=MySQL之数据库基础"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MySQL之数据库基础&body=Check out this article: https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&name=MySQL之数据库基础&description=&lt;p&gt;MySQL是目前最为流行的开源数据库，是完全网络化的跨平台关系型数据库系统。&lt;br&gt;由MySQL AB公司开发，已从1995年至今，其象征符号是一只小海豚。&lt;br&gt;如今已被Oracle收购，其创始人从现有MySQL程序代码中，开发出了另一个分支版本，名为MariaDB。&lt;br&gt;官网地址：&lt;a href=&#34;https://www.mysql.com/&#34;&gt;https://www.mysql.com/&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&t=MySQL之数据库基础"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E9%99%86"><span class="toc-number">3.</span> <span class="toc-text">登陆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">数据库操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">5.</span> <span class="toc-text">数据表操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="toc-number">6.</span> <span class="toc-text">MySQL中的特殊字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tips"><span class="toc-number">7.</span> <span class="toc-text">Tips</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        MySQL之数据库基础
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-11-03T16:00:00.000Z" class="dt-published" itemprop="datePublished">2019-11-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/MySQL/">MySQL</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/MySQL/" rel="tag">MySQL</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>MySQL是目前最为流行的开源数据库，是完全网络化的跨平台关系型数据库系统。<br>由MySQL AB公司开发，已从1995年至今，其象征符号是一只小海豚。<br>如今已被Oracle收购，其创始人从现有MySQL程序代码中，开发出了另一个分支版本，名为MariaDB。<br>官网地址：<a target="_blank" rel="noopener" href="https://www.mysql.com/">https://www.mysql.com/</a></p>
+<span id="more"></span>
+
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>功能强大：提供了多种数据库存储引擎</li>
+<li>支持跨平台：至少20种以上的开发平台，包括Linux、Windows、FreeBSD、IBMAIX等</li>
+<li>运行速度快：使用了极快的B树磁盘表（MyISAM 5.0默认引擎）和索引压缩</li>
+<li>成本低：开源、免费</li>
+<li>支持各种开发语言：PHP、C、C++、Java、Python等</li>
+<li>数据库存储容量大：其最大的有效表尺寸通常是由于操作系统对文件大小的限制决定的，而不是由MySQL内部限制决定的。InnoDB存储引擎（MySQL 5.5起默认引擎）将表保存在一个表空间内，该表空间可以由数个文件创建，表空间的最大容量为64TB。</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>具体的安装步骤就不详细介绍了，网上有很多的安装教程，不会的可以自行度娘一下。<br>安装包下载，可以从文章开头给出的官网链接下载，也可以使用其它第三方源提供的下载。</p>
+<h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><p>在安装配置好你的MySQL数据库之后，我们需要做肯定是连入你自己的数据库。</p>
+<p>常用的连接数据库的方式有三种：1、命令行直接登陆 2、Web页面登陆（phpMyAdmin) 3、第三方工具</p>
+<p>这里主要介绍命令行的登陆方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -proot //-u后面连接数据库的用户名，这里为root；-p后面连接数据库的密码，这里为root</span><br></pre></td></tr></table></figure>
+
+<p><em>需要注意的是，上述-u和-p后面是没有空格的，</em><br><em>且在没有设置系统环境变量的时候，只能够在MySQL的安装目录下的\bin目录下执行登陆操作</em></p>
+<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><p>在登陆数据库后，则可以对数据库的库、表、字段、包括内容进行一系列的操作。</p>
+<ul>
+<li>创建数据库</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create database 数据库名;</span><br><span class="line">/*数据库的命名规则*</span><br><span class="line">*不能与其它数据库重名</span><br><span class="line">*名称可以由字母、数据库、下划线（_）、或者&#x27;$&#x27;组成，除数字以外，其它均能作为开头</span><br><span class="line">*名称最长可以为64字符，而别名可以为256字符</span><br><span class="line">*不能使用MySQL关键字作为数据库、表明</span><br><span class="line">*默认情况下，Windows下数据库名、表名不区分大小写，而Linux下相反，为了便于平台迁移建议使用小写字母进行定义</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>选择数据库</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use 数据库名;   # 选择了对应的数据库后，才可以操作该数据库内的所有对象</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看数据库</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除数据库</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database 数据库名;  # 需要注意，对于删除数据库的操作，应谨慎使用，一旦执行，所有数据都将被删除，无法恢复</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据表操作"><a href="#数据表操作" class="headerlink" title="数据表操作"></a>数据表操作</h2><ul>
+<li>创建数据表</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">create [TEMPORARY] table [IF NOT EXISTS] 数据表名 [(create_definition,...)] [table_options] [select_statement]</span><br><span class="line">/*</span><br><span class="line">*TEMPORARY - 使用该关键字，则临时创建一个临时表</span><br><span class="line">*IF NOT EXISTS - 用于避免表存在时MySQL报错</span><br><span class="line">*create_definition - 表的列属性部分，创建表时至少包含一列</span><br><span class="line">*table_options - 表的一些特性参数</span><br><span class="line">*select_statement - SELECT语句的描述，可以用于快速创建表</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line"># create_definition的用法</span><br><span class="line">col_name type [NOT NULL | NULL] [DEFAULT default_value] [AUTO_INCREMENT] [PRIMARY KEY] [reference_definition]</span><br><span class="line">/*</span><br><span class="line">*col_name - 字段名</span><br><span class="line">*type - 字段类型</span><br><span class="line">*NOT NULL | NULL - 是否允许为空，注意数据‘0’和空格都不是空值，一般默认允许为空</span><br><span class="line">*DEFAULT default_value - 表示默认值</span><br><span class="line">*AUTO_INCREMENT - 是否自动编号，每张表只能有一个AUTO_INCREMENT列，且必须被索引</span><br><span class="line">*PRIMARY KEY - 是否为主键，每张表只能由一个PRIMARY KEY，若未设定，MySQL将返回第一个没有任何NULL列的UNIQUE键作为主键</span><br><span class="line">*reference_definition - 字段添加注释</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line"># 实际使用中只需要指定基本属性即可：</span><br><span class="line">create table table_name (列名1 属性， 列名2 属性， ...);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看表结构</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/*show columns语句*/</span><br><span class="line">show [full] columns from 数据表名 [from 数据库名];</span><br><span class="line">show [full] columns from 数据库名.数据表名;</span><br><span class="line"># 两条语句任选其一即可</span><br><span class="line"></span><br><span class="line">/*describe语句*/</span><br><span class="line">describe 数据表名;          </span><br><span class="line"># 列出整表describe 数据表名 列名;     </span><br><span class="line"># 列出某一列的信息</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改表结构</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">alter [IGNORE] table 数据表名 alter_spec[,alter_spec]...</span><br><span class="line">/*当制定IGNORE时，若出现重复关键的行，则只执行一行，其它重复的被删除*/</span><br><span class="line">/*alter_spec - 定义要修改的内容，语法如下*/</span><br><span class="line">alter_specification:    </span><br><span class="line">    ADD [COLUMN] create_definition [FIRST | AFTER column_name]  --添加新字段    </span><br><span class="line">    ADD INDEX [index_name] (index_col_name,...)                 --添加索引名称    </span><br><span class="line">    ADD PRIMARY KEY (index_col_name,...)                        --添加主键名称    </span><br><span class="line">    ADD UNIQUE [index_name] (index_col_name,...)                --添加唯一索引    </span><br><span class="line">    ALTER [COLUNM] col_name &#123;SET DEFAULT literal | DROP DEFAULT&#125;--修改字段名称    </span><br><span class="line">    CHANGE [COLUMN] old_col_name create_definition              --修改字段名称    </span><br><span class="line">    MODIFY [COLUMN] create_definition                           --修改子句定义字段    </span><br><span class="line">    DROP [COLUMN] col_name                                      --删除字段名称    </span><br><span class="line">    DROP PRIMARY KEY                                            --删除主键名称    </span><br><span class="line">    DROP INDEX index_name                                       --删除索引名称    </span><br><span class="line">    RENAME [AS] new_tbl_name                                    --更改表名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重命名数据表</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename table 数据表名1 to 数据表名2; /*可以同时多个表进行，使用‘，’隔开即可*/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除数据表</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table [if exists] 数据表名;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into 数据表名(column_name1, column_name2,...) values(value1, value2, value3,...);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select selection_list from 数据表名 where condition;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update 数据表名 set column_name1 = new_value1, column_name2 = new_value2,...where condition;</span><br><span class="line"># where语句是可选的，如果不选则将修改所有行的记录</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from 数据表名 where condition;</span><br><span class="line"># 若未指定where语句，将删除所有记录</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select selecttion_list              # 要查询的内容，选择哪些列</span><br><span class="line">from table_name                     # 指定数据表</span><br><span class="line">where primary_constraint            # 查询时需要满足的条件</span><br><span class="line">group by grouping_columns           # 如何对结果进行分组</span><br><span class="line">order by sorting_columns            # 如何对结果进行排序，默认升序，desc降序</span><br><span class="line">having secondary_constraint         # 查询时满足第二个条件</span><br><span class="line">like()                              # 模糊查询，可以使用&#x27;%&#x27;或者&#x27;_&#x27;匹配，前者匹配一个或者多个字符，后者只匹配一个字符</span><br><span class="line">limit count                         # 限定输出的查询结果</span><br></pre></td></tr></table></figure>
+
+<h2 id="MySQL中的特殊字符"><a href="#MySQL中的特殊字符" class="headerlink" title="MySQL中的特殊字符"></a>MySQL中的特殊字符</h2><p>当SQL语句中存在特殊字符时，需要使用“\”对特殊字符进行转义，否则将会出现错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">\&#x27;      # 单引号</span><br><span class="line">\&#x27;&#x27;     # 双引号</span><br><span class="line">\\      # 反斜杠</span><br><span class="line">\n      # 换行符</span><br><span class="line">\r      # 回车符</span><br><span class="line">\t      # 制表符</span><br><span class="line">\0      # 0字符</span><br><span class="line">\%      # %字符</span><br><span class="line">\_      # _字符</span><br><span class="line">\b      # 退格符</span><br></pre></td></tr></table></figure>
+
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>Drop、Delete、Truncate的区别</p>
+<ol>
+<li>delete和truncate操作只删除表中的数据，而不删除表的结构</li>
+<li>drop语句将删除表的结构，被依赖的约束、触发器、索引等</li>
+<li>属于不通类型的操作，delete属于DML，事务提交后才生效；另两者属于DDL，操作立即生效</li>
+<li>执行速度 drop &gt; truncate &gt; delete</li>
+<li>完全删除使用drop；想保留表而将所有数据删除，如若和事务无关，使用truncate；若和事务相关，则使用delete</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E9%99%86"><span class="toc-number">3.</span> <span class="toc-text">登陆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">数据库操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">5.</span> <span class="toc-text">数据表操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="toc-number">6.</span> <span class="toc-text">MySQL中的特殊字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tips"><span class="toc-number">7.</span> <span class="toc-text">Tips</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&text=MySQL之数据库基础"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&is_video=false&description=MySQL之数据库基础"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MySQL之数据库基础&body=Check out this article: https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&title=MySQL之数据库基础"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&name=MySQL之数据库基础&description=&lt;p&gt;MySQL是目前最为流行的开源数据库，是完全网络化的跨平台关系型数据库系统。&lt;br&gt;由MySQL AB公司开发，已从1995年至今，其象征符号是一只小海豚。&lt;br&gt;如今已被Oracle收购，其创始人从现有MySQL程序代码中，开发出了另一个分支版本，名为MariaDB。&lt;br&gt;官网地址：&lt;a href=&#34;https://www.mysql.com/&#34;&gt;https://www.mysql.com/&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2019/11/04/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/&t=MySQL之数据库基础"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

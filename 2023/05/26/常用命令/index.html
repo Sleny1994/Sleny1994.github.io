@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Hexo1234hexo clean      # 清除缓存hexo generate   # 重新生成静态文件hexo deploy     # 部署至指定仓库hexo server     # 启动本地服务器  NPM 使用淘宝镜像12npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npmmirror.comcnpm install [name]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用命令">
+<meta property="og:url" content="https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="Hexo1234hexo clean      # 清除缓存hexo generate   # 重新生成静态文件hexo deploy     # 部署至指定仓库hexo server     # 启动本地服务器  NPM 使用淘宝镜像12npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npmmirror.comcnpm install [name]">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-10T05:11:45.908Z">
+<meta property="article:author" content="Sleny">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>常用命令</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/06/01/JS%E4%B8%8ETS%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/05/25/Python/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&text=常用命令"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&is_video=false&description=常用命令"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=常用命令&body=Check out this article: https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&name=常用命令&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&t=常用命令"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo"><span class="toc-number">1.</span> <span class="toc-text">Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NPM"><span class="toc-number">2.</span> <span class="toc-text">NPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-number">3.</span> <span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-number">4.</span> <span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Epicor-ERP"><span class="toc-number">5.</span> <span class="toc-text">Epicor ERP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WinDebug"><span class="toc-number">6.</span> <span class="toc-text">WinDebug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#You-Get"><span class="toc-number">7.</span> <span class="toc-text">You-Get</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        常用命令
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-05-25T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-05-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean      <span class="comment"># 清除缓存</span></span><br><span class="line">hexo generate   <span class="comment"># 重新生成静态文件</span></span><br><span class="line">hexo deploy     <span class="comment"># 部署至指定仓库</span></span><br><span class="line">hexo server     <span class="comment"># 启动本地服务器</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="NPM"><a href="#NPM" class="headerlink" title="NPM"></a>NPM</h2><ol>
+<li>使用淘宝镜像<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npmmirror.com</span><br><span class="line">cnpm install [name]</span><br></pre></td></tr></table></figure></li>
+<li>Vue.js安装<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm init vue@latest      <span class="comment"># 最新稳定版</span></span><br><span class="line"><span class="built_in">cd</span> vue_project</span><br><span class="line">npm install</span><br><span class="line">npm run dev</span><br><span class="line">npm install -g @vue/cli  <span class="comment"># 安装vue cli</span></span><br><span class="line">                         <span class="comment"># %USERPROFILE%\AppData\Roaming\npm 添加至环境变量</span></span><br><span class="line">vue ui                   <span class="comment"># 图形化界面创建和管理项目</span></span><br><span class="line">npm run build            <span class="comment"># vue3项目打包，生成dist目录</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><ol>
+<li>bat命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 批量删除指定类型文件</span></span><br><span class="line">del /s /q <span class="string">&quot;C:\Users\Username\AppData\Local\Temp\*.tmp&quot;</span> </span><br><span class="line"><span class="comment"># /s 表示遍历指定文件夹即其子文件夹</span></span><br><span class="line"><span class="comment"># /q 不确认直接删除</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 遍历指定类型文件</span></span><br><span class="line"><span class="built_in">dir</span> /s /b *.tmp</span><br><span class="line"></span><br><span class="line"><span class="comment">## 批量注册dll文件</span></span><br><span class="line"><span class="keyword">for</span> %1 <span class="keyword">in</span> (%windir%\system32\*.dll) <span class="keyword">do</span> regsvr32.exe /s %1</span><br><span class="line"></span><br><span class="line"><span class="comment">## 强制结束指定程序进程</span></span><br><span class="line">taskkill /im FoxitPDFReader.exe /f</span><br><span class="line"></span><br><span class="line"><span class="comment">## 卸载Win11小组件</span></span><br><span class="line">winget uninstall MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy</span><br><span class="line">winget uninstall <span class="string">&quot;windows web experience pack&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>IP Guard<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注册表目录:\HKEY_LOCAL_MACHINE\SOFTWARE\TEC\Ocular.3\agent\config</span></span><br><span class="line"><span class="comment"># 修改添加下列键值</span></span><br><span class="line">hookapi_disins = 1</span><br><span class="line">hookapi_filterproc_external = excel.exe;word.exe;outlook.exe;cmd.exe;powershell.exe;git.exe;idea64.exe</span><br></pre></td></tr></table></figure></li>
+<li>Office<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 异常奔溃的处理方法：</span></span><br><span class="line"><span class="comment"># 打开 %USERPROFILE%\AppData\Local\Microsoft\Office\OTele 文件夹</span></span><br><span class="line"><span class="comment"># 清空该文件夹内的所有内容，若没有该文件夹，则新建同名文件夹</span></span><br></pre></td></tr></table></figure></li>
+<li>AD域控<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 批量导出数据</span></span><br><span class="line"><span class="comment"># 方法1：</span></span><br><span class="line">csvde -f D:\1.csv -r <span class="string">&quot;(&amp;(objectcategory=person)(objectClass=user))&quot;</span> -d <span class="string">&quot;DC=SPT-AMAT,DC=COM&quot;</span> -l <span class="string">&quot;sAMAccountName,userPrincipalName&quot;</span> -j D:\</span><br><span class="line"><span class="comment"># -f 指定导出目录</span></span><br><span class="line"><span class="comment"># -j 指定日志目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法2:</span></span><br><span class="line"><span class="comment"># 导出用户</span></span><br><span class="line">get-aduser -filter * -properties * | <span class="keyword">select</span> samaccountname,displayname,userprincipalname | Export-CSV <span class="string">&quot;D:\1.csv&quot;</span> -NoTypeInformation -Encoding UTF8</span><br><span class="line"><span class="comment"># 导出组</span></span><br><span class="line">get-adgroupmember</span><br></pre></td></tr></table></figure></li>
+<li>Handle<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># [官方文档]：https://learn.microsoft.com/zh-cn/sysinternals/downloads/handle</span></span><br><span class="line"><span class="comment"># [下载地址]：https://download.sysinternals.com/files/Handle.zip</span></span><br><span class="line"><span class="comment"># Handle可以快速定位文件或文件夹的占用情况</span></span><br><span class="line"><span class="comment"># 默认会打印所有的句柄信息和版权信息，可以通过nobanner关闭版权信息的输出</span></span><br><span class="line"><span class="comment"># 查询某文件或文件夹直接在命令后面接文件名或目录的绝对路径即可</span></span><br><span class="line">handle64.exe -nobanner</span><br><span class="line">handle64.exe C:\Users\xxx\Desktop\PIRR.xlsx</span><br><span class="line"><span class="comment"># EXCEL.EXE          pid: 2333  type: File          8D3: C:\Users\xxx\Desktop\PIRR.xlsx</span></span><br><span class="line"><span class="comment"># 可以通过对进程ID或进程可执行文件名进行查看对应进程的完整信息</span></span><br><span class="line">handle64.exe -nobanner -p 2333</span><br><span class="line">handle64.exe -nobanner -p EXCEL.exe</span><br><span class="line"><span class="comment"># 可以使用taskkill终止进程，也可以使用handle结束占用的句柄</span></span><br><span class="line">handle64.exe -nobanner -p 2333 -c 8D3</span><br><span class="line"><span class="comment"># -p 进程ID	-c 句柄号（16进制）</span></span><br></pre></td></tr></table></figure></li>
+<li>Regedit<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Windows未激活如何去除右下角的激活Windows水印</span></span><br><span class="line"><span class="comment"># 打开注册表定位至如下位置</span></span><br><span class="line">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\SoftwareProtectionPlatform\Activation</span><br><span class="line"><span class="comment"># 将右侧的Manual值从0修改为1</span></span><br><span class="line"><span class="comment"># 重新启动计算机即可</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><ol>
+<li>docker启动</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -d --name halo -p 8090:8090 -v ~/.halo2:/root/.halo2 halohub/halo:2.4 --halo.external-url=http://localhost:8090/ --halo.security.initializer.superadminusername=admin --halo.security.initializer.superadminpassword=admin@123 --SPRING_THYMELEAF_CACHE=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>docker配置国内镜像源</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line"> <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;cj1s62b9.mirror.aliyuncs.com&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;builder&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;gc&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">		<span class="attr">&quot;defaultKeepStorage&quot;</span><span class="punctuation">:</span><span class="string">&quot;20GB&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;enabled&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span></span><br><span class="line">		<span class="punctuation">&#125;</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;experimental&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;features&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;buildkit&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span></span><br><span class="line">	<span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Epicor-ERP"><a href="#Epicor-ERP" class="headerlink" title="Epicor ERP"></a>Epicor ERP</h2><ol>
+<li>SSRS<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获取的文本需要换行</span></span><br><span class="line"><span class="operator">=</span> <span class="keyword">First</span>(REPLACE(Fields<span class="operator">!</span>InspectLines.Value, chr(<span class="number">13</span>), VbCrLf)) <span class="operator">+</span> VbCrLf</span><br><span class="line"><span class="operator">=</span> Fields<span class="operator">!</span>InspectLines.Value</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 获取指定表的字段（by Parameters!TableGuid.Value)</span></span><br><span class="line"><span class="keyword">select</span> v.VendorID ,v.Name ,v.Address1 </span><br><span class="line"><span class="keyword">from</span> TEST.Erp.Vendor <span class="keyword">as</span> v </span><br><span class="line"><span class="keyword">where</span> v.VendorNum <span class="operator">=</span>( </span><br><span class="line">	<span class="keyword">select</span> p2.VendorNum </span><br><span class="line">	<span class="keyword">from</span> TEST.Erp.POHeader <span class="keyword">as</span> p2 </span><br><span class="line">	<span class="keyword">where</span> p2.PONum <span class="operator">=</span>(</span><br><span class="line">		<span class="keyword">select</span> p.PONum </span><br><span class="line">		<span class="keyword">from</span> TESTSSRS.dbo.POHeader_&quot; + Parameters!TableGuid.Value + &quot; <span class="keyword">as</span> p</span><br><span class="line">		)</span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 表达式中引用的全局集合类别</span></span><br><span class="line"><span class="comment">-- Fields 字段集合</span></span><br><span class="line"><span class="operator">=</span> Fields<span class="operator">!</span>Sales.Value</span><br><span class="line"><span class="comment">-- ReportItems 文本框集合</span></span><br><span class="line"><span class="operator">=</span> ReportItems(&quot;Textbox1&quot;).<span class="keyword">Value</span></span><br><span class="line"><span class="comment">-- Globals 全集变量：如报表名称或页码</span></span><br><span class="line"><span class="operator">=</span> Globals.ReportName</span><br><span class="line"><span class="comment">-- Parameters 参数集合</span></span><br><span class="line"><span class="operator">=</span> Parameters<span class="operator">!</span>JobNum.Value</span><br><span class="line"><span class="comment">-- User 用户有关的数据集合</span></span><br><span class="line"><span class="operator">=</span> User.UserID</span><br><span class="line"><span class="comment">-- DataSources 数据源集合(无法在本地预览使用)</span></span><br><span class="line"><span class="operator">=</span> DataSources(&quot;DS_Data&quot;).Type</span><br><span class="line"><span class="comment">-- DataSets 数据集集合(无法在本地预览使用)</span></span><br><span class="line"><span class="operator">=</span> DataSets(&quot;POHead&quot;).CommandText</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="WinDebug"><a href="#WinDebug" class="headerlink" title="WinDebug"></a>WinDebug</h2><ol>
+<li>设置Symbols Path<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_NT_SYMBOL_PATH=srv*c:\symbols*http://msdl.microsoft.com/download/symbols</span><br></pre></td></tr></table></figure></li>
+<li>常用指令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">!analyze -v         <span class="comment"># 详细列出DUMP文件的信息</span></span><br><span class="line">~* kb               <span class="comment"># 查看所有线程的堆栈</span></span><br><span class="line">!threads            <span class="comment"># 查看当前进程的所有线程</span></span><br><span class="line">!peb                <span class="comment"># 查看进程环境块</span></span><br><span class="line">!teb                <span class="comment"># 查看当前线程环境块</span></span><br><span class="line">!clrstack           <span class="comment"># 查看 .NET 程序的堆栈信息</span></span><br><span class="line">!dumpheap           <span class="comment"># 查看堆中的对象信息</span></span><br><span class="line">!dumpobj            <span class="comment"># 查看堆中指定对象的信息</span></span><br><span class="line">!gcroot             <span class="comment"># 查看指定对象的根引用</span></span><br><span class="line">!sosex.mdt          <span class="comment"># 查看指定类型的所有实例信息</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="You-Get"><a href="#You-Get" class="headerlink" title="You-Get"></a>You-Get</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GitHub：https://github.com/soimort/you-get/tree/develop</span></span><br><span class="line"><span class="comment"># 安装python3</span></span><br><span class="line">pip3 install you-get</span><br><span class="line"><span class="comment"># 使用方法</span></span><br><span class="line">you-get -i             <span class="comment"># to see all available quality and formats</span></span><br><span class="line">        --format=mp4   <span class="comment"># set format which you want</span></span><br><span class="line">        -o             <span class="comment"># set output directory</span></span><br><span class="line">        -O             <span class="comment"># set output filename</span></span><br><span class="line">        --first        <span class="comment"># set the first number</span></span><br><span class="line">        --last         <span class="comment"># set the last number</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Example：</span></span><br><span class="line">you-get --format=[] -o [output directory] -O [output filename] [url]</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo"><span class="toc-number">1.</span> <span class="toc-text">Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NPM"><span class="toc-number">2.</span> <span class="toc-text">NPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-number">3.</span> <span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-number">4.</span> <span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Epicor-ERP"><span class="toc-number">5.</span> <span class="toc-text">Epicor ERP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WinDebug"><span class="toc-number">6.</span> <span class="toc-text">WinDebug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#You-Get"><span class="toc-number">7.</span> <span class="toc-text">You-Get</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&text=常用命令"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&is_video=false&description=常用命令"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=常用命令&body=Check out this article: https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=常用命令"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&name=常用命令&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/05/26/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&t=常用命令"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

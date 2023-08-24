@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="特性（Attribute）定义：用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明标签。一个声明性标签是通过放置在它所应用的元素前面的方括号([])来描述的。作用：特性用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。分类：预定义特性和自定义特性。 语法1234[attribute(positional_parameters, name_paramete">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C Sharp高级进阶">
+<meta property="og:url" content="https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="特性（Attribute）定义：用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明标签。一个声明性标签是通过放置在它所应用的元素前面的方括号([])来描述的。作用：特性用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。分类：预定义特性和自定义特性。 语法1234[attribute(positional_parameters, name_paramete">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-14T08:32:48.574Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="CSharp">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>C Sharp高级进阶</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/08/14/Dot%20NET%E4%B8%8B%E8%BF%9E%E6%8E%A5SQL%20Server/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/07/19/Epicor%20ERP%20UD%20Table%20Maintenance/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&text=C Sharp高级进阶"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&is_video=false&description=C Sharp高级进阶"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C Sharp高级进阶&body=Check out this article: https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&name=C Sharp高级进阶&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&t=C Sharp高级进阶"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%80%A7%EF%BC%88Attribute%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">特性（Attribute）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E7%89%B9%E6%80%A7"><span class="toc-number">1.2.</span> <span class="toc-text">预定义特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%89%B9%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">自定义特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E9%80%94"><span class="toc-number">2.2.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">2.3.</span> <span class="toc-text">查看元数据</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        C Sharp高级进阶
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-08-13T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-08-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSharp/">CSharp</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CSharp/" rel="tag">CSharp</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="特性（Attribute）"><a href="#特性（Attribute）" class="headerlink" title="特性（Attribute）"></a>特性（Attribute）</h2><p>定义：用于在运行时传递程序中各种元素（比如类、方法、结构、枚举、组件等）的行为信息的声明标签。一个声明性标签是通过放置在它所应用的元素前面的方括号([])来描述的。<br>作用：特性用于添加元数据，如编译器指令和注释、描述、方法、类等其他信息。<br>分类：预定义特性和自定义特性。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">attribute(positional_parameters, name_parameter = value, ...)</span>]</span><br><span class="line">element</span><br><span class="line"><span class="comment">// 特性的名称和值是在方括号内规定的，放置在它所应用的元素之前</span></span><br><span class="line"><span class="comment">// positional_parameters 规定必需的信息，name_parameter 规定可选的信息</span></span><br></pre></td></tr></table></figure>
+<h3 id="预定义特性"><a href="#预定义特性" class="headerlink" title="预定义特性"></a>预定义特性</h3><p>.NET框架提供了三种预定义特性：</p>
+<ul>
+<li>AttributeUsage：描述了如何使用一个自定义特性类，规定了可应用到的项目类型<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">AttributeUsage(</span></span><br><span class="line"><span class="meta">   validon,</span></span><br><span class="line"><span class="meta">   AllowMultiple=allowmultiple,</span></span><br><span class="line"><span class="meta">   Inherited=inherited</span></span><br><span class="line"><span class="meta">)</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// validon - 规定特性可被放置的语言元素，是枚举器AttributeTargets的值的组合，默认值：AttributeTargets.All</span></span><br><span class="line"><span class="comment">// allowmultiple - 为特性的AllowMultiple属性提供一个布尔值，若为true，则该特性是多用的，默认为false（单用的）</span></span><br><span class="line"><span class="comment">// inherited - 为特性的Inherited属性提供一个布尔值，若为true，则该特性可被派生类继承，默认是false</span></span><br><span class="line">e.g:</span><br><span class="line">[<span class="meta">AttributeUsage(AttributeTargets.Class |</span></span><br><span class="line"><span class="meta">AttributeTargets.Constructor |</span></span><br><span class="line"><span class="meta">AttributeTargets.Field |</span></span><br><span class="line"><span class="meta">AttributeTargets.Method |</span></span><br><span class="line"><span class="meta">AttributeTargets.Property, </span></span><br><span class="line"><span class="meta">AllowMultiple = true)</span>]</span><br></pre></td></tr></table></figure></li>
+<li>Conditional：标记了一个条件方法，其执行依赖于指定的预处理标识符，会引起方法调用的条件编译，取决于指定的值，比如Debug或Trace<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Conditional(</span></span><br><span class="line"><span class="meta">   conditionalSymbol</span></span><br><span class="line"><span class="meta">)</span>]</span><br><span class="line"></span><br><span class="line">e.g:</span><br><span class="line">[<span class="meta">Conditional(<span class="string">&quot;DEBUG&quot;</span>)</span>]</span><br><span class="line"><span class="comment">// ---------------------------</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DEBUG</span></span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Diagnostics;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Myclass</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Conditional(<span class="string">&quot;DEBUG&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Message</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">Test</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function1</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Myclass.Message(<span class="string">&quot;In Function 1.&quot;</span>);</span><br><span class="line">        function2();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function2</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Myclass.Message(<span class="string">&quot;In Function 2.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Myclass.Message(<span class="string">&quot;In Main function.&quot;</span>);</span><br><span class="line">        function1();</span><br><span class="line">        Console.ReadKey();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">In Main function.</span></span><br><span class="line"><span class="comment">In Function 1.</span></span><br><span class="line"><span class="comment">In Function 2.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+<li>Obsolete：标记了不应被使用的程序实体，可以让编译器丢弃某个特定的目标元素，如当一个新方法被用在一个类中，但仍然想要保持类中的旧方法，可以通过显示一个应该使用新方法而不是旧方法的消息，来标记为obsolete（过时的）<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Obsolete(</span></span><br><span class="line"><span class="meta">   message</span></span><br><span class="line"><span class="meta">)</span>]</span><br><span class="line">[<span class="meta">Obsolete(</span></span><br><span class="line"><span class="meta">   message,</span></span><br><span class="line"><span class="meta">   iserror</span></span><br><span class="line"><span class="meta">)</span>]</span><br><span class="line"><span class="comment">// message - 是一个字符串，描述项目为什么过时以及该替代使用什么</span></span><br><span class="line"><span class="comment">// iserror - 是一个布尔值，若为true，编译器会将项目的使用当作一个错误，默认false（生成一个警告）</span></span><br><span class="line">e.g:</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyClass</span></span><br><span class="line">&#123;</span><br><span class="line">   [<span class="meta">Obsolete(<span class="string">&quot;Don&#x27;t use OldMethod, use NewMethod instead&quot;</span>, true)</span>]</span><br><span class="line">   <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OldMethod</span>()</span></span><br><span class="line">   &#123; </span><br><span class="line">      Console.WriteLine(<span class="string">&quot;It is the old method&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">NewMethod</span>()</span></span><br><span class="line">   &#123; </span><br><span class="line">      Console.WriteLine(<span class="string">&quot;It is the new method&quot;</span>); </span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>()</span></span><br><span class="line">   &#123;</span><br><span class="line">      OldMethod();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Don&#x27;t use OldMethod, use NewMethod instead</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="自定义特性"><a href="#自定义特性" class="headerlink" title="自定义特性"></a>自定义特性</h3><p>.NET框架允许创建自定义特性，用于存储声明性的信息，且可在运行时被检索，该信息根据涉及标准和应用程序需要，可与任何目标元素相关。<br>创建步骤：</p>
+<ul>
+<li>声明自定义特性<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个自定义特性 BugFix 被赋给类及其成员</span></span><br><span class="line">[<span class="meta">AttributeUsage(AttributeTargets.Class |</span></span><br><span class="line"><span class="meta">AttributeTargets.Constructor |</span></span><br><span class="line"><span class="meta">AttributeTargets.Field |</span></span><br><span class="line"><span class="meta">AttributeTargets.Method |</span></span><br><span class="line"><span class="meta">AttributeTargets.Property,</span></span><br><span class="line"><span class="meta">AllowMultiple = true)</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DeBugInfo</span> : <span class="title">System.Attribute</span></span><br></pre></td></tr></table></figure></li>
+<li>构建自定义特性<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bug的代码编号</span></span><br><span class="line"><span class="comment">// 辨认该bug的开发人员名字</span></span><br><span class="line"><span class="comment">// 最后一次审查该代码的日期</span></span><br><span class="line"><span class="comment">// 一个存储开发人员标记的字符串消息</span></span><br><span class="line"><span class="comment">// 一个自定义特性 BugFix 被赋给类及其成员</span></span><br><span class="line">[<span class="meta">AttributeUsage(AttributeTargets.Class |</span></span><br><span class="line"><span class="meta">AttributeTargets.Constructor |</span></span><br><span class="line"><span class="meta">AttributeTargets.Field |</span></span><br><span class="line"><span class="meta">AttributeTargets.Method |</span></span><br><span class="line"><span class="meta">AttributeTargets.Property,</span></span><br><span class="line"><span class="meta">AllowMultiple = true)</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DeBugInfo</span> : <span class="title">System.Attribute</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">int</span> bugNo;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">string</span> developer;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">string</span> lastReview;</span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">string</span> message;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">DeBugInfo</span>(<span class="params"><span class="built_in">int</span> bg, <span class="built_in">string</span> dev, <span class="built_in">string</span> d</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">this</span>.bugNo = bg;</span><br><span class="line">      <span class="keyword">this</span>.developer = dev;</span><br><span class="line">      <span class="keyword">this</span>.lastReview = d;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">int</span> BugNo</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">get</span></span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> bugNo;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">string</span> Developer</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">get</span></span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> developer;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">string</span> LastReview</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">get</span></span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> lastReview;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">string</span> Message</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">get</span></span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">return</span> message;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">set</span></span><br><span class="line">      &#123;</span><br><span class="line">          message = <span class="keyword">value</span>;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在目标程序元素上应用自定义特性<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">DeBugInfo(45, <span class="string">&quot;Zara Ali&quot;</span>, <span class="string">&quot;12/8/2012&quot;</span>, Message = <span class="string">&quot;Return type mismatch&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">DeBugInfo(49, <span class="string">&quot;Nuha Ali&quot;</span>, <span class="string">&quot;10/10/2012&quot;</span>, Message = <span class="string">&quot;Unused variable&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">class</span> <span class="title">Rectangle</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 成员变量</span></span><br><span class="line">  <span class="keyword">protected</span> <span class="built_in">double</span> length;</span><br><span class="line">  <span class="keyword">protected</span> <span class="built_in">double</span> width;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Rectangle</span>(<span class="params"><span class="built_in">double</span> l, <span class="built_in">double</span> w</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">      length = l;</span><br><span class="line">      width = w;</span><br><span class="line">  &#125;</span><br><span class="line">  [<span class="meta">DeBugInfo(55, <span class="string">&quot;Zara Ali&quot;</span>, <span class="string">&quot;19/10/2012&quot;</span>,</span></span><br><span class="line"><span class="meta">  Message = <span class="string">&quot;Return type mismatch&quot;</span>)</span>]</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="built_in">double</span> <span class="title">GetArea</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">return</span> length * width;</span><br><span class="line">  &#125;</span><br><span class="line">  [<span class="meta">DeBugInfo(56, <span class="string">&quot;Zara Ali&quot;</span>, <span class="string">&quot;19/10/2012&quot;</span>)</span>]</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Display</span>()</span></span><br><span class="line">  &#123;</span><br><span class="line">      Console.WriteLine(<span class="string">&quot;Length: &#123;0&#125;&quot;</span>, length);</span><br><span class="line">      Console.WriteLine(<span class="string">&quot;Width: &#123;0&#125;&quot;</span>, width);</span><br><span class="line">      Console.WriteLine(<span class="string">&quot;Area: &#123;0&#125;&quot;</span>, GetArea());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>通过反射访问特性</li>
+</ul>
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p>定义：指程序可以访问、检测和修改它本身状态或行为的一种能力<br>作用：反射提供了封装程序集、模块和类型的对象，可以使用反射动态地创建类型地实例，将类型绑定到现有对象，或从现有对象中获取类型，可以调用类型地方法或访问其字段和属性</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点：</p>
+<ol>
+<li>反射提高了程序的灵活性和扩展性</li>
+<li>降低耦合性，提高自适应能力</li>
+<li>它允许程序创建和控制任何类的对象，无需提前硬编码目标类<br>缺点：</li>
+<li>性能问题，使用反射基本上是一种解释操作，用于字段和方法接入时要远慢于直接代码；因此反射机制主要应用在对灵活性和拓展性要求很高的系统框架上，普通程序不建议。</li>
+<li>使用反射会模糊程序内部逻辑，反射绕过了源码，会带来维护的问题，会比相应的直接代码复杂</li>
+</ol>
+<h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><ul>
+<li>允许在运行时查看特性信息</li>
+<li>允许审查集合中的各种类型、以及实例化这些类型</li>
+<li>允许延迟绑定的方法和属性</li>
+<li>允许在运行时创建新类型，然后使用这些类型执行一些任务</li>
+</ul>
+<h3 id="查看元数据"><a href="#查看元数据" class="headerlink" title="查看元数据"></a>查看元数据</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line">[<span class="meta">AttributeUsage(AttributeTargets.All)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">HelpAttribute</span> : <span class="title">System.Attribute</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">readonly</span> <span class="built_in">string</span> Url;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="built_in">string</span> Topic  <span class="comment">// Topic 是一个命名（named）参数</span></span><br><span class="line">   &#123;</span><br><span class="line">      <span class="keyword">get</span></span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">return</span> topic;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">set</span></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">         topic = <span class="keyword">value</span>;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">HelpAttribute</span>(<span class="params"><span class="built_in">string</span> url</span>)  <span class="comment">// url 是一个定位（positional）参数</span></span></span><br><span class="line">   &#123;</span><br><span class="line">      <span class="keyword">this</span>.Url = url;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> <span class="built_in">string</span> topic;</span><br><span class="line">&#125;</span><br><span class="line">[<span class="meta">HelpAttribute(<span class="string">&quot;Information on the class MyClass&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">class</span> <span class="title">MyClass</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">AttributeAppl</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">   &#123;</span><br><span class="line">      <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">      &#123;</span><br><span class="line">         System.Reflection.MemberInfo info = <span class="keyword">typeof</span>(MyClass);</span><br><span class="line">         <span class="built_in">object</span>[] attributes = info.GetCustomAttributes(<span class="literal">true</span>);</span><br><span class="line">         <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; attributes.Length; i++)</span><br><span class="line">         &#123;</span><br><span class="line">            System.Console.WriteLine(attributes[i]);</span><br><span class="line">         &#125;</span><br><span class="line">         Console.ReadKey();</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// HelpAttribute</span></span><br><span class="line">e.g:</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Reflection;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">BugFixApplication</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">// 一个自定义特性 BugFix 被赋给类及其成员</span></span><br><span class="line">   [<span class="meta">AttributeUsage(AttributeTargets.Class |</span></span><br><span class="line"><span class="meta">   AttributeTargets.Constructor |</span></span><br><span class="line"><span class="meta">   AttributeTargets.Field |</span></span><br><span class="line"><span class="meta">   AttributeTargets.Method |</span></span><br><span class="line"><span class="meta">   AttributeTargets.Property,</span></span><br><span class="line"><span class="meta">   AllowMultiple = true)</span>]</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DeBugInfo</span> : <span class="title">System.Attribute</span></span><br><span class="line">   &#123;</span><br><span class="line">      <span class="keyword">private</span> <span class="built_in">int</span> bugNo;</span><br><span class="line">      <span class="keyword">private</span> <span class="built_in">string</span> developer;</span><br><span class="line">      <span class="keyword">private</span> <span class="built_in">string</span> lastReview;</span><br><span class="line">      <span class="keyword">public</span> <span class="built_in">string</span> message;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="title">DeBugInfo</span>(<span class="params"><span class="built_in">int</span> bg, <span class="built_in">string</span> dev, <span class="built_in">string</span> d</span>)</span></span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">this</span>.bugNo = bg;</span><br><span class="line">         <span class="keyword">this</span>.developer = dev;</span><br><span class="line">         <span class="keyword">this</span>.lastReview = d;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">public</span> <span class="built_in">int</span> BugNo</span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">get</span></span><br><span class="line">         &#123;</span><br><span class="line">            <span class="keyword">return</span> bugNo;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">public</span> <span class="built_in">string</span> Developer</span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">get</span></span><br><span class="line">         &#123;</span><br><span class="line">            <span class="keyword">return</span> developer;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">public</span> <span class="built_in">string</span> LastReview</span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">get</span></span><br><span class="line">         &#123;</span><br><span class="line">            <span class="keyword">return</span> lastReview;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">public</span> <span class="built_in">string</span> Message</span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">get</span></span><br><span class="line">         &#123;</span><br><span class="line">            <span class="keyword">return</span> message;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">set</span></span><br><span class="line">         &#123;</span><br><span class="line">            message = <span class="keyword">value</span>;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   [<span class="meta">DeBugInfo(45, <span class="string">&quot;Zara Ali&quot;</span>, <span class="string">&quot;12/8/2012&quot;</span>,</span></span><br><span class="line"><span class="meta">        Message = <span class="string">&quot;Return type mismatch&quot;</span>)</span>]</span><br><span class="line">   [<span class="meta">DeBugInfo(49, <span class="string">&quot;Nuha Ali&quot;</span>, <span class="string">&quot;10/10/2012&quot;</span>,</span></span><br><span class="line"><span class="meta">        Message = <span class="string">&quot;Unused variable&quot;</span>)</span>]</span><br><span class="line">   <span class="keyword">class</span> <span class="title">Rectangle</span></span><br><span class="line">   &#123;</span><br><span class="line">      <span class="comment">// 成员变量</span></span><br><span class="line">      <span class="keyword">protected</span> <span class="built_in">double</span> length;</span><br><span class="line">      <span class="keyword">protected</span> <span class="built_in">double</span> width;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="title">Rectangle</span>(<span class="params"><span class="built_in">double</span> l, <span class="built_in">double</span> w</span>)</span></span><br><span class="line">      &#123;</span><br><span class="line">         length = l;</span><br><span class="line">         width = w;</span><br><span class="line">      &#125;</span><br><span class="line">      [<span class="meta">DeBugInfo(55, <span class="string">&quot;Zara Ali&quot;</span>, <span class="string">&quot;19/10/2012&quot;</span>,</span></span><br><span class="line"><span class="meta">           Message = <span class="string">&quot;Return type mismatch&quot;</span>)</span>]</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="built_in">double</span> <span class="title">GetArea</span>()</span></span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">return</span> length * width;</span><br><span class="line">      &#125;</span><br><span class="line">      [<span class="meta">DeBugInfo(56, <span class="string">&quot;Zara Ali&quot;</span>, <span class="string">&quot;19/10/2012&quot;</span>)</span>]</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Display</span>()</span></span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(<span class="string">&quot;Length: &#123;0&#125;&quot;</span>, length);</span><br><span class="line">         Console.WriteLine(<span class="string">&quot;Width: &#123;0&#125;&quot;</span>, width);</span><br><span class="line">         Console.WriteLine(<span class="string">&quot;Area: &#123;0&#125;&quot;</span>, GetArea());</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;<span class="comment">//end class Rectangle  </span></span><br><span class="line">   </span><br><span class="line">   <span class="keyword">class</span> <span class="title">ExecuteRectangle</span></span><br><span class="line">   &#123;</span><br><span class="line">      <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">      &#123;</span><br><span class="line">         Rectangle r = <span class="keyword">new</span> Rectangle(<span class="number">4.5</span>, <span class="number">7.5</span>);</span><br><span class="line">         r.Display();</span><br><span class="line">         Type type = <span class="keyword">typeof</span>(Rectangle);</span><br><span class="line">         <span class="comment">// 遍历 Rectangle 类的特性</span></span><br><span class="line">         <span class="keyword">foreach</span> (Object attributes <span class="keyword">in</span> type.GetCustomAttributes(<span class="literal">false</span>))</span><br><span class="line">         &#123;</span><br><span class="line">            DeBugInfo dbi = (DeBugInfo)attributes;</span><br><span class="line">            <span class="keyword">if</span> (<span class="literal">null</span> != dbi)</span><br><span class="line">            &#123;</span><br><span class="line">               Console.WriteLine(<span class="string">&quot;Bug no: &#123;0&#125;&quot;</span>, dbi.BugNo);</span><br><span class="line">               Console.WriteLine(<span class="string">&quot;Developer: &#123;0&#125;&quot;</span>, dbi.Developer);</span><br><span class="line">               Console.WriteLine(<span class="string">&quot;Last Reviewed: &#123;0&#125;&quot;</span>,</span><br><span class="line">                                        dbi.LastReview);</span><br><span class="line">               Console.WriteLine(<span class="string">&quot;Remarks: &#123;0&#125;&quot;</span>, dbi.Message);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         </span><br><span class="line">         <span class="comment">// 遍历方法特性</span></span><br><span class="line">         <span class="keyword">foreach</span> (MethodInfo m <span class="keyword">in</span> type.GetMethods())</span><br><span class="line">         &#123;</span><br><span class="line">            <span class="keyword">foreach</span> (Attribute a <span class="keyword">in</span> m.GetCustomAttributes(<span class="literal">true</span>))</span><br><span class="line">            &#123;</span><br><span class="line">               DeBugInfo dbi = (DeBugInfo)a;</span><br><span class="line">               <span class="keyword">if</span> (<span class="literal">null</span> != dbi)</span><br><span class="line">               &#123;</span><br><span class="line">                  Console.WriteLine(<span class="string">&quot;Bug no: &#123;0&#125;, for Method: &#123;1&#125;&quot;</span>,</span><br><span class="line">                                                dbi.BugNo, m.Name);</span><br><span class="line">                  Console.WriteLine(<span class="string">&quot;Developer: &#123;0&#125;&quot;</span>, dbi.Developer);</span><br><span class="line">                  Console.WriteLine(<span class="string">&quot;Last Reviewed: &#123;0&#125;&quot;</span>,</span><br><span class="line">                                                dbi.LastReview);</span><br><span class="line">                  Console.WriteLine(<span class="string">&quot;Remarks: &#123;0&#125;&quot;</span>, dbi.Message);</span><br><span class="line">               &#125;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         Console.ReadLine();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Length: 4.5</span></span><br><span class="line"><span class="comment">Width: 7.5</span></span><br><span class="line"><span class="comment">Area: 33.75</span></span><br><span class="line"><span class="comment">Bug No: 49</span></span><br><span class="line"><span class="comment">Developer: Nuha Ali</span></span><br><span class="line"><span class="comment">Last Reviewed: 10/10/2012</span></span><br><span class="line"><span class="comment">Remarks: Unused variable</span></span><br><span class="line"><span class="comment">Bug No: 45</span></span><br><span class="line"><span class="comment">Developer: Zara Ali</span></span><br><span class="line"><span class="comment">Last Reviewed: 12/8/2012</span></span><br><span class="line"><span class="comment">Remarks: Return type mismatch</span></span><br><span class="line"><span class="comment">Bug No: 55, for Method: GetArea</span></span><br><span class="line"><span class="comment">Developer: Zara Ali</span></span><br><span class="line"><span class="comment">Last Reviewed: 19/10/2012</span></span><br><span class="line"><span class="comment">Remarks: Return type mismatch</span></span><br><span class="line"><span class="comment">Bug No: 56, for Method: Display</span></span><br><span class="line"><span class="comment">Developer: Zara Ali</span></span><br><span class="line"><span class="comment">Last Reviewed: 19/10/2012</span></span><br><span class="line"><span class="comment">Remarks: </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%80%A7%EF%BC%88Attribute%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">特性（Attribute）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E7%89%B9%E6%80%A7"><span class="toc-number">1.2.</span> <span class="toc-text">预定义特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%89%B9%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">自定义特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E9%80%94"><span class="toc-number">2.2.</span> <span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">2.3.</span> <span class="toc-text">查看元数据</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&text=C Sharp高级进阶"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&is_video=false&description=C Sharp高级进阶"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C Sharp高级进阶&body=Check out this article: https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&title=C Sharp高级进阶"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&name=C Sharp高级进阶&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/14/C%20Sharp%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6/&t=C Sharp高级进阶"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

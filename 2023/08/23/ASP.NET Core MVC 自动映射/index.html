@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="手动映射 在小项目中一般采用手动映射赋值，如：将StudentViewModel对象的属性赋值给Student123456789101112131415&#x2F;&#x2F; StudentController.cs&#x2F;&#x2F; StudentViewModel.cs 是一个类[HttpPost]public IActionResult Add(StudentViewModel studentViewModel)&amp;#123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET Core MVC 自动映射">
+<meta property="og:url" content="https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="手动映射 在小项目中一般采用手动映射赋值，如：将StudentViewModel对象的属性赋值给Student123456789101112131415&#x2F;&#x2F; StudentController.cs&#x2F;&#x2F; StudentViewModel.cs 是一个类[HttpPost]public IActionResult Add(StudentViewModel studentViewModel)&amp;#123">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-23T08:11:39.552Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="CSharp">
+<meta property="article:tag" content="NET">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ASP.NET Core MVC 自动映射</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/08/23/ASP.NET%20Core%20MVC%20HTML%E8%BE%85%E5%8A%A9%E6%A0%87%E7%AD%BE/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/08/22/ASP.NET%20Core%20MVC%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&text=ASP.NET Core MVC 自动映射"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&is_video=false&description=ASP.NET Core MVC 自动映射"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASP.NET Core MVC 自动映射&body=Check out this article: https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&name=ASP.NET Core MVC 自动映射&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&t=ASP.NET Core MVC 自动映射"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%98%A0%E5%B0%84"><span class="toc-number">1.</span> <span class="toc-text">手动映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">自动映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">多个关系映射文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-number">4.</span> <span class="toc-text">自动映射命名规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%9B%BF%E6%8D%A2"><span class="toc-number">5.</span> <span class="toc-text">字符替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84%E5%8C%B9%E9%85%8D%E5%89%8D%E7%BC%80%E5%92%8C%E5%90%8E%E7%BC%80"><span class="toc-number">6.</span> <span class="toc-text">自动映射匹配前缀和后缀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84%E6%8E%A7%E5%88%B6%EF%BC%88%E4%B8%8D%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">自动映射控制（不常用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%98%A0%E5%B0%84"><span class="toc-number">8.</span> <span class="toc-text">列表映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%98%A0%E5%B0%84%EF%BC%88%E4%B8%8D%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-number">9.</span> <span class="toc-text">手动控制映射（不常用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E6%98%A0%E5%B0%84"><span class="toc-number">10.</span> <span class="toc-text">嵌套映射</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        ASP.NET Core MVC 自动映射
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-08-22T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-08-23</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSharp/">CSharp</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CSharp/" rel="tag">CSharp</a>, <a class="p-category" href="/tags/NET/" rel="tag">NET</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="手动映射"><a href="#手动映射" class="headerlink" title="手动映射"></a>手动映射</h2><ul>
+<li>在小项目中一般采用手动映射赋值，如：将StudentViewModel对象的属性赋值给Student<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// StudentController.cs</span></span><br><span class="line"><span class="comment">// StudentViewModel.cs 是一个类</span></span><br><span class="line">[<span class="meta">HttpPost</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> IActionResult <span class="title">Add</span>(<span class="params">StudentViewModel studentViewModel</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> student = <span class="keyword">new</span> Student()</span><br><span class="line">    &#123;</span><br><span class="line">        Id = studentViewModel.Id,</span><br><span class="line">        Name = studentViewModel.Name,</span><br><span class="line">        Age = studentViewModel.Age,</span><br><span class="line">        Sex = studentViewModel.Sex,</span><br><span class="line">    &#125;;</span><br><span class="line">    studentService.Add(student);</span><br><span class="line">    <span class="keyword">return</span> View();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>手动映射需要逐个属性进行赋值，灵活度比较高，但项目中如果需要映射的地方比较多的话，则工作量和复杂度也会随之提升</li>
+</ul>
+<h2 id="自动映射"><a href="#自动映射" class="headerlink" title="自动映射"></a>自动映射</h2><p>自动映射是由程序自动匹配属性名进行赋值，一般使用AutoMapper库完成，即将A对象的属性映射到B对象的属性值。</p>
+<ol>
+<li>安装自动映射包 - AutoMapper.Extensions.Microsoft.DependencyInjection&#x2F;第三方库</li>
+<li>创建自动映射关系<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Profiles/AutomapProfile.cs</span></span><br><span class="line"><span class="keyword">using</span> AutoMapper;</span><br><span class="line"><span class="keyword">using</span> MvcDemo.ViewModels;</span><br><span class="line"><span class="keyword">using</span> MvcDemo.Models;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.Profiles</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AutomapProfile</span>:<span class="title">Profile</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">AutomapProfile</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//创建映射关系</span></span><br><span class="line">            CreateMap&lt;StudentViewModel, Student&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>注册自动映射服务<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Program.cs</span></span><br><span class="line"><span class="comment">//builder.Services.AddAutoMapper(typeof(AutomapProfile));</span></span><br><span class="line">builder.Services.AddAutoMapper(cfg =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    cfg.AddProfile&lt;AutomapProfile&gt;();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>注入IMapper接口<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controllers/StudentController.cs</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> IMapper mapper;</span><br><span class="line"><span class="keyword">private</span> IStudentService studentService;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">StudentController</span>(<span class="params">IStudentService studentService,IMapper mapper</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>.studentService = studentService;</span><br><span class="line">    <span class="keyword">this</span>.mapper = mapper;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>调用映射方法<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controllers/StudentController.cs</span></span><br><span class="line">[<span class="meta">HttpPost</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> IActionResult <span class="title">Add</span>(<span class="params">StudentViewModel studentViewModel</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> student =  mapper.Map&lt;StudentViewModel, Student&gt;(studentViewModel);</span><br><span class="line">    studentService.Add(student);</span><br><span class="line">    <span class="keyword">return</span> View();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="多个关系映射文件"><a href="#多个关系映射文件" class="headerlink" title="多个关系映射文件"></a>多个关系映射文件</h2><p>当存在很多个对象需要映射时，通常会根据不同的类型，创建多个关系映射类，则在项目启动注册自动映射服务时，就需要加载多个映射类。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Program.cs</span></span><br><span class="line">builder.Services.AddAutoMapper(cfg =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    cfg.AddProfile&lt;AutomapProfile&gt;();</span><br><span class="line">    cfg.AddProfile&lt;CompanyProfile&gt;();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>也可以通过扫描程序集的方式加载映射文件，配置程序集名称，程序会自动扫描继承了Profile类的文件</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Program.cs</span></span><br><span class="line">builder.Services.AddAutoMapper(cfg =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    cfg.AddMaps(<span class="string">&quot;MvcDemo&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>【注】：AddMaps参数配置的是程序集名称，而不是命名空间，程序集名称可以通过项目属性获取</p>
+<h2 id="自动映射命名规则"><a href="#自动映射命名规则" class="headerlink" title="自动映射命名规则"></a>自动映射命名规则</h2><p>默认情况下，自动映射的数据源和目标的属性，必须一致，才能进行映射，但是在实际应用中，属性名之间可能会存在差异，如果不处理，默认是无法自动映射成功的。</br><br>需要在映射时进行配置源的命名格式和目标命名格式：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Profiles/AutomapProfile.cs</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.Profiles</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AutomapProfile</span>:<span class="title">Profile</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">AutomapProfile</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            SourceMemberNamingConvention = <span class="keyword">new</span> LowerUnderscoreNamingConvention();</span><br><span class="line">            DestinationMemberNamingConvention = <span class="keyword">new</span> PascalCaseNamingConvention();</span><br><span class="line">            <span class="comment">//创建映射关系</span></span><br><span class="line">            CreateMap&lt;StudentViewModel, Student&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// SourceMemberNamingConvention: 源类型成员命名规则</span></span><br><span class="line"><span class="comment">// LowerUnderscoreNamingConvention(): 下划线命名法</span></span><br><span class="line"><span class="comment">// DestinationMemberNamingConvention: 目标类型成员命名规则</span></span><br><span class="line"><span class="comment">// PascalCaseNamingConvention(): 帕斯卡命名法</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字符替换"><a href="#字符替换" class="headerlink" title="字符替换"></a>字符替换</h2><p>在实际开发中，如果映射源存在一些特殊字符，映射目标是正常字符，则需要进行替换才能映射。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> configuration = <span class="keyword">new</span> MapperConfiguration(c =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    c.ReplaceMemberName(<span class="string">&quot;Ä&quot;</span>, <span class="string">&quot;A&quot;</span>);</span><br><span class="line">    c.ReplaceMemberName(<span class="string">&quot;í&quot;</span>, <span class="string">&quot;i&quot;</span>);</span><br><span class="line">    c.ReplaceMemberName(<span class="string">&quot;Airlina&quot;</span>, <span class="string">&quot;Airline&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="自动映射匹配前缀和后缀"><a href="#自动映射匹配前缀和后缀" class="headerlink" title="自动映射匹配前缀和后缀"></a>自动映射匹配前缀和后缀</h2><p>数据源一般都会有固定的风格，如带有前缀、后缀等标识。</br><br>默认情况下，带前缀是无法自动映射的，需要在映射匹配文件中，增加映射前缀RecongnizePrefixes(“s”)</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Profiles/AutomapProfile.cs</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.Profiles</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AutomapProfile</span>:<span class="title">Profile</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">AutomapProfile</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            RecognizePrefixes(<span class="string">&quot;s&quot;</span>);</span><br><span class="line">            SourceMemberNamingConvention = <span class="keyword">new</span> LowerUnderscoreNamingConvention();</span><br><span class="line">            DestinationMemberNamingConvention = <span class="keyword">new</span> PascalCaseNamingConvention();</span><br><span class="line">            <span class="comment">//创建映射关系</span></span><br><span class="line">            CreateMap&lt;StudentViewModel, Student&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>一般前缀都是具有一定规律的设置，否则有些前缀a，有些前缀b，没有一定的规律，则无法完全匹配</li>
+<li>后缀通过RecognizePostfixes(“s”);设置</li>
+<li>取消前缀设置ClearPrefixes();就是取消所有的前缀设置列表中设置的前缀，Automapper默认匹配了Get前缀，如果不需要可以清除</li>
+</ul>
+<h2 id="自动映射控制（不常用）"><a href="#自动映射控制（不常用）" class="headerlink" title="自动映射控制（不常用）"></a>自动映射控制（不常用）</h2><ul>
+<li>使用ShouldMapField和ShouldMapProperty控制哪些属性和字段能够被映射</li>
+<li>默认所有public的field和property都会被map，也会map private 的setter，但是不会map整个property都是internal&#x2F;private的属性<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cfg.ShouldMapField = fi =&gt; <span class="literal">false</span>;</span><br><span class="line">cfg.ShouldMapProperty = pi =&gt;pi.GetMethod != <span class="literal">null</span> &amp;&amp; (pi.GetMethod.IsPublic || pi.GetMethod.IsPrivate);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="列表映射"><a href="#列表映射" class="headerlink" title="列表映射"></a>列表映射</h2><p>在实际开发中，列表的应用场景还是比较多的，列表映射也比较常用。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controllers/StudentController.cs</span></span><br><span class="line">[<span class="meta">HttpPost</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> IActionResult <span class="title">Add</span>(<span class="params">StudentViewModel studentViewModel</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> listStudents=<span class="keyword">new</span> List&lt;StudentViewModel&gt;();</span><br><span class="line">    listStudents.Add(studentViewModel);</span><br><span class="line">    <span class="keyword">var</span> students =  mapper.Map&lt;List&lt;StudentViewModel&gt;,List&lt; Student&gt;&gt;(listStudents);</span><br><span class="line">    studentService.Adds(students);</span><br><span class="line">    <span class="keyword">return</span> View();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>AutoMapper默认会自动映射以下类型：</p>
+<ul>
+<li>IEnumerable</li>
+<li>IEnumerable<T></li>
+<li>ICollection</li>
+<li>ICollection<T></li>
+<li>IList</li>
+<li>IList<T></li>
+<li>List<T></li>
+<li>Arrays</li>
+</ul>
+<p>这些集合之间可以相互映射，如：<code>mapper.Map&lt;Source[], IEnumerable&lt;Destination&gt;&gt;(sources);</code></p>
+<h2 id="手动控制映射（不常用）"><a href="#手动控制映射（不常用）" class="headerlink" title="手动控制映射（不常用）"></a>手动控制映射（不常用）</h2><p>当对于完全没有任何规律的映射，那就需要手动配置映射属性列。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源类型</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.ViewModels</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">UserViewModel</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> UserId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> UserName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Mail &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 目标类型</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.Models</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">User</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> Id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Email &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置映射属性列</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AutomapProfile</span>:<span class="title">Profile</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AutomapProfile</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        CreateMap&lt;UserViewModel, User&gt;()</span><br><span class="line">            .ForMember(dest =&gt; dest.Id, opt =&gt; opt.MapFrom(source =&gt; source.UserId))</span><br><span class="line">            .ForMember(dest =&gt; dest.Name, opt =&gt; opt.MapFrom(source =&gt; source.UserName))</span><br><span class="line">            .ForMember(dest =&gt; dest.Email, opt =&gt; opt.MapFrom(source =&gt; source.Mail));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 手动配置后就可以实现自动映射</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> IActionResult <span class="title">Add</span>(<span class="params">UserViewModel userViewModel</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> user =  mapper.Map&lt;UserViewModel,User&gt;(userViewModel);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> View();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="嵌套映射"><a href="#嵌套映射" class="headerlink" title="嵌套映射"></a>嵌套映射</h2><p>对于复杂的嵌套类型，对象的属性可能是一个复杂引用类型对象</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源类型</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.ViewModels</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">EmployeeViewModel</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> Id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="comment">// 属性User为类型为UserViewModel的引用类型</span></span><br><span class="line">        <span class="keyword">public</span> UserViewModel User &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 目标类型</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.Models</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Employee</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> Id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="comment">// 属性Uer为类型为User的引用类型</span></span><br><span class="line">        <span class="keyword">public</span> User User &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 需要对于属性类型也创建映射关系</span></span><br><span class="line">CreateMap&lt;UserViewModel, User&gt;()</span><br><span class="line">    .ForMember(dest =&gt; dest.Id, opt =&gt; opt.MapFrom(source =&gt; source.UserId))</span><br><span class="line">    .ForMember(dest =&gt; dest.Name, opt =&gt; opt.MapFrom(source =&gt; source.UserName))</span><br><span class="line">    .ForMember(dest =&gt; dest.Email, opt =&gt; opt.MapFrom(source =&gt; source.Mail));</span><br><span class="line">CreateMap&lt;EmployeeViewModel,Employee&gt;();</span><br><span class="line"><span class="comment">// 控制器中调用</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> IActionResult <span class="title">Add</span>(<span class="params">UserViewModel userViewModel</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    EmployeeViewModel employeeViewModel = <span class="keyword">new</span> EmployeeViewModel() &#123; Id = <span class="number">1</span>, User = userViewModel &#125;;</span><br><span class="line">    <span class="keyword">var</span> employee = mapper.Map&lt;EmployeeViewModel, Employee&gt;(employeeViewModel);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> View();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%98%A0%E5%B0%84"><span class="toc-number">1.</span> <span class="toc-text">手动映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84"><span class="toc-number">2.</span> <span class="toc-text">自动映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">多个关系映射文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-number">4.</span> <span class="toc-text">自动映射命名规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%9B%BF%E6%8D%A2"><span class="toc-number">5.</span> <span class="toc-text">字符替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84%E5%8C%B9%E9%85%8D%E5%89%8D%E7%BC%80%E5%92%8C%E5%90%8E%E7%BC%80"><span class="toc-number">6.</span> <span class="toc-text">自动映射匹配前缀和后缀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84%E6%8E%A7%E5%88%B6%EF%BC%88%E4%B8%8D%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">自动映射控制（不常用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%98%A0%E5%B0%84"><span class="toc-number">8.</span> <span class="toc-text">列表映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%8E%A7%E5%88%B6%E6%98%A0%E5%B0%84%EF%BC%88%E4%B8%8D%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-number">9.</span> <span class="toc-text">手动控制映射（不常用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E6%98%A0%E5%B0%84"><span class="toc-number">10.</span> <span class="toc-text">嵌套映射</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&text=ASP.NET Core MVC 自动映射"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&is_video=false&description=ASP.NET Core MVC 自动映射"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASP.NET Core MVC 自动映射&body=Check out this article: https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&title=ASP.NET Core MVC 自动映射"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&name=ASP.NET Core MVC 自动映射&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/23/ASP.NET%20Core%20MVC%20%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84/&t=ASP.NET Core MVC 自动映射"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

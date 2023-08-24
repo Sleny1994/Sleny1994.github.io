@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="缓存的作用 提高应用程序的访问速度 适用于不易改变的数据  缓存的分类根据缓存的应用范围和存储方式，可以分为以下几种：  内存缓存：这种方式是将内容缓存到Web服务器内存中，主要适用于单服务器程序，且在服务器重启后，缓存中的数据也会丢失。 缓存服务器：对于分布式部署的Web系统，缓存与内存中的方式会造成各个Web服务器中的缓存内容不一致，一般都会有独立的缓存服务器，如Redis，SQL Serve">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET Core MVC 缓存">
+<meta property="og:url" content="https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="缓存的作用 提高应用程序的访问速度 适用于不易改变的数据  缓存的分类根据缓存的应用范围和存储方式，可以分为以下几种：  内存缓存：这种方式是将内容缓存到Web服务器内存中，主要适用于单服务器程序，且在服务器重启后，缓存中的数据也会丢失。 缓存服务器：对于分布式部署的Web系统，缓存与内存中的方式会造成各个Web服务器中的缓存内容不一致，一般都会有独立的缓存服务器，如Redis，SQL Serve">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-24T03:59:34.425Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="CSharp">
+<meta property="article:tag" content="NET">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ASP.NET Core MVC 缓存</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/08/24/ASP.NET%20Core%20MVC%20Filter/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/08/24/ASP.NET%20Core%20MVC%20%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&text=ASP.NET Core MVC 缓存"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&is_video=false&description=ASP.NET Core MVC 缓存"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASP.NET Core MVC 缓存&body=Check out this article: https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&name=ASP.NET Core MVC 缓存&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&t=ASP.NET Core MVC 缓存"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">缓存的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">缓存的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98"><span class="toc-number">2.1.</span> <span class="toc-text">内存缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98"><span class="toc-number">2.2.</span> <span class="toc-text">分布式缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E8%A6%81%E6%B1%82"><span class="toc-number">2.2.1.</span> <span class="toc-text">部署要求</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        ASP.NET Core MVC 缓存
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-08-23T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-08-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSharp/">CSharp</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CSharp/" rel="tag">CSharp</a>, <a class="p-category" href="/tags/NET/" rel="tag">NET</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="缓存的作用"><a href="#缓存的作用" class="headerlink" title="缓存的作用"></a>缓存的作用</h2><ol>
+<li>提高应用程序的访问速度</li>
+<li>适用于不易改变的数据</li>
+</ol>
+<h2 id="缓存的分类"><a href="#缓存的分类" class="headerlink" title="缓存的分类"></a>缓存的分类</h2><p>根据缓存的应用范围和存储方式，可以分为以下几种：</p>
+<ol>
+<li>内存缓存：这种方式是将内容缓存到Web服务器内存中，主要适用于单服务器程序，且在服务器重启后，缓存中的数据也会丢失。</li>
+<li>缓存服务器：对于分布式部署的Web系统，缓存与内存中的方式会造成各个Web服务器中的缓存内容不一致，一般都会有独立的缓存服务器，如Redis，SQL Server等存储缓存的地方。缓存服务器中的内容，不会随着Web服务器的重启而变化。</li>
+<li>客户端：缓存于客户端一般通过Header实现，也可以通过localStorage，Cookie等方式。</li>
+</ol>
+<h3 id="内存缓存"><a href="#内存缓存" class="headerlink" title="内存缓存"></a>内存缓存</h3><p>In-Memory缓存，将数据缓存在Web服务器内存中，适用于单服务器部署的程序。在ASP.NET Core MVC程序中，使用内存缓存的步骤如下：</p>
+<ol>
+<li>添加缓存服务<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Program.cs</span></span><br><span class="line"><span class="comment">//内存缓存</span></span><br><span class="line">builder.Services.AddMemoryCache();</span><br></pre></td></tr></table></figure></li>
+<li>注入缓存接口<br>在需要用到内存缓存的控制器中，添加内存缓存接口IMemoryCache注入。<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controllers</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> ILogger&lt;HomeController&gt; _logger;</span><br><span class="line"></span><br><span class="line"><span class="comment">//内存缓存接口</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> IMemoryCache _memoryCache;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HomeController</span>(<span class="params">ILogger&lt;HomeController&gt; logger,IMemoryCache memoryCache</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    _logger = logger;</span><br><span class="line">    _memoryCache = memoryCache;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>获取&#x2F;设置缓存<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controllers</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> IActionResult <span class="title">Index</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!_memoryCache.TryGetValue(<span class="string">&quot;citys&quot;</span>,<span class="keyword">out</span> List&lt;City&gt; cityList))</span><br><span class="line">    &#123;</span><br><span class="line">        cityList = GetCitys();</span><br><span class="line">        <span class="keyword">var</span> memoryCacheEntryOptions = <span class="keyword">new</span> MemoryCacheEntryOptions();</span><br><span class="line">        memoryCacheEntryOptions.SetAbsoluteExpiration(TimeSpan.FromSeconds(<span class="number">10</span>));</span><br><span class="line">        memoryCacheEntryOptions.RegisterPostEvictionCallback((<span class="built_in">object</span> key, <span class="built_in">object</span> <span class="keyword">value</span>, EvictionReason reason, <span class="built_in">object</span> state) =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//在被清除缓存时，重新回调，重新填充</span></span><br><span class="line">            _logger.LogInformation(<span class="string">&quot;缓存已被释放！&quot;</span>);</span><br><span class="line">        &#125;, <span class="keyword">this</span>);</span><br><span class="line">        _memoryCache.Set(<span class="string">&quot;citys&quot;</span>, cityList, memoryCacheEntryOptions);</span><br><span class="line">    &#125;</span><br><span class="line">    ViewBag.Citys = cityList;</span><br><span class="line">    <span class="keyword">return</span> View();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>参数说明<br>示例中MemoryCacheEntryOptions，主要用于设置内存缓存参数，主要有以下几个参数：<ul>
+<li>AbsoluteExpiration 设置绝对过期时间</li>
+<li>SlidingExpiration 滑动过期时间</li>
+<li>PostEvictionCallbacks 缓存清除时的回调函数</li>
+</ul>
+</li>
+</ol>
+<h3 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h3><p>分布式缓存是由多个应用服务器共享的缓存，通常作为访问它的应用服务器的外部服务进行维护。分布式缓存可以提高 ASP.NET Core 应用的性能和可伸缩性，尤其是当应用由云服务或服务器场托管时。</p>
+<p>与其他将缓存数据存储在单个应用服务器上的缓存方案相比，分布式缓存具有多个优势。分布式缓存的优点：</p>
+<ul>
+<li>无需Sticky Session</li>
+<li>可扩展，适用于多台Web服务器部署的情况</li>
+<li>独立存储，Web服务器重启不会影响缓存</li>
+<li>性能更好</li>
+</ul>
+<h4 id="部署要求"><a href="#部署要求" class="headerlink" title="部署要求"></a>部署要求</h4><ol>
+<li>前提条件，添加包引用<ul>
+<li>Redis：Microsoft.Extensions.Caching.StackExchangeRedis</li>
+<li>SQL Server：Microsoft.Extensions.Caching.SqlServer</li>
+<li>NCache：NCache.Microsoft.Extensions.Caching.OpenSource</li>
+</ul>
+</li>
+<li>环境搭建，根据选择的类别进行部署</li>
+<li>安装依赖包（以Redis为例），NuGet安装第三方库Microsoft.Extensions.Caching.StackExchangeRedis</li>
+<li>添加分布式缓存服务，添加StackExchangeRedisCache服务，通过Configruation配置Redis连接信息和InstanceName实例名称<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">builder.Services.AddStackExchangeRedisCache(options =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    options.Configuration = <span class="string">&quot;192.168.1.2:6379&quot;</span>;</span><br><span class="line">    options.InstanceName = <span class="string">&quot;redis&quot;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>注入分布式缓存接口，在Controller中，注入分布式缓存接口IDistributedCache<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> IDistributedCache _distributedCache;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HomeController</span>(<span class="params">ILogger&lt;HomeController&gt; logger ,IDistributedCache distributedCache</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    _logger = logger;</span><br><span class="line">    _distributedCache = distributedCache;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>获取&#x2F;设置缓存，在使用缓存的地方，获取GetString和设置SetString缓存<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> IActionResult <span class="title">Index</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> cityList = <span class="keyword">new</span> List&lt;City&gt;();</span><br><span class="line">    <span class="keyword">var</span> obj = _distributedCache.GetString(<span class="string">&quot;citys&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">string</span>.IsNullOrEmpty(obj))</span><br><span class="line">    &#123;</span><br><span class="line">        cityList = GetCitys();</span><br><span class="line">        DistributedCacheEntryOptions options = <span class="keyword">new</span> DistributedCacheEntryOptions();</span><br><span class="line">        options.SetAbsoluteExpiration(TimeSpan.FromSeconds(<span class="number">60</span>));</span><br><span class="line">        obj = JsonConvert.SerializeObject(cityList);</span><br><span class="line">        _distributedCache.SetString(<span class="string">&quot;citys&quot;</span>, obj,options);</span><br><span class="line">    &#125;</span><br><span class="line">    cityList = JsonConvert.DeserializeObject&lt;List&lt;City&gt;&gt;(obj);</span><br><span class="line">    ViewBag.Citys = cityList;</span><br><span class="line">    <span class="keyword">return</span> View();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>测试会发现，数据首次获取是从数据库中获取，再次获取时，则会从缓存获取，可以从Redis服务器上进行查看<ul>
+<li>缓存服务器中存储的Key是加了配置的InstanceName前缀<code>Keys *</code></li>
+<li>虽然代码中是通过SetString进行存储，由于存储JSON序列化对象，所以Redis自动识别对象类型为hash<code>type rediscitys</code></li>
+<li>存储的中文在缓存服务器中是转码后的</li>
+</ul>
+</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">缓存的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">缓存的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98"><span class="toc-number">2.1.</span> <span class="toc-text">内存缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98"><span class="toc-number">2.2.</span> <span class="toc-text">分布式缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E8%A6%81%E6%B1%82"><span class="toc-number">2.2.1.</span> <span class="toc-text">部署要求</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&text=ASP.NET Core MVC 缓存"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&is_video=false&description=ASP.NET Core MVC 缓存"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASP.NET Core MVC 缓存&body=Check out this article: https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&title=ASP.NET Core MVC 缓存"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&name=ASP.NET Core MVC 缓存&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/&t=ASP.NET Core MVC 缓存"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

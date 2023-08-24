@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Filter定义Filter又被称为筛选器、过滤器。在ASP.NET Core MVC项目中，使用Filter可以在请求处理管道的特定位置之前或之后运行代码。可以创建自定义Filter，用于处理横切关注点，相当于于AOP面向切面编程。对于创建Filter，可以减少代码的复制，如：错误处理异常筛选器可以合并错误处理。 Filter工作原理从请求开始，到请求结束，经过一系列的节点，组成了调用管道，其在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET Core MVC Filter">
+<meta property="og:url" content="https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="Filter定义Filter又被称为筛选器、过滤器。在ASP.NET Core MVC项目中，使用Filter可以在请求处理管道的特定位置之前或之后运行代码。可以创建自定义Filter，用于处理横切关注点，相当于于AOP面向切面编程。对于创建Filter，可以减少代码的复制，如：错误处理异常筛选器可以合并错误处理。 Filter工作原理从请求开始，到请求结束，经过一系列的节点，组成了调用管道，其在">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-24T03:18:03.230Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="CSharp">
+<meta property="article:tag" content="NET">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>ASP.NET Core MVC Filter</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/08/24/ASP.NET%20Core%20MVC%20Identity/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/08/24/ASP.NET%20Core%20MVC%20%E7%BC%93%E5%AD%98/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&text=ASP.NET Core MVC Filter"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&is_video=false&description=ASP.NET Core MVC Filter"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASP.NET Core MVC Filter&body=Check out this article: https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&name=ASP.NET Core MVC Filter&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&t=ASP.NET Core MVC Filter"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">Filter定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">Filter工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">Filter类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">Filter实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">5.</span> <span class="toc-text">Filter作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%88%E6%9D%83Filter"><span class="toc-number">6.</span> <span class="toc-text">授权Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90Filter"><span class="toc-number">7.</span> <span class="toc-text">资源Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9CFilter"><span class="toc-number">8.</span> <span class="toc-text">操作Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8Filter"><span class="toc-number">9.</span> <span class="toc-text">异常Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9CFilter"><span class="toc-number">10.</span> <span class="toc-text">结果Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E6%B5%8B%E8%AF%95"><span class="toc-number">11.</span> <span class="toc-text">Filter测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E5%85%A8%E5%B1%80%E5%BA%94%E7%94%A8"><span class="toc-number">12.</span> <span class="toc-text">Filter全局应用</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        ASP.NET Core MVC Filter
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-08-23T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-08-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSharp/">CSharp</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CSharp/" rel="tag">CSharp</a>, <a class="p-category" href="/tags/NET/" rel="tag">NET</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Filter定义"><a href="#Filter定义" class="headerlink" title="Filter定义"></a>Filter定义</h2><p>Filter又被称为筛选器、过滤器。在ASP.NET Core MVC项目中，使用Filter可以在请求处理管道的特定位置之前或之后运行代码。可以创建自定义Filter，用于处理横切关注点，相当于于AOP面向切面编程。对于创建Filter，可以减少代码的复制，如：错误处理异常筛选器可以合并错误处理。</p>
+<h2 id="Filter工作原理"><a href="#Filter工作原理" class="headerlink" title="Filter工作原理"></a>Filter工作原理</h2><p>从请求开始，到请求结束，经过一系列的节点，组成了调用管道，其在调用管道内运行，过滤器相当于在管道中设置了几个钩子，用于执行特定的代码。</p>
+<p>请求 - 路由 - 过滤器 - Model绑定和验证 - 过滤器 - Controller&#x2F;Action - 过滤器 - View - 过滤器 - HTML</p>
+<h2 id="Filter类型"><a href="#Filter类型" class="headerlink" title="Filter类型"></a>Filter类型</h2><p>根据不同的处理功能，主要分类如下所示：</p>
+<ul>
+<li>授权筛选器Authorization Filter：<ul>
+<li>首先运行</li>
+<li>确定用户是否获得请求授权</li>
+<li>如果请求未获授权，可以让管道短路</li>
+</ul>
+</li>
+<li>资源筛选器Resource Filter：<ul>
+<li>授权后运行</li>
+<li>OnResourceExecuting在筛选器管道的其余阶段之前运行代码，如：OnResourceExecuting在模型绑定之前运行代码</li>
+<li>OnResourceExecuted在管道的其余阶段完成之后运行代码</li>
+</ul>
+</li>
+<li>操作筛选器Action Filter：<ul>
+<li>在调用操作方法之前和之后立即运行</li>
+<li>可以更改传递到操作中的参数</li>
+<li>可以更改从操作返回的结果</li>
+<li>不可在 Razor Pages 中使用</li>
+</ul>
+</li>
+<li>异常筛选器Exception Filter在向响应正文写入任何内容之前，对未经处理的异常应用全局策略</li>
+<li>结果筛选器Result Filter：<ul>
+<li>在执行操作结果之前和之后立即运行</li>
+<li>仅当操作方法成功执行时才会运行</li>
+<li>对于必须围绕视图或格式化程序的执行的逻辑会有更大的作用</li>
+</ul>
+</li>
+</ul>
+<p>Filter筛选器类型在筛选器管道中的交互方式：</br><br>Authorization Filters -&gt; Resource Filters -&gt; (Model Binding) -&gt; Action Filters -&gt; (Action Execution -&gt; Action Result Conversion) -&gt; Exception Filters -&gt; Result Filters -&gt; (Result Execution) -&gt; Result Filters -&gt; Resource Filters </p>
+<h2 id="Filter实现"><a href="#Filter实现" class="headerlink" title="Filter实现"></a>Filter实现</h2><p>所有的Filter都实现接口IfilterMetadata，根据不同的业务类型，派生出了五个接口，分别对应五大类Filter：</p>
+<ul>
+<li>IAuthorizationFilter: OnAuthorization(AuthorizationFilterContext)</li>
+<li>IExceptionFilter: OnException(ExceptionContext)</li>
+<li>IResourceFilter: OnResourceExecuted(ResourceExecutedContext)&amp;OnResourceExecuting(ResourceExecutingContext)</li>
+<li>IActionFilter: OnActionExecuted(ActionExecutedContext)&amp;OnActionExecuting(ActionExecutingContext)</li>
+<li>IResultFilter: OnResultExecuted(ResultExecutedContext)&amp;OnResultExecuting(ResultExecutingContext)</li>
+</ul>
+<h2 id="Filter作用域"><a href="#Filter作用域" class="headerlink" title="Filter作用域"></a>Filter作用域</h2><p>Filter可以作用在Controller、Action、全局，其在同步操作筛选器运行筛选器方法的顺序：</br><br>全球(OnActionExecuting) &gt; 控制器(OnActionExecuting) &gt; 操作(OnActionExecuting) &gt; 操作(OnActionExecuted) &gt; 控制器(OnActionExecuted) &gt; 全球(OnActionExecuted)</p>
+<h2 id="授权Filter"><a href="#授权Filter" class="headerlink" title="授权Filter"></a>授权Filter</h2><p>授权筛选器具有以下特征：</p>
+<ul>
+<li>是筛选器管道中运行的第一个筛选器</li>
+<li>控制对操作方法的访问</li>
+<li>具有在它之前的执行的方法，但没有之后执行的方法</li>
+</ul>
+<p>例如：常用的RequireHTTPS就是授权筛选器，其实现了IAuthorizationFilter接口，并继承了Attirbute，所以可以作用于Controller或Action中，以限制请求的方式。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Mvc.Filters;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Microsoft.AspNetCore.Mvc</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// 摘要:</span></span><br><span class="line">    <span class="comment">//     An authorization filter that confirms requests are received over HTTPS.</span></span><br><span class="line">    [<span class="meta">AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">RequireHttpsAttribute</span> : <span class="title">Attribute</span>, <span class="title">IAuthorizationFilter</span>, <span class="title">IFilterMetadata</span>, <span class="title">IOrderedFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">RequireHttpsAttribute</span>()</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">bool</span> Permanent &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> Order &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnAuthorization</span>(<span class="params">AuthorizationFilterContext filterContext</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">HandleNonHttpsRequest</span>(<span class="params">AuthorizationFilterContext filterContext</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="资源Filter"><a href="#资源Filter" class="headerlink" title="资源Filter"></a>资源Filter</h2><p>资源Filter在授权Filter之后执行，需要实现IResourceFilter接口。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Filter/logResourceFilter.cs</span></span><br><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Mvc.Filters;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.Filter</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 同步版本</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LogResourceFilter</span> :<span class="title">Attribute</span>, <span class="title">IResourceFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnResourceExecuted</span>(<span class="params">ResourceExecutedContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//Action执行完成后执行</span></span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Resource Filter Executed********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnResourceExecuting</span>(<span class="params">ResourceExecutingContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//授权Filter执行后执行。</span></span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Resource Filter Executing********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 异步版本</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AsynLogResouceFilter</span> : <span class="title">Attribute</span>, <span class="title">IAsyncResourceFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">OnResourceExecutionAsync</span>(<span class="params">ResourceExecutingContext context, ResourceExecutionDelegate next</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Aysnc Resource Filter Executing********************&quot;</span>);</span><br><span class="line">            <span class="keyword">var</span> exceutedContext =  <span class="keyword">await</span> next();</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Async Resource Filter Executed********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果要使大部分管道短路，资源筛选器会很有用。如：如果缓存命中，则缓存筛选器可以绕开管道的其余阶段。</p>
+<h2 id="操作Filter"><a href="#操作Filter" class="headerlink" title="操作Filter"></a>操作Filter</h2><p>操作筛选器不应用于 Razor Pages。</br><br>Razor Pages 支持 IPageFilter 和 IAsyncPageFilter。</br></p>
+<p>操作筛选器具有以下特征：</p>
+<ul>
+<li>实现 IActionFilter 或 IAsyncActionFilter 接口</li>
+<li>它们的执行围绕着操作方法的执行<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Filter/DoDoActionFilter.cs</span></span><br><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Mvc.Filters;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.Filter</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DoDoActionFilter</span> : <span class="title">Attribute</span>, <span class="title">IActionFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnActionExecuted</span>(<span class="params">ActionExecutedContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Action Executed********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnActionExecuting</span>(<span class="params">ActionExecutingContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Action Executing********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AsyncDoDoActionFilter</span> : <span class="title">IAsyncActionFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">OnActionExecutionAsync</span>(<span class="params">ActionExecutingContext context, ActionExecutionDelegate next</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Async Action Executing********************&quot;</span>);</span><br><span class="line">            <span class="keyword">await</span> next();</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Async Action Executed********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ActionExecutingContext的属性：</li>
+<li>ActionArguments：用于读取操作方法的输入</li>
+<li>Controller：用于处理控制器实例</li>
+<li>Result：设置 Result 会使操作方法和后续操作筛选器的执行短路</li>
+</ul>
+<p>ActionExecutedContext提供 Controller 和 Result 以及以下属性：</p>
+<ul>
+<li>Canceled：如果操作执行已被另一个筛选器设置短路，则为 true</li>
+<li>Exception：如果操作或之前运行的操作筛选器引发了异常，则为非 NULL 值，将此属性设置为 null：<ul>
+<li>有效地处理异常</li>
+<li>执行 Result，从操作方法中将它返回</li>
+</ul>
+</li>
+</ul>
+<p>对于IAsyncActionFilter，一个向 ActionExecutionDelegate 的调用可以达到以下目的：</p>
+<ul>
+<li>执行所有后续操作筛选器和操作方法</li>
+<li>返回 ActionExecutedContext</li>
+</ul>
+<h2 id="异常Filter"><a href="#异常Filter" class="headerlink" title="异常Filter"></a>异常Filter</h2><p>异常筛选器具有以下特征：</p>
+<ul>
+<li>实现 IExceptionFilter 或 IAsyncExceptionFilter</li>
+<li>可用于实现常见的错误处理策略<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Filter/DoExceptionFilter.cs</span></span><br><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Mvc.Filters;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.Filter</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DoExceptionFilter</span> :<span class="title">Attribute</span>, <span class="title">IExceptionFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnException</span>(<span class="params">ExceptionContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Exception********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DoAsyncExceptionFilter</span> : <span class="title">Attribute</span>, <span class="title">IAsyncExceptionFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">OnExceptionAsync</span>(<span class="params">ExceptionContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">await</span> Task.Run(() =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(<span class="string">&quot;********************On Exception Async********************&quot;</span>);</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+异常筛选器的特点：</li>
+<li>没有之前和之后的事件</li>
+<li>实现 OnException 或 OnExceptionAsync</li>
+<li>处理 Razor 页面或控制器创建、模型绑定、操作筛选器或操作方法中发生的未经处理的异常</li>
+<li>请不要捕获资源筛选器、结果筛选器或 MVC 结果执行中发生的异常</li>
+<li>非常适合捕获发生在操作中的异常</li>
+<li>并不像错误处理中间件那么灵活</li>
+</ul>
+<p>如果要处理异常，请将 ExceptionHandled 属性设置为 true 或分配 Result 属性，这将停止传播异常。</p>
+<p>异常筛选器无法将异常转变为“成功”，只有操作筛选器才能执行该转变。</p>
+<p>一般建议使用中间件处理异常，基于所调用的操作方法，仅当错误处理不同时，才使用异常筛选器。<br>如：应用可能具有用于 API 终结点和视图&#x2F;HTML 的操作方法。API 终结点可以将错误信息返回为 JSON，而基于视图的操作可能会以 HTML 形式返回错误页。</p>
+<h2 id="结果Filter"><a href="#结果Filter" class="headerlink" title="结果Filter"></a>结果Filter</h2><p>结果筛选器的特征：</p>
+<ul>
+<li>实现接口：<ul>
+<li>IResultFilter 或 IAsyncResultFilter</li>
+<li>IAlwaysRunResultFilter 或 IAsyncAlwaysRunResultFilter</li>
+</ul>
+</li>
+<li>它们的执行围绕着操作结果的执行<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Filter/DoResultFilters.cs</span></span><br><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Mvc.Filters;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MvcDemo.Filter</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DoResultFilter</span> :<span class="title">Attribute</span>, <span class="title">IResultFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnResultExecuted</span>(<span class="params">ResultExecutedContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Result Executed********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnResultExecuting</span>(<span class="params">ResultExecutingContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Result Executing********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DoAysncResultFilter</span> :<span class="title">Attribute</span>, <span class="title">IAsyncResultFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">OnResultExecutionAsync</span>(<span class="params">ResultExecutingContext context, ResultExecutionDelegate next</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Result Execution Async Executing********************&quot;</span>);</span><br><span class="line">            <span class="keyword">await</span> next();</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;********************On Result Execution Async Executed********************&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Filter测试"><a href="#Filter测试" class="headerlink" title="Filter测试"></a>Filter测试</h2><p>将编辑好的过滤器，添加在Home&#x2F;Index上。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Views/Home/Index.cshtml</span></span><br><span class="line">[<span class="meta">DoExceptionFilter</span>]</span><br><span class="line">[<span class="meta">LogResourceFilter</span>]</span><br><span class="line">[<span class="meta">DoResultFilter</span>]</span><br><span class="line">[<span class="meta">DoDoActionFilter</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> IActionResult <span class="title">Index</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    _logger.LogInformation(<span class="string">&quot;Hello, This is Index！&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> View();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【注】：异常过滤器没有输出内容，是因为没有异常产生；授权过滤器没有添加，在所有过滤器之前开始，所有过滤器之后结束。</p>
+<h2 id="Filter全局应用"><a href="#Filter全局应用" class="headerlink" title="Filter全局应用"></a>Filter全局应用</h2><p>Filter可以应用在单个Controller或Action上，也可以进行全局应用。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Program.cs</span></span><br><span class="line">builder.Services.AddControllersWithViews(option =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    option.Filters.Add&lt;LogResourceFilter&gt;();</span><br><span class="line">    option.Filters.Add&lt;DoExceptionFilter&gt;();</span><br><span class="line">    option.Filters.Add&lt;DoResultFilter&gt;();</span><br><span class="line">    option.Filters.Add&lt;DoDoActionFilter&gt;();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">Filter定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">Filter工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">Filter类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">Filter实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">5.</span> <span class="toc-text">Filter作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%88%E6%9D%83Filter"><span class="toc-number">6.</span> <span class="toc-text">授权Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90Filter"><span class="toc-number">7.</span> <span class="toc-text">资源Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9CFilter"><span class="toc-number">8.</span> <span class="toc-text">操作Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8Filter"><span class="toc-number">9.</span> <span class="toc-text">异常Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9CFilter"><span class="toc-number">10.</span> <span class="toc-text">结果Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E6%B5%8B%E8%AF%95"><span class="toc-number">11.</span> <span class="toc-text">Filter测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter%E5%85%A8%E5%B1%80%E5%BA%94%E7%94%A8"><span class="toc-number">12.</span> <span class="toc-text">Filter全局应用</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&text=ASP.NET Core MVC Filter"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&is_video=false&description=ASP.NET Core MVC Filter"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ASP.NET Core MVC Filter&body=Check out this article: https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&title=ASP.NET Core MVC Filter"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&name=ASP.NET Core MVC Filter&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/08/24/ASP.NET%20Core%20MVC%20Filter/&t=ASP.NET Core MVC Filter"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
