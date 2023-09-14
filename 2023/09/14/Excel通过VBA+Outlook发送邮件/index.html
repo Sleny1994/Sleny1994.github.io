@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="实现步骤 将需要实现该功能的Excel表另存为xlsm格式，仅该格式支持宏代码 点击开发工具-插入-表单控件（按钮） 在弹出的对话框中，点击新建 在打开的Mircosoft Visual Basic For Application中编辑实现功能的代码 保存后，点击该按钮即可实现对应功能  实现代码123456789101112131415161718192021222324252627282930">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Excel通过VBA+Outlook发送邮件">
+<meta property="og:url" content="https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="实现步骤 将需要实现该功能的Excel表另存为xlsm格式，仅该格式支持宏代码 点击开发工具-插入-表单控件（按钮） 在弹出的对话框中，点击新建 在打开的Mircosoft Visual Basic For Application中编辑实现功能的代码 保存后，点击该按钮即可实现对应功能  实现代码123456789101112131415161718192021222324252627282930">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-14T03:28:00.805Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="VBA">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Excel通过VBA+Outlook发送邮件</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/08/28/SQL%20Server%E4%B9%8B%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&text=Excel通过VBA+Outlook发送邮件"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&is_video=false&description=Excel通过VBA+Outlook发送邮件"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Excel通过VBA+Outlook发送邮件&body=Check out this article: https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&name=Excel通过VBA+Outlook发送邮件&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&t=Excel通过VBA+Outlook发送邮件"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">实现步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">实现代码</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Excel通过VBA+Outlook发送邮件
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-09-13T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-09-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/VBA/" rel="tag">VBA</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><ol>
+<li>将需要实现该功能的Excel表另存为xlsm格式，仅该格式支持宏代码</li>
+<li>点击开发工具-插入-表单控件（按钮）</li>
+<li>在弹出的对话框中，点击新建</li>
+<li>在打开的Mircosoft Visual Basic For Application中编辑实现功能的代码</li>
+<li>保存后，点击该按钮即可实现对应功能</li>
+</ol>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> Test()</span><br><span class="line">    <span class="keyword">Dim</span> Mail <span class="keyword">As</span> Outlook.Application</span><br><span class="line">    <span class="keyword">Set</span> Mail = <span class="built_in">New</span> Outlook.Application</span><br><span class="line">    <span class="keyword">Dim</span> objMail <span class="keyword">As</span> Outlook.MailItem</span><br><span class="line">    <span class="keyword">Set</span> objMail = Mail.CreateItem(olMailItem)</span><br><span class="line">    <span class="keyword">Dim</span> oRng <span class="keyword">As</span> Range</span><br><span class="line">    <span class="keyword">Dim</span> oCell <span class="keyword">As</span> Range</span><br><span class="line">    <span class="keyword">Dim</span> dtToday <span class="keyword">As</span> <span class="type">Date</span></span><br><span class="line">    <span class="keyword">Dim</span> dtDiff <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line">    <span class="keyword">Dim</span> mtCells <span class="keyword">As</span> <span class="built_in">New</span> Collection</span><br><span class="line">    </span><br><span class="line">    <span class="comment">&#x27;获取当前日期</span></span><br><span class="line">    dtToday = <span class="type">Date</span>  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">&#x27;指定日期所在的列范围</span></span><br><span class="line">    <span class="keyword">Set</span> oRng = Worksheets(<span class="string">&quot;Sheet1&quot;</span>).Range(<span class="string">&quot;A2&quot;</span>, <span class="string">&quot;A6&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">&#x27;循环遍历，与当前时间进行比较，3天内到期的物料将发送邮件提醒</span></span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> oCell <span class="keyword">In</span> oRng</span><br><span class="line">        dtDiff = DateDiff(<span class="string">&quot;d&quot;</span>, dtToday, oCell.Value)</span><br><span class="line">        <span class="keyword">If</span> dtDiff &lt;= <span class="number">3</span> <span class="built_in">And</span> dtDiff &gt;= <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">            <span class="keyword">Dim</span> rng <span class="keyword">As</span> Range</span><br><span class="line">            <span class="keyword">Set</span> rng = Cells(Right(oCell.Address, <span class="number">1</span>), <span class="string">&quot;B&quot;</span>) <span class="comment">&#x27;通过日期所在行来获取物料所在的单元格</span></span><br><span class="line">            sMsg = <span class="string">&quot;物料 &quot;</span> &amp; rng.Value &amp; <span class="string">&quot; &quot;</span> &amp; <span class="string">&quot;过期时间 &quot;</span> &amp; oCell.Value &amp; <span class="string">&quot; &quot;</span> &amp; <span class="string">&quot;还有 &quot;</span> &amp; dtDiff &amp; <span class="string">&quot;天！&quot;</span></span><br><span class="line">            mtCells.Add (sMsg)  <span class="comment">&#x27;定义的集合，将循环的所有sMsg信息全部存储其中</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&#x27;遍历循环集合内的值，并将所有值拼接至result中</span></span><br><span class="line">    <span class="keyword">Dim</span> result <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line">    <span class="keyword">Dim</span> i <span class="keyword">As</span> <span class="type">Long</span></span><br><span class="line">    <span class="keyword">For</span> i = <span class="number">1</span> <span class="keyword">To</span> mtCells.Count</span><br><span class="line">        result = result &amp; mtCells(i) &amp; vbCrLf &amp; vbCrLf</span><br><span class="line">    <span class="keyword">Next</span> i</span><br><span class="line">    </span><br><span class="line">    <span class="comment">&#x27;发送邮件</span></span><br><span class="line">    <span class="keyword">With</span> objMail</span><br><span class="line">        .Subject = <span class="string">&quot;My Test Mail&quot;</span>             <span class="comment">&#x27;主题</span></span><br><span class="line">        .<span class="keyword">To</span> = <span class="string">&quot;1402271195@qq.com&quot;</span>             <span class="comment">&#x27;收件人，多人使用分号隔开</span></span><br><span class="line">        <span class="comment">&#x27;.CC = &quot;xxxxx@hotmail.com&quot;            &#x27;抄送</span></span><br><span class="line">        <span class="comment">&#x27;.BCC = &quot;xxxxx@sina.cn&quot;               &#x27;密送</span></span><br><span class="line">        <span class="comment">&#x27;.BodyFormat = olFormatHTML           &#x27;邮件格式</span></span><br><span class="line">        .Body = result                        <span class="comment">&#x27;正文</span></span><br><span class="line">        <span class="comment">&#x27;.Attachments.Add &quot;D:\RunLog.txt&quot;     &#x27;附件</span></span><br><span class="line">        .Display                              <span class="comment">&#x27;预览显示，不发送</span></span><br><span class="line">        <span class="comment">&#x27;.Send                                &#x27;执行发送</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&#x27;MsgBox &quot;发送成功！&quot; &amp; vbCrLf &amp; &quot;共用时：&quot; &amp; Timer - t &amp; &quot;秒&quot;, vbInformation + vbOKOnly</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">实现步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">实现代码</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&text=Excel通过VBA+Outlook发送邮件"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&is_video=false&description=Excel通过VBA+Outlook发送邮件"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Excel通过VBA+Outlook发送邮件&body=Check out this article: https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&title=Excel通过VBA+Outlook发送邮件"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&name=Excel通过VBA+Outlook发送邮件&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/09/14/Excel%E9%80%9A%E8%BF%87VBA+Outlook%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/&t=Excel通过VBA+Outlook发送邮件"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
