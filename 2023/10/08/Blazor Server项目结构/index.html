@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="目录结构[以默认Demo为例 - 即获取天气数据和计数功能] 123456789101112131415161718192021222324252627282930313233343536373839404142434445Project|-Connected Services|-Properties|--launchSettings.json|-wwwroot|--css--favicon.ic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blazor Server项目结构">
+<meta property="og:url" content="https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="目录结构[以默认Demo为例 - 即获取天气数据和计数功能] 123456789101112131415161718192021222324252627282930313233343536373839404142434445Project|-Connected Services|-Properties|--launchSettings.json|-wwwroot|--css--favicon.ic">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-08T02:18:28.974Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="CSharp">
+<meta property="article:tag" content="NET">
+<meta property="article:tag" content="Blazor">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Blazor Server项目结构</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/09/26/C%20Sharp%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&text=Blazor Server项目结构"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&is_video=false&description=Blazor Server项目结构"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Blazor Server项目结构&body=Check out this article: https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&name=Blazor Server项目结构&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&t=Blazor Server项目结构"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E8%AF%B4%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">目录说明</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Blazor Server项目结构
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-07T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-10-08</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSharp/">CSharp</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Blazor/" rel="tag">Blazor</a>, <a class="p-category" href="/tags/CSharp/" rel="tag">CSharp</a>, <a class="p-category" href="/tags/NET/" rel="tag">NET</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>[以默认Demo为例 - 即获取天气数据和计数功能]</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">Project</span><br><span class="line">|</span><br><span class="line">-Connected Services</span><br><span class="line">|</span><br><span class="line">-Properties</span><br><span class="line">|</span><br><span class="line">--launchSettings.json</span><br><span class="line">|</span><br><span class="line">-wwwroot</span><br><span class="line">|</span><br><span class="line">--css</span><br><span class="line">--favicon.ico</span><br><span class="line">|</span><br><span class="line">-依赖项</span><br><span class="line">|</span><br><span class="line">-Data</span><br><span class="line">|</span><br><span class="line">--WeatherForecast.cs</span><br><span class="line">--WeatherForecastService.cs</span><br><span class="line">|</span><br><span class="line">-Pages</span><br><span class="line">|</span><br><span class="line">--_Host.cshtml</span><br><span class="line">--_Layout.cshtml</span><br><span class="line">--Counter.razor</span><br><span class="line">--Error.cshtml</span><br><span class="line">---Error.cshtml.cs</span><br><span class="line">--FetchData.razor</span><br><span class="line">--Index.razor</span><br><span class="line">|</span><br><span class="line">-Shared</span><br><span class="line">|</span><br><span class="line">--MainLayout.razor</span><br><span class="line">---MainLayout.razor.css</span><br><span class="line">--NavMenu.razor</span><br><span class="line">---NavMenu.razor.css</span><br><span class="line">--SurveyPrompt.razor</span><br><span class="line">|</span><br><span class="line">-_Imports.razor</span><br><span class="line">|</span><br><span class="line">-App.razor</span><br><span class="line">|</span><br><span class="line">-appsettings.json</span><br><span class="line">|</span><br><span class="line">-Program.cs</span><br></pre></td></tr></table></figure>
+
+<h2 id="目录说明"><a href="#目录说明" class="headerlink" title="目录说明"></a>目录说明</h2><ol>
+<li>Data文件夹：包含WeatherForecast类和WeatherForecastService的实现，主要作用是向应用FeathData组件提供Demo天气数据</li>
+<li>Pages文件夹：包含构成Blazor应用的各种路由组件和页面（.razor）和根页面，每个页面的路由是由页面顶部的@page指令来指定的。<ul>
+<li>_Host.cshtml: 实现Razor页面应用的根页面</li>
+<li>_Layout.cshtml: 根页面的布局页，包含通用的HTML元素<ul>
+<li>默认请求应用的任何页面，都会在响应中返回此页面进行呈现</li>
+<li>指定根App.razor的呈现位置</li>
+</ul>
+</li>
+<li>Counter.razor: 计数器页面</li>
+<li>Error.razor: 当应用中发生未经处理的异常时调用</li>
+<li>FetchData.razor: 数据列表页面</li>
+<li>Index.razor: Demo创建的Blazor应用的默认首页</li>
+</ul>
+</li>
+<li>Shared文件夹：包含共享组件和样式表<ul>
+<li>MainLayout.razor: 应用的布局组件</li>
+<li>MainLayout.razor.css: 应用主布局的样式表</li>
+<li>NavMenu.razor: 侧边导航栏，包括NavLink组件，该组件可向其它Razor组件呈现导航菜单，其会在系统加载组件时自动指示选定状态，有助于了解当前选中菜单名称及所显示的页面<ul>
+<li>NavMenu.razor.css: 应用导航菜单的样式表</li>
+</ul>
+</li>
+<li>SurveyPrompt.razor: Blazor调查组件</li>
+</ul>
+</li>
+<li>wwwroot文件夹：存放静态文件的文件夹，包含应用程序的公共静态文件，一般包括网站使用的css样式表、图像和JavaScript文件</li>
+<li>_Imports.razor：包括要包含在应用组件中常见的Razor指令，例如用于命名空间的@using指令</li>
+<li>App.razor：是Blazor应用程序的根组件，使用Router组件来设置客户端路由，Router组件会截获浏览器所发出的请求并导航到相对应的地址页面</li>
+<li>appsettings.json：环境应用设置文件</li>
+<li>Program.cs：启动服务器的应用程序的入口，用于设置主机并包含应用的启动逻辑，包括配置应用程序服务和请求处理管道配置<ul>
+<li>指定应用程序的依赖注入服务(DI)，如：通过调用AddServerSideBlazor添加服务，将WeatherForecastService添加到服务容器以供示例FetchData组件使用</li>
+<li>配置应用的请求处理管道，用于处理所有对应用程序的请求<ul>
+<li>调用MapBlazorHub方法可以为浏览器的实时连接设置终结点，使用SignalR创建连接，用于向应用程序添加实时Web功能</li>
+<li>调用MapFallbackToPage(“&#x2F;_Host”)以设置应用程序的根页面并启用导肮</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BlazorAppDemo.csproj文件定义了应用程序项目及其依赖项，可以通过双击解决方案资源管理器中的BlazorAppDemo项目节点来查看</li>
+<li>Properties文件夹：launchSettings.json文件为本地开发环境定义了不同的配置文件设置，如在项目创建时分配的端口号保存在此文件中</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E8%AF%B4%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">目录说明</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&text=Blazor Server项目结构"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&is_video=false&description=Blazor Server项目结构"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Blazor Server项目结构&body=Check out this article: https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&title=Blazor Server项目结构"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&name=Blazor Server项目结构&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/&t=Blazor Server项目结构"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
