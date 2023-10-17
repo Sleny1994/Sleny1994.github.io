@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="目的 从业务层面来说，针对用户输入的数据必须校验，以便提供优质的服务，以免后期因为数据错误导致的重大问题。 从技术层面来说，不正确的输入会导致异常或错误，规范化的开发很重要。 从安全层面来说，可以避免恶意用户使用输入数据中存在的漏洞注入攻击，从而入侵服务器，窃取重要数据。  特性在Blazor组件和EF框架中，提供DRY（不要自我重复）原则级别的校验，即在实体类中采用特性的方式声明，应用程序的所有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blazor Server数据校验">
+<meta property="og:url" content="https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="目的 从业务层面来说，针对用户输入的数据必须校验，以便提供优质的服务，以免后期因为数据错误导致的重大问题。 从技术层面来说，不正确的输入会导致异常或错误，规范化的开发很重要。 从安全层面来说，可以避免恶意用户使用输入数据中存在的漏洞注入攻击，从而入侵服务器，窃取重要数据。  特性在Blazor组件和EF框架中，提供DRY（不要自我重复）原则级别的校验，即在实体类中采用特性的方式声明，应用程序的所有">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-11T04:56:41.100Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="CSharp">
+<meta property="article:tag" content="NET">
+<meta property="article:tag" content="Blazor">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Blazor Server数据校验</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/10/08/Blazor%20Server%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&text=Blazor Server数据校验"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&is_video=false&description=Blazor Server数据校验"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Blazor Server数据校验&body=Check out this article: https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&name=Blazor Server数据校验&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&t=Blazor Server数据校验"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84"><span class="toc-number">1.</span> <span class="toc-text">目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4"><span class="toc-number">3.</span> <span class="toc-text">提交</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Blazor Server数据校验
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-10T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-10-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSharp/">CSharp</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Blazor/" rel="tag">Blazor</a>, <a class="p-category" href="/tags/CSharp/" rel="tag">CSharp</a>, <a class="p-category" href="/tags/NET/" rel="tag">NET</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ol>
+<li>从业务层面来说，针对用户输入的数据必须校验，以便提供优质的服务，以免后期因为数据错误导致的重大问题。</li>
+<li>从技术层面来说，不正确的输入会导致异常或错误，规范化的开发很重要。</li>
+<li>从安全层面来说，可以避免恶意用户使用输入数据中存在的漏洞注入攻击，从而入侵服务器，窃取重要数据。</li>
+</ol>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><p>在Blazor组件和EF框架中，提供DRY（不要自我重复）原则级别的校验，即在实体类中采用特性的方式声明，应用程序的所有位置都将强制执行。</p>
+<p>System.ComponentModel.DataAnnotations：该类提供校验支持</p>
+<p>DataAnnotations 命名空间下提供内置校验规则特性：</p>
+<ul>
+<li>[ValidationNever]. 如果要确保该字段从不包含在验证中，请使用此特性。</li>
+<li>[CreditCard]. 如果要记录用户的有效信用卡号，请使用此特性。</li>
+<li>[Compare]. 如果要确保模型中的两个属性匹配，请使用此特性。</li>
+<li>[Phone]. 如果要记录用户的有效电话号码，请使用此特性。</li>
+<li>[RegularExpression]. 如果通过将值与正则表达式进行比较来检查值的格式，请使用此特性。</li>
+<li>[StringLength]. 如果要检查字符串值的长度是否不超过最大长度，请使用此特性。</li>
+<li>[Url]. 如果要记录用户的有效 URL，请使用此特性。</li>
+<li>[Required]. 如果要求用户必须填写，请使用此特性。</li>
+<li>[Key]. 数据库表的主键标识，请使用此特性。</li>
+<li>[Range]. 将值限制在指定范围内，请使用此特性。</li>
+</ul>
+<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><p>使用EditForm组件时，有三个事件可用于响应表单提交：</p>
+<ul>
+<li>OnSubmit: 无论验证结果如何，只要用户提交表单，就会触发该事件。（该事件需要配合EditContext和Validate()使用）</li>
+<li>OnValidSubmit: 当用户提交表单且输入的验证通过时，将触发该事件。</li>
+<li>OnInvalidSubmit: 当用户提交表单且输入的验证失败时，将触发该事件。</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84"><span class="toc-number">1.</span> <span class="toc-text">目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4"><span class="toc-number">3.</span> <span class="toc-text">提交</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&text=Blazor Server数据校验"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&is_video=false&description=Blazor Server数据校验"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Blazor Server数据校验&body=Check out this article: https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&title=Blazor Server数据校验"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&name=Blazor Server数据校验&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/&t=Blazor Server数据校验"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
