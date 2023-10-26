@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="查找合适的NTP服务器在CMD命令行或Power Shell中输入命令w32tm &#x2F;stripchart &#x2F;computer:[ntp server],若不提示错误即为成功可用 1234567891011121314151617181920212223242526272829w32tm &#x2F;stripchart &#x2F;computer:ntp.aliyun.com# 常见的NTP服务器210.72.14">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AD域服务器开启NTP时间同步">
+<meta property="og:url" content="https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="查找合适的NTP服务器在CMD命令行或Power Shell中输入命令w32tm &#x2F;stripchart &#x2F;computer:[ntp server],若不提示错误即为成功可用 1234567891011121314151617181920212223242526272829w32tm &#x2F;stripchart &#x2F;computer:ntp.aliyun.com# 常见的NTP服务器210.72.14">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-26T05:32:48.136Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="AD">
+<meta property="article:tag" content="Windoes">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>AD域服务器开启NTP时间同步</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/10/11/Blazor%20Server%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&text=AD域服务器开启NTP时间同步"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&is_video=false&description=AD域服务器开启NTP时间同步"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AD域服务器开启NTP时间同步&body=Check out this article: https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&name=AD域服务器开启NTP时间同步&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&t=AD域服务器开启NTP时间同步"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%90%88%E9%80%82%E7%9A%84NTP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">查找合适的NTP服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AENTP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">配置NTP服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%8ENTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5"><span class="toc-number">3.</span> <span class="toc-text">设置与NTP服务器时间同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%9D%83%E5%A8%81%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">设置权威服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BB%84%E7%AD%96%E7%95%A5"><span class="toc-number">5.</span> <span class="toc-text">配置组策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">6.</span> <span class="toc-text">注意点</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        AD域服务器开启NTP时间同步
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-25T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-10-26</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Windows/">Windows</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/AD/" rel="tag">AD</a>, <a class="p-category" href="/tags/Windoes/" rel="tag">Windoes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="查找合适的NTP服务器"><a href="#查找合适的NTP服务器" class="headerlink" title="查找合适的NTP服务器"></a>查找合适的NTP服务器</h2><p>在CMD命令行或Power Shell中输入命令<code>w32tm /stripchart /computer:[ntp server]</code>,若不提示错误即为成功可用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">w32tm /stripchart /computer:ntp.aliyun.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 常见的NTP服务器</span></span><br><span class="line">210.72.145.44 国家授时中心服务器IP地址</span><br><span class="line">ntp.sjtu.edu.cn 202.120.2.101 上海交通大学网络中心NTP服务器地址</span><br><span class="line">s1a.time.edu.cn 北京邮电大学</span><br><span class="line">s1b.time.edu.cn 清华大学</span><br><span class="line">s1c.time.edu.cn 北京大学</span><br><span class="line">s1d.time.edu.cn 东南大学</span><br><span class="line">s1e.time.edu.cn 清华大学</span><br><span class="line">s2a.time.edu.cn 清华大学</span><br><span class="line">s2b.time.edu.cn 清华大学</span><br><span class="line">s2c.time.edu.cn 北京邮电大学</span><br><span class="line">s2d.time.edu.cn 西南地区网络中心</span><br><span class="line">s2e.time.edu.cn 西北地区网络中心</span><br><span class="line">s2f.time.edu.cn 东北地区网络中心</span><br><span class="line">s2g.time.edu.cn 华东南地区网络中心</span><br><span class="line">s2h.time.edu.cn 四川大学网络管理中心</span><br><span class="line">s2j.time.edu.cn 大连理工大学网络中心</span><br><span class="line">s2k.time.edu.cn CERNET桂林主节点</span><br><span class="line">s2m.time.edu.cn 北京大学</span><br><span class="line"> </span><br><span class="line">Africa — africa.pool.ntp.org (53)</span><br><span class="line">Antarctica — antarctica.pool.ntp.org (0)</span><br><span class="line">Asia — asia.pool.ntp.org (298)</span><br><span class="line">Europe — europe.pool.ntp.org (2967)</span><br><span class="line">North America — north-america.pool.ntp.org (960)</span><br><span class="line">Oceania — oceania.pool.ntp.org (128)</span><br><span class="line">South America — south-america.pool.ntp.org (61)</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置NTP服务器"><a href="#配置NTP服务器" class="headerlink" title="配置NTP服务器"></a>配置NTP服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">w32tm /config /manualpeerlist:ntp.aliyun.com /syncfromflags:manual /reliable:<span class="built_in">yes</span> /update</span><br><span class="line"></span><br><span class="line">w32tm /config /update</span><br><span class="line">net stop w32time</span><br><span class="line">net start w32time</span><br><span class="line">w32tm /resync /rediscover</span><br><span class="line">w32tm /query /source</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置与NTP服务器时间同步"><a href="#设置与NTP服务器时间同步" class="headerlink" title="设置与NTP服务器时间同步"></a>设置与NTP服务器时间同步</h2><ol>
+<li>添加时间服务器<br>打开注册表<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers</code>，右键新建字符串值，名称设置为<code>0</code>，数据输入：<code>ntp.aliyun.com</code>，将最上方默认数据修改为<code>0</code></li>
+<li>指定时间源<br>打开注册表<code>HKEY_LOCAL_MACHINE\SYSTEM\Current\ControlSetServices\W32Time\Parameters</code>，修改键<code>NtpServer</code>的数据为：<code>ntp.aliyun.com</code></li>
+<li>设置校时周期<br>打开注册表<code>HKEY_LOCAL_MACHINE\SYSTEM\Current\ControlSetServices\W32Time\TimeProviders\NtpClient</code>，修改键<code>SpecialPollInterval</code>的数据为十进制的<code>3600</code>（即3600s，60分钟）</li>
+</ol>
+<h2 id="设置权威服务器"><a href="#设置权威服务器" class="headerlink" title="设置权威服务器"></a>设置权威服务器</h2><ol>
+<li>设置权威服务器<br>打开注册表<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32TimeConfig</code>，修改键<code>AnnounceFlag</code>的数据为十进制的<code>10</code></li>
+<li>启用NTP服务器<br>打开注册表<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpServer</code>，修改键<code>Enabled</code>的数据为十进制的<code>1</code></li>
+</ol>
+<h2 id="配置组策略"><a href="#配置组策略" class="headerlink" title="配置组策略"></a>配置组策略</h2><ol>
+<li>打开组策略管理，计算机配置-管理模板-系统-Windows时间服务，选择全局配置设置，选择已启用，修改<code>MaxNegPhaseCorrection</code>的值为<code>3600</code>，修改<code>MaxPosPhaseCorrection</code>的值为<code>3600</code>，修改<code>AnnounceFlags</code>的值为<code>5</code>，点击应用和确认</li>
+<li>打开组策略管理，计算机配置-管理模板-系统-Windows时间服务-时间提供程序，选择启用Windows NTP客户端，选择已启用，配置Windows NTP客户端，选择已启用，修改<code>NTP Server</code>的值为<code>ntp.aliyun.com</code>，修改<code>Type</code>的值为<code>NTP</code>，修改<code>SpecialPollInterval</code>的值为<code>3600</code></li>
+<li>cmd命令在AD域服务器和客户端内检测是否成功<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gpupdate /force              <span class="comment"># 强制更新组策略</span></span><br><span class="line">w32tm /query /source         <span class="comment"># 查看时间服务器是否更改</span></span><br><span class="line">w32tm /resync /rediscover    <span class="comment"># 手工同步时间</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制同步主域控服务器时间的命令</span></span><br><span class="line">net time \[AD Server IP] /SET /y</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ol>
+<li>强制更新组策略，可能没有效果，需要重新启动计算机或使用强制同步命令</li>
+<li>系统时间比标准时间系统时间晚14小时59分钟之内会同步失败</li>
+<li>系统时间比标准时间早30分钟之内会同步失败</li>
+<li>若部分客户端Windows Time服务自动停止，可以尝试重新注册该服务<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">W32tm /unregister</span><br><span class="line">W32tm /register</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启w32tm debug的方法</span></span><br><span class="line">w32tm /debug /enable /file:c:w32time.log /size:10000000 /entries:0-116</span><br><span class="line">w32tm /debug /disable</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%90%88%E9%80%82%E7%9A%84NTP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">查找合适的NTP服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AENTP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">配置NTP服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%8ENTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5"><span class="toc-number">3.</span> <span class="toc-text">设置与NTP服务器时间同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%9D%83%E5%A8%81%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">设置权威服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BB%84%E7%AD%96%E7%95%A5"><span class="toc-number">5.</span> <span class="toc-text">配置组策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">6.</span> <span class="toc-text">注意点</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&text=AD域服务器开启NTP时间同步"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&is_video=false&description=AD域服务器开启NTP时间同步"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AD域服务器开启NTP时间同步&body=Check out this article: https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&title=AD域服务器开启NTP时间同步"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&name=AD域服务器开启NTP时间同步&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/&t=AD域服务器开启NTP时间同步"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
