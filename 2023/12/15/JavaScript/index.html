@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="基础语法 在head与body标签内可以调用执行JavaScript语言 调用使用方式如下所示：1234&lt;script src&#x3D;&quot;xx.js&quot;&gt;	&#x2F;&#x2F; JavaScript Codes	&#x2F;&#x2F; src调用外部js文件&lt;&#x2F;script&gt; 变量的定义使用var关键字，分号”;”结尾 变量区分大小写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript基础知识">
+<meta property="og:url" content="https://sleny1994.github.io/2023/12/15/JavaScript/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="基础语法 在head与body标签内可以调用执行JavaScript语言 调用使用方式如下所示：1234&lt;script src&#x3D;&quot;xx.js&quot;&gt;	&#x2F;&#x2F; JavaScript Codes	&#x2F;&#x2F; src调用外部js文件&lt;&#x2F;script&gt; 变量的定义使用var关键字，分号”;”结尾 变量区分大小写">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-15T03:11:45.552Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>JavaScript基础知识</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/10/26/AD%E5%9F%9F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFNTP%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/12/15/JavaScript/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/12/15/JavaScript/&text=JavaScript基础知识"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/12/15/JavaScript/&is_video=false&description=JavaScript基础知识"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JavaScript基础知识&body=Check out this article: https://sleny1994.github.io/2023/12/15/JavaScript/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/12/15/JavaScript/&name=JavaScript基础知识&description=&lt;h2 id=&#34;基础语法&#34;&gt;&lt;a href=&#34;#基础语法&#34; class=&#34;headerlink&#34; title=&#34;基础语法&#34;&gt;&lt;/a&gt;基础语法&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在head与body标签内可以调用执行JavaScript语言&lt;/li&gt;
+&lt;li&gt;调用使用方式如下所示：&lt;figure class=&#34;highlight javascript&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;script src=&lt;span class=&#34;string&#34;&gt;&amp;quot;xx.js&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;comment&#34;&gt;// JavaScript Codes&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;comment&#34;&gt;// src调用外部js文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;变量的定义使用var关键字，分号”;”结尾&lt;/li&gt;
+&lt;li&gt;变量区分大小写&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/12/15/JavaScript/&t=JavaScript基础知识"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">基础语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">DOM操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE"><span class="toc-number">3.</span> <span class="toc-text">输出数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%85%A5%E5%86%85%E5%AE%B9"><span class="toc-number">4.</span> <span class="toc-text">写入内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.</span> <span class="toc-text">实用函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84%E8%87%AA%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">操作元素的自有属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%A0%B7%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">操作样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BA%8B%E4%BB%B6"><span class="toc-number">8.</span> <span class="toc-text">浏览器事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">9.</span> <span class="toc-text">注意</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        JavaScript基础知识
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-12-14T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-12-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/JavaScript/">JavaScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/JavaScript/" rel="tag">JavaScript</a>, <a class="p-category" href="/tags/jQuery/" rel="tag">jQuery</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><ul>
+<li>在head与body标签内可以调用执行JavaScript语言</li>
+<li>调用使用方式如下所示：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;xx.js&quot;</span>&gt;</span><br><span class="line">	<span class="comment">// JavaScript Codes</span></span><br><span class="line">	<span class="comment">// src调用外部js文件</span></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<li>变量的定义使用var关键字，分号”;”结尾</li>
+<li>变量区分大小写</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h2><ul>
+<li>DOM(Document Object Model)</li>
+<li>document.getElementById(“id属性的值”); 通过id的值获取元素，返回值为id所在的HTML代码</li>
+<li>document.getElementsByTagName(“标签名字”); 通过标签名获取元素，返回值为一个集合</li>
+<li>document.getElementsByName(“name属性的值”); 通过name属性的值获取元素</li>
+<li>document.getElementsByClassName(“类的名字”); 通过类的名字获取元素，返回值为一个集合</li>
+<li>document.querySelector(“选择器”); 获取单个选择器所在的HTML代码</li>
+<li>document.querySelectorAll(“选择器”); 获取多个选择器返回一个集合<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wrap = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.wrap&quot;</span>);</span><br><span class="line">wrap.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	wrap.<span class="property">style</span>.<span class="property">cssText</span> = <span class="string">&quot;width:500px; height:800px; background-color:red;&quot;</span>)	</span><br><span class="line">&#125;</span><br><span class="line">wrap.<span class="property">onmousemove</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125; <span class="comment">//鼠标滑动时出现效果</span></span><br><span class="line">wrap.<span class="property">onkeydown</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125; <span class="comment">//键盘按压时出现效果</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="输出数据"><a href="#输出数据" class="headerlink" title="输出数据"></a>输出数据</h2><ul>
+<li>document.write(“xxx”)</li>
+<li>console.log() 控制台输出日志</li>
+<li>window.alert(“xxx”) 弹窗</li>
+</ul>
+<h2 id="写入内容"><a href="#写入内容" class="headerlink" title="写入内容"></a>写入内容</h2><ul>
+<li>innerHTML</li>
+<li>innerText<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">	box[<span class="number">0</span>].<span class="property">innerHTML</span> = <span class="string">&quot;&lt;p&gt;&lt;/p&gt;&quot;</span>;    <span class="comment">//要注意box是一个集合</span></span><br><span class="line">	box[<span class="number">0</span>].<span class="property">innerText</span> = <span class="string">&quot;修改的内容&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>两者的区别在于，HTML会将写入的标签进行解析，而Text则是以文本方式直接输出</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ul>
+<li>关键字：function</li>
+<li>有名函数：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">name</span>(<span class="params"></span>)&#123; </span><br><span class="line">	<span class="comment">//codes </span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="title function_">name</span>()</span><br></pre></td></tr></table></figure></li>
+<li>函数表达式：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">test</span>()</span><br></pre></td></tr></table></figure></li>
+<li>匿名函数：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;这是一个匿名函数&quot;</span>)</span><br><span class="line">&#125;; <span class="comment">// 该调用会报错</span></span><br><span class="line"></span><br><span class="line">(<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;这是一个匿名函数&quot;</span>) &#125;)(); <span class="comment">//函数自执行</span></span><br><span class="line">((<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;这是一个匿名函数&quot;</span>) &#125;));</span><br><span class="line">!<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;这是一个匿名函数&quot;</span>) &#125;();</span><br><span class="line">~<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;这是一个匿名函数&quot;</span>) &#125;();</span><br><span class="line">-<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;这是一个匿名函数&quot;</span>) &#125;();</span><br><span class="line">+<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;这是一个匿名函数&quot;</span>) &#125;();</span><br></pre></td></tr></table></figure></li>
+<li>形参&#x2F;实参</li>
+<li>return &#x2F;&#x2F; 一般函数执行后返回undefined -&gt; 未定义</li>
+<li>arguments &#x2F;&#x2F;可以用于获取参数的值</li>
+</ul>
+<h3 id="实用函数"><a href="#实用函数" class="headerlink" title="实用函数"></a>实用函数</h3><ol>
+<li>在页面内点击按钮即可插入<input>输入框输入数据<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以使用本地jquery，也可以采用cdn环境，确保src路径正确即可</span></span><br><span class="line">&lt;script src=<span class="string">&quot;https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">CreateInput</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> inputList = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;inputList&quot;</span>);</span><br><span class="line">	<span class="keyword">var</span> inputCount = inputList.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;input&#x27;</span>).<span class="property">length</span>;</span><br><span class="line">	<span class="keyword">var</span> newInput = <span class="string">`&lt;form id=&quot;myForm&quot;&gt;</span></span><br><span class="line"><span class="string">						&lt;div class=&quot;form-group&quot;&gt;</span></span><br><span class="line"><span class="string">							&lt;th&gt;</span></span><br><span class="line"><span class="string">								&lt;input class=&quot;form-control&quot; id=&quot;inputText&quot; name=&quot;inputText[<span class="subst">$&#123;inputCount&#125;</span>]&quot; type=&quot;text&quot;&gt;</span></span><br><span class="line"><span class="string">							&lt;/th&gt;</span></span><br><span class="line"><span class="string">							&lt;th&gt;</span></span><br><span class="line"><span class="string">								&lt;input class=&quot;form-control&quot; id=&quot;inputDate&quot; name=&quot;inputDate[<span class="subst">$&#123;inputCount&#125;</span>]&quot; type=&quot;date&quot;&gt; </span></span><br><span class="line"><span class="string">							&lt;/th&gt;</span></span><br><span class="line"><span class="string">							&lt;th&gt;</span></span><br><span class="line"><span class="string">								&lt;input class=&quot;form-check-input&quot; id=&quot;inputCheck&quot; name=&quot;inputCheck[<span class="subst">$&#123;inputCount&#125;</span>]&quot; type=&quot;checkbox&quot;&gt;</span></span><br><span class="line"><span class="string">							&lt;/th&gt;</span></span><br><span class="line"><span class="string">							&lt;th&gt;</span></span><br><span class="line"><span class="string">								&lt;button class=&quot;btn btn-success&quot; id=&quot;button&quot; name=&quot;btn_add&quot; onclick=&quot;Add()&quot;&gt;添加&lt;/button&gt;</span></span><br><span class="line"><span class="string">							&lt;/th&gt;</span></span><br><span class="line"><span class="string">						&lt;/div&gt;</span></span><br><span class="line"><span class="string">					&lt;/form&gt;</span></span><br><span class="line"><span class="string">					&lt;br/&gt;`</span>;</span><br><span class="line">	<span class="keyword">var</span> element = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;thead&quot;</span>);</span><br><span class="line">	element.<span class="property">innerHTML</span> = newInput;</span><br><span class="line">	inputList.<span class="title function_">appendChild</span>(element);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>通过xhr或者ajax对数据进行Post方法操作<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Add</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> dataText = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;inputText&quot;</span>).<span class="property">value</span>;</span><br><span class="line">	<span class="keyword">var</span> dataTime = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;inputDate&quot;</span>).<span class="property">value</span>;</span><br><span class="line">	<span class="keyword">var</span> dataCheck = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;inputCheck&quot;</span>).<span class="property">checked</span>;</span><br><span class="line">	<span class="comment">// 使用JSON格式进行数据传递</span></span><br><span class="line">	<span class="keyword">var</span> data = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">		<span class="title class_">Item</span>:dataText,</span><br><span class="line">		<span class="title class_">CreateTime</span>:dataTime,</span><br><span class="line">		<span class="title class_">IsDone</span>:dataCheck</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 方法一：</span></span><br><span class="line">	<span class="keyword">var</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>;</span><br><span class="line">	xhr.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>,<span class="string">&quot;/Home/Create&quot;</span>,<span class="literal">true</span>);  <span class="comment">// POST所对应的后端Action的路由url</span></span><br><span class="line">	xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;Content-type&quot;</span>,<span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">	xhr.<span class="title function_">send</span>(data);</span><br><span class="line">	</span><br><span class="line">	xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (xhr.<span class="property">readyState</span> == <span class="number">4</span> &amp;&amp; xhr.<span class="property">status</span> == <span class="number">200</span>) &#123;</span><br><span class="line">			<span class="comment">// readyState有5种状态：</span></span><br><span class="line">			<span class="comment">//   0 - ajax开始初始化</span></span><br><span class="line">			<span class="comment">//   1 - 开始发送ajax请求</span></span><br><span class="line">			<span class="comment">//   2 - ajax请求发送完成</span></span><br><span class="line">			<span class="comment">//   3 - 开始解析响应的资源</span></span><br><span class="line">			<span class="comment">//   4 - ajax请求的步骤全部完成</span></span><br><span class="line">			<span class="comment">//var s = xhr.responseText;</span></span><br><span class="line">			<span class="comment">//document.getElementById(&quot;result&quot;).innerHTML = JSON.parse(s).result;</span></span><br><span class="line">			<span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();  <span class="comment">// 需要加上window，否则不会刷新页面</span></span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 方法二：</span></span><br><span class="line">	$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">	   <span class="attr">url</span>:<span class="string">&quot;/Home/Create&quot;</span>,</span><br><span class="line">	   <span class="attr">data</span>:data,</span><br><span class="line">	   <span class="attr">contentType</span>:<span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">	   <span class="attr">type</span>:<span class="string">&quot;post&quot;</span>,</span><br><span class="line">	   <span class="attr">cache</span>:<span class="literal">false</span>,</span><br><span class="line">	   <span class="attr">datatype</span>:<span class="string">&quot;json&quot;</span>,</span><br><span class="line">	   <span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">data</span>)&#123;<span class="title function_">alert</span>(<span class="string">&quot;添加成功&quot;</span>);location.<span class="title function_">reload</span>()&#125;, <span class="comment">// ajax中使用location.reload()即可刷新页面</span></span><br><span class="line">	   <span class="attr">error</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="title function_">alert</span>(<span class="string">&quot;添加失败&quot;</span>);&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="操作元素的自有属性"><a href="#操作元素的自有属性" class="headerlink" title="操作元素的自有属性"></a>操作元素的自有属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> old_img = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;img&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> old_div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">old_img.<span class="property">src</span> = <span class="string">&quot;test2.jpg&quot;</span>;</span><br><span class="line">old_div.<span class="property">className</span> = <span class="string">&quot;new_name&quot;</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通用获取方法：obj.getAttribute(“name”), obj.setAttribute(“name”, “1”), obj.removeAttribute(“name”)</li>
+<li>自定义属性获取方式采用通用获取方法即可</li>
+</ul>
+<h2 id="操作样式"><a href="#操作样式" class="headerlink" title="操作样式"></a>操作样式</h2><ul>
+<li>行内样式（定义在标签内）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.box&quot;</span>);</span><br><span class="line">box.<span class="property">style</span>.<span class="property">width</span> = <span class="number">500</span>+<span class="string">&quot;px&quot;</span>; <span class="comment">//操作单个样式</span></span><br><span class="line">box.<span class="property">style</span>.<span class="property">cssText</span> = <span class="string">&quot;width:500px;height:500px;&quot;</span> <span class="comment">//操作多个样式</span></span><br></pre></td></tr></table></figure></li>
+<li>内嵌样式（在style标签内）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.box&quot;</span>);</span><br><span class="line">box.<span class="title function_">getComputedStyle</span>(box,<span class="literal">null</span>)[<span class="string">&quot;样式名&quot;</span>]</span><br></pre></td></tr></table></figure></li>
+<li>外部样式（外部的css文件），与内嵌相同</li>
+</ul>
+<h2 id="浏览器事件"><a href="#浏览器事件" class="headerlink" title="浏览器事件"></a>浏览器事件</h2><ul>
+<li>BOM（Browser Object Model）</li>
+<li>onload,onerror,onresize<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">onload</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;页面已经加载完毕&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">onreize</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;页面窗口发生变化&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">onscrool</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;页面滚动条发生变化&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
+<li>若从页面中获取了日期文本，需要注意格式是否与后端相匹配，如不匹配需要对文本进行格式化处理<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 页面内获取的日期格式为：2023/12/15</span></span><br><span class="line"><span class="comment">// 后端内的日期格式为：2023-12-15</span></span><br><span class="line"><span class="comment">// 前后端不一致在.net core web mvc环境下会导致报错：视图页面不存在的错误</span></span><br><span class="line"><span class="comment">// 可以采用split分割后再使用join进行拼接处理</span></span><br><span class="line"><span class="keyword">var</span> date = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;id&#x27;</span>).<span class="property">innerText</span>.<span class="title function_">toString</span>().<span class="title function_">split</span>(<span class="string">&quot;/&quot;</span>).<span class="title function_">join</span>(<span class="string">&quot;-&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li>获取元素所对应的值<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;button[name=edit]&#x27;</span>).<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params">e</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">var</span> x = $(e.<span class="property">target</span>).<span class="title function_">attr</span>(<span class="string">&quot;id&quot;</span>);</span><br><span class="line">	<span class="title class_">Edit</span>(<span class="variable language_">this</span>,x);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>修改<input>输入框的内容，将不可编辑变成可编辑<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;.input_1&#x27;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 未修改前的文本内容 </span></span><br><span class="line">	<span class="keyword">var</span> old_value = $(<span class="variable language_">this</span>).<span class="title function_">html</span>().<span class="title function_">trim</span>(<span class="string">&quot; &quot;</span>); </span><br><span class="line">	$(<span class="variable language_">this</span>).<span class="title function_">html</span>(<span class="string">&quot;&lt;input type=&#x27;text&#x27; name=&quot;</span> + inputName + <span class="string">&quot; class=&#x27;form-control&#x27; value=&quot;</span> + old_value + <span class="string">&quot; &gt;&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取修改后的文本内容</span></span><br><span class="line">$(<span class="string">&#x27;input[name=&#x27;</span>input<span class="string">&#x27;]&#x27;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params"></span>)</span><br><span class="line">&#123; 	</span><br><span class="line">	<span class="keyword">var</span> new_value = $(<span class="variable language_">this</span>).<span class="title function_">parent</span>(<span class="string">&#x27;td&#x27;</span>).<span class="title function_">parent</span>(<span class="string">&#x27;tr&#x27;</span>).<span class="title function_">children</span>().<span class="title function_">find</span>(<span class="string">&#x27;input&#x27;</span>).<span class="title function_">val</span>(); </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">基础语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">DOM操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE"><span class="toc-number">3.</span> <span class="toc-text">输出数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%85%A5%E5%86%85%E5%AE%B9"><span class="toc-number">4.</span> <span class="toc-text">写入内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.</span> <span class="toc-text">实用函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E7%9A%84%E8%87%AA%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">操作元素的自有属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%A0%B7%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">操作样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BA%8B%E4%BB%B6"><span class="toc-number">8.</span> <span class="toc-text">浏览器事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">9.</span> <span class="toc-text">注意</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2023/12/15/JavaScript/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2023/12/15/JavaScript/&text=JavaScript基础知识"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2023/12/15/JavaScript/&is_video=false&description=JavaScript基础知识"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JavaScript基础知识&body=Check out this article: https://sleny1994.github.io/2023/12/15/JavaScript/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2023/12/15/JavaScript/&title=JavaScript基础知识"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2023/12/15/JavaScript/&name=JavaScript基础知识&description=&lt;h2 id=&#34;基础语法&#34;&gt;&lt;a href=&#34;#基础语法&#34; class=&#34;headerlink&#34; title=&#34;基础语法&#34;&gt;&lt;/a&gt;基础语法&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在head与body标签内可以调用执行JavaScript语言&lt;/li&gt;
+&lt;li&gt;调用使用方式如下所示：&lt;figure class=&#34;highlight javascript&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;script src=&lt;span class=&#34;string&#34;&gt;&amp;quot;xx.js&amp;quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;comment&#34;&gt;// JavaScript Codes&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;comment&#34;&gt;// src调用外部js文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;变量的定义使用var关键字，分号”;”结尾&lt;/li&gt;
+&lt;li&gt;变量区分大小写&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2023/12/15/JavaScript/&t=JavaScript基础知识"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
