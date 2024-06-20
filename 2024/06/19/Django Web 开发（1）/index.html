@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="安装 先安装Python，从官网下载安装包直接运行即可 打开Django官网（https:&#x2F;&#x2F;www.djangoproject.com），点击DOWNLOAD页面，根据操作系统选择合适的安装方式。1py -m pip install Django&#x3D;&#x3D;5.0.6 使用命令python -m django --version查看版本号，如有输出即表示安装成功  创建Django内置一个管理工具dja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python - Django Web开发（1）">
+<meta property="og:url" content="https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="安装 先安装Python，从官网下载安装包直接运行即可 打开Django官网（https:&#x2F;&#x2F;www.djangoproject.com），点击DOWNLOAD页面，根据操作系统选择合适的安装方式。1py -m pip install Django&#x3D;&#x3D;5.0.6 使用命令python -m django --version查看版本号，如有输出即表示安装成功  创建Django内置一个管理工具dja">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-20T02:30:48.237Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Python - Django Web开发（1）</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/06/20/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/04/26/Nuxt%20+%20tailwindcss%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9E%84%E5%BB%BA/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&text=Python - Django Web开发（1）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&is_video=false&description=Python - Django Web开发（1）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python - Django Web开发（1）&body=Check out this article: https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&name=Python - Django Web开发（1）&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&t=Python - Django Web开发（1）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.</span> <span class="toc-text">项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-number">2.2.</span> <span class="toc-text">运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF"><span class="toc-number">3.</span> <span class="toc-text">模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF"><span class="toc-number">3.1.</span> <span class="toc-text">创建模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE"><span class="toc-number">3.2.</span> <span class="toc-text">模板标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E7%AD%BE%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">3.3.</span> <span class="toc-text">自定义标签和过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6"><span class="toc-number">3.4.</span> <span class="toc-text">静态文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E7%BB%A7%E6%89%BF"><span class="toc-number">3.5.</span> <span class="toc-text">模板继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%88%B6%E6%A8%A1%E6%9D%BF"><span class="toc-number">3.5.1.</span> <span class="toc-text">父模板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E6%A8%A1%E7%89%88"><span class="toc-number">3.5.2.</span> <span class="toc-text">子模版</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.1.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">4.2.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C-1"><span class="toc-number">4.3.</span> <span class="toc-text">运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">4.4.</span> <span class="toc-text">获取数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="toc-number">4.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">4.6.</span> <span class="toc-text">删除数据</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Python - Django Web开发（1）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-06-18T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-06-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Django/" rel="tag">Django</a>, <a class="p-category" href="/tags/Python/" rel="tag">Python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li>先安装Python，从官网下载安装包直接运行即可</li>
+<li>打开Django官网（<a target="_blank" rel="noopener" href="https://www.djangoproject.com),点击download页面,根据操作系统选择合适的安装方式./">https://www.djangoproject.com），点击DOWNLOAD页面，根据操作系统选择合适的安装方式。</a><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">py -m pip install Django==5.0.6</span><br></pre></td></tr></table></figure></li>
+<li>使用命令<code>python -m django --version</code>查看版本号，如有输出即表示安装成功</li>
+</ol>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>Django内置一个管理工具<code>django-admin</code>，可以使用它来进行一系列的操作</p>
+<h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><ol>
+<li>使用命令<code>django-admin startproject HelloWorld</code>创建项目</li>
+<li>创建完成后的项目目录结构如下所示：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">|-- HelloWorld          -- 项目的容器</span><br><span class="line">|   |-- __init__.py     -- 空文件，用于标识Python包</span><br><span class="line">|   |-- asgi.py         -- ASGI兼容的Web服务器入口</span><br><span class="line">|   |-- settings.py     -- Django项目的所有配置信息</span><br><span class="line">|   |-- urls.py         -- Django项目的URL声明即路由信息</span><br><span class="line">|   `-- wsgi.py         -- WSGI兼容的Web服务器入口</span><br><span class="line">`-- manage.py           -- 实用的命令行工具，用于和Django项目进行交互</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ol>
+<li>使用命令<code>py manage.py runserver 0.0.0.0:8000</code>启动项目</li>
+</ol>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><h3 id="创建模板"><a href="#创建模板" class="headerlink" title="创建模板"></a>创建模板</h3><ol>
+<li>在项目&#x2F;应用目录下创建文件夹<code>templates</code>，在该目录下再创建相关的html模板页面<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span> &#123;&#123; Hello &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>模板中的变量使用双括号标识，同时需要修改<code>settings.py</code>文件中的<code>TEMPLATES</code>配置项，添加<code>DIRS</code>配置项，如下所示：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&#x27;BACKEND&#x27;</span>: <span class="string">&#x27;django.template.backends.django.DjangoTemplates&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;DIRS&#x27;</span>: [os.path.join(BASE_DIR, <span class="string">&#x27;templates&#x27;</span>)],</span><br><span class="line">        <span class="string">&#x27;APP_DIRS&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&#x27;OPTIONS&#x27;</span>: &#123;</span><br><span class="line">            <span class="string">&#x27;context_processors&#x27;</span>: [</span><br><span class="line">                <span class="string">&#x27;django.template.context_processors.debug&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.template.context_processors.request&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.contrib.auth.context_processors.auth&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.contrib.messages.context_processors.messages&#x27;</span>,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+<li>修改<code>urls.py</code>文件，添加路由信息，如下所示：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> views</span><br><span class="line"> </span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;index/&#x27;</span>, views.index),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+<li>修改<code>views.py</code>文件，添加视图函数，如下所示：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;index.html&#x27;</span>, &#123;<span class="string">&#x27;Hello&#x27;</span>: <span class="string">&#x27;Hello World!&#x27;</span>&#125;)</span><br><span class="line">    <span class="comment"># context = &#123;&#125;</span></span><br><span class="line">    <span class="comment"># context[&#x27;Hello&#x27;] = &#x27;Hello World!&#x27;</span></span><br><span class="line">    <span class="comment"># return render(request, &#x27;index.html&#x27;, context)</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h3><ol>
+<li>变量<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">view: &#123;&quot;HTML变量名&quot; : &quot;views变量名&quot;&#125;</span><br><span class="line">HTML: &#123;&#123; HTML变量名 &#125;&#125;</span><br></pre></td></tr></table></figure></li>
+<li>列表 - 可以使用<code>.</code>索引下标来取出对应的元素<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">view: view_list = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span><br><span class="line">HTML: &#123;&#123; view_list.0 &#125;&#125;</span><br></pre></td></tr></table></figure></li>
+<li>字典 - 可以使用<code>.键</code>取出对应的值<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">view: view_dict = &#123;&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3&#125;</span><br><span class="line">HTML: &#123;&#123; view_dict.a &#125;&#125;</span><br></pre></td></tr></table></figure></li>
+<li>过滤器 - 可以在变量被显示前修改它，使用管道字符，且管道字符可以被套接，有些过滤器存在参数且参数跟随冒号之后总是以双引号包含<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">view: view_list = &quot;hello world&quot;</span><br><span class="line">HTML: &#123;&#123; view_list|first|upper &#125;&#125;       - 显示列表第一个元素并大写</span><br><span class="line">HTML: &#123;&#123; str|truncatewords:&quot;30&quot;&#125;&#125;       - 显示变量str的前30个字符</span><br><span class="line">HTML: &#123;&#123; str|truncatechars:&quot;3&quot;&#125;&#125;        - 如果包含的字符总个数多于指定的字符数量，后续内容将会被截断，以`...`结尾</span><br><span class="line">HTML: &#123;&#123; view_parm|default:&quot;默认值&quot; &#125;&#125;   - default为变量提供一个默认值|[0,0.0,False,0j,&quot;&quot;,[],(),set(),&#123;&#125;,None] = false</span><br><span class="line">HTML: &#123;&#123; view_name|length &#125;&#125;            - 返回对象的长度，适用于字符串和列表，字典返回键值对数量，集合返回去重后的长度</span><br><span class="line">HTML: &#123;&#123; file|filesizeformat &#125;&#125;         - 返回文件大小，格式化后显示</span><br><span class="line">HTML: &#123;&#123; view_date|date:&quot;Y-m-d&quot; &#125;&#125;      - 格式化日期，格式化字符串</span><br><span class="line">HTML: &#123;&#123; view_str|safe &#125;&#125;               - 将变量标记为安全，不进行转义，可以用来传递HTML代码</span><br></pre></td></tr></table></figure></li>
+<li>注释<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTML: &#123;# 注释内容 #&#125;</span><br></pre></td></tr></table></figure></li>
+<li>条件语句<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">view: view_dict = &#123;&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3&#125;</span><br><span class="line">HTML: &#123;% if view_dict.a &gt; 0 %&#125; 条件为真 &#123;% elif %&#125; 条件为假 &#123;% else %&#125; 条件为假 &#123;% endif %&#125;</span><br></pre></td></tr></table></figure></li>
+<li>循环语句 - 允许我们在一个序列上迭代<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">view: view_list = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span><br><span class="line">HTML: &#123;% for item in view_list [reversed] %&#125; &#123;&#123; item &#125;&#125; &#123;% endfor %&#125; - [reversed]表示倒序</span><br><span class="line"></span><br><span class="line">view: view_dict = &#123;&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3&#125;</span><br><span class="line">HTML: &#123;% for key, value in view_dict.items %&#125; &#123;&#123; key &#125;&#125;: &#123;&#123; value &#125;&#125; &#123;% endfor %&#125; - 使用.item方法分别获取键值</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">使用`&#123;&#123; forloog &#125;&#125;`变量获取循环序号</span><br><span class="line">- `forloop.counter` - 当前循环的索引值</span><br><span class="line">- `forloop.counter0` - 当前循环的索引值，从0开始</span><br><span class="line">- `forloop.revcounter` - 当前循环的倒序索引值</span><br><span class="line">- `forloop.revcounter0` - 当前循环的倒序索引值，从0开始</span><br><span class="line">- `forloop.first` - 当前循环是否是第一次循环，即第一条数据返回True</span><br><span class="line">- `forloop.last` - 当前循环是否是最后一次循环，即最后一条数据返回True</span><br><span class="line">- `forloop.parentloop` - 父循环</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">可选&#123;&#123;% empty %&#125;&#125;从句，在循环为空时执行，即in后面的参数布尔为false</span><br><span class="line">view: view_list = []</span><br><span class="line">HTML: &#123;% for item in view_list %&#125; &#123;&#123; item &#125;&#125; &#123;% empty %&#125; 列表为空 &#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">嵌套使用for标签</span><br><span class="line">&#123;% for athlete in athlete_list %&#125;</span><br><span class="line">    &lt;h1&gt;&#123;&#123; athlete.name &#125;&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">    &#123;% for sport in athlete.sports_played %&#125;</span><br><span class="line">        &lt;li&gt;&#123;&#123; sport &#125;&#125;&lt;/li&gt;</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>ifequal&#x2F;ifnotequal 标签 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">比较两个值，相等时，显示值</span><br><span class="line">&#123;% ifequal user currentuser %&#125;</span><br><span class="line">    &lt;h1&gt;Welcome!&lt;/h1&gt;</span><br><span class="line">&#123;% endifequal %&#125;</span><br><span class="line"></span><br><span class="line">支持else标签</span><br><span class="line">&#123;% ifequal section &#x27;sitenews&#x27; %&#125;</span><br><span class="line">    &lt;h1&gt;Site News&lt;/h1&gt;</span><br><span class="line">&#123;% else %&#125;</span><br><span class="line">    &lt;h1&gt;No News Here&lt;/h1&gt;</span><br><span class="line">&#123;% endifequal %&#125;</span><br></pre></td></tr></table></figure></li>
+<li>注释标签<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;# 注释内容 #&#125;</span><br></pre></td></tr></table></figure></li>
+<li>csrf_token标签 - 跨站请求伪造保护</li>
+<li>include标签 - 允许在模板中包含其它模板的内容<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% include &quot;header.html&quot; %&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="自定义标签和过滤器"><a href="#自定义标签和过滤器" class="headerlink" title="自定义标签和过滤器"></a>自定义标签和过滤器</h3><ol>
+<li>在应用目录下创建<code>templatetags</code>目录，与<code>templates</code>目录同级</li>
+<li>在<code>templatetags</code>目录下创建<code>mytags.py</code>文件</li>
+<li>在上述创建的文件中编写对应的代码，并修改<code>settings.py</code>文件中的<code>TEMPLATES</code>选项的配置，添加<code>libraries</code>配置<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mytags.py</span></span><br><span class="line"><span class="keyword">from</span> django <span class="keyword">import</span> template</span><br><span class="line"></span><br><span class="line">register = template.Library()   <span class="comment">#register的名字是固定的,不可改变</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># settings.py</span></span><br><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&#x27;BACKEND&#x27;</span>: <span class="string">&#x27;django.template.backends.django.DjangoTemplates&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;DIRS&#x27;</span>: [BASE_DIR, <span class="string">&quot;/templates&quot;</span>,],</span><br><span class="line">        <span class="string">&#x27;APP_DIRS&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&#x27;OPTIONS&#x27;</span>: &#123;</span><br><span class="line">            <span class="string">&#x27;context_processors&#x27;</span>: [</span><br><span class="line">                <span class="string">&#x27;django.template.context_processors.debug&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.template.context_processors.request&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.contrib.auth.context_processors.auth&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.contrib.messages.context_processors.messages&#x27;</span>,</span><br><span class="line">            ],</span><br><span class="line">            <span class="string">&quot;libraries&quot;</span>:&#123;                          <span class="comment"># 添加这边三行配置</span></span><br><span class="line">                <span class="string">&#x27;mytags&#x27;</span>:<span class="string">&#x27;templatetags.mytags&#x27;</span>    <span class="comment"># 添加这边三行配置        </span></span><br><span class="line">            &#125;                                      <span class="comment"># 添加这边三行配置</span></span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+<li>利用装饰器@register.filter自定义过滤器，且装饰器的参数最多只能有2个<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@register.filter</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">my_filter</span>(<span class="params">v1, v2</span>):</span><br><span class="line">    <span class="keyword">return</span> v1 * v2</span><br></pre></td></tr></table></figure></li>
+<li>利用装饰器register.simple_tag自定义标签<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@register.simple_tag</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">my_tag1</span>(<span class="params">v1, v2, v3</span>):</span><br><span class="line">    <span class="keyword">return</span> v1 * v2 * v3</span><br></pre></td></tr></table></figure></li>
+<li>在使用自定义标签和过滤器前，需要在html文件body的最上方导入该py文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load mytags %&#125;</span><br></pre></td></tr></table></figure></li>
+<li>使用<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; 11|my_filter:22 &#125;&#125;</span><br><span class="line">&#123;% my_tag1 11 22 33 %&#125;</span><br></pre></td></tr></table></figure></li>
+<li>语义化标签<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  在py文件中导入mark_safe</span></span><br><span class="line"><span class="keyword">from</span> django.utils.safestring <span class="keyword">import</span> mark_safe </span><br><span class="line"><span class="comment"># 定义标签时，使用mark_safe方法，和模板页面中的safe效果一致</span></span><br><span class="line"><span class="meta">@register.simple_tag</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">my_html</span>(<span class="params">v1, v2</span>):</span><br><span class="line">    temp_html = <span class="string">&quot;&lt;input type=&#x27;text&#x27; id=&#x27;%s&#x27; class=&#x27;%s&#x27; /&gt;&quot;</span> %(v1, v2)</span><br><span class="line">    <span class="keyword">return</span> mark_safe(temp_html)</span><br><span class="line"><span class="comment"># 在html中使用该标签</span></span><br><span class="line">&#123;% my_html <span class="string">&quot;zzz&quot;</span> <span class="string">&quot;xxx&quot;</span> %&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="静态文件"><a href="#静态文件" class="headerlink" title="静态文件"></a>静态文件</h3><ol>
+<li>在项目根目录下创建<code>statics</code>目录</li>
+<li>在<code>settings.py</code>文件添加以下配置<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">STATIC_URL = <span class="string">&#x27;/static/&#x27;</span> <span class="comment"># 别名</span></span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line">    os.path.join(BASE_DIR, <span class="string">&quot;statics&quot;</span>),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+<li>在 statics 目录下创建 css 目录，js 目录，images 目录，plugins 目录， 分别放 css文件，js文件，图片，插件</li>
+<li>把 bootstrap 框架放入插件目录 plugins</li>
+<li>在 HTML 文件的 head 标签中引入 bootstrap，此时引用路径中的要用配置文件中的别名 static，而不是目录 statics<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/static/plugins/bootstrap-3.3.7/dist/css/bootstrap.css&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>在模板中使用需要加入<code>&#123;% load static %&#125;</code>代码<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;% static &#x27;images/logo.png&#x27; %&#125;&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;logo&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="模板继承"><a href="#模板继承" class="headerlink" title="模板继承"></a>模板继承</h3><p>模板可以使用继承的方式来实现复用，减少冗余内容，网页的头部和尾部内容一般都是一致的，我们就可以通过模板继承来实现复用，父模板中放置可以重复使用的内容，子模板继承父模板的内容，并添加自己的内容</p>
+<h4 id="父模板"><a href="#父模板" class="headerlink" title="父模板"></a>父模板</h4><p>标签 <code>block...endblock</code>: 父模板中的预留区域，该区域留给子模板填充差异性的内容，不同预留区域名字不能相同</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block 名称 %&#125; </span><br><span class="line">预留给子模板的区域，可以设置默认内容</span><br><span class="line">&#123;% endblock 名称 %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--示例--</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;title&gt;Demo&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;Hello World!&lt;/h1&gt;</span><br><span class="line">    &lt;p&gt;Django Demo.&lt;/p&gt;</span><br><span class="line">    &#123;% block mainbody %&#125;</span><br><span class="line">       &lt;p&gt;这里是父模板预设内容&lt;/p&gt;</span><br><span class="line">    &#123;% endblock %&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="子模版"><a href="#子模版" class="headerlink" title="子模版"></a>子模版</h4><p>标签 <code>extends...endextends</code>: 子模板继承父模板的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &#x27;父模板名称&#x27; %&#125;</span><br></pre></td></tr></table></figure>
+<p>标签 <code>block...endblock</code>: 子模板填充父模板预留区域的内容，如果没有设置则使用父模板设置的内容，当然也可以不设置全部为空</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block 名称 %&#125;</span><br><span class="line">子模板中填充的内容</span><br><span class="line">&#123;% endblock 名称 %&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--示例--</span><br><span class="line">&#123;%extends &quot;father.html&quot; %&#125;</span><br><span class="line"> </span><br><span class="line">&#123;% block mainbody %&#125;</span><br><span class="line">&lt;p&gt;继承了 father.html 文件&lt;/p&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>Djagno规定，如果要使用模型，则必须要创建一个App，创建方式如下：<br><code>py manage.py startapp [应用名]</code></p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ol>
+<li>Django支持多种数据库，包括sqllite3,mysql,postgresql,oracle</li>
+<li>先使用对应数据库的方法创建一个数据库，因为ORM无法操作到数据库级别，只能操作到数据表<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- e.g:mysql创建数据库的方法</span></span><br><span class="line"><span class="keyword">create</span> database 数据库名称 <span class="keyword">default</span> charset<span class="operator">=</span>utf8;   </span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>需要在<code>setting.py</code>中找到<code>INSTALLED_APP</code>，在其中添加上创建的app，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">&#x27;django.contrib.admin&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.contenttypes&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.staticfiles&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;app01&#x27;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>模型相关的数据全部放置在<code>HelloWorld/app01/models.py</code>中</li>
+<li>上述文件中的类名即代表了数据库的表名，且继承了<code>models.Model</code></li>
+<li>类里面的字段代表了数据表中的字段，数据类型有<code>CharField(varchar)</code>,<code>DateField(datetime)</code>,<code>max_length</code>限定长度。</li>
+</ol>
+<p>需要修改<code>settings.py</code>文件中<code>DATABASES</code>配置项，修改内容如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123; </span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: </span><br><span class="line">    &#123; </span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.mysql&#x27;</span>,    <span class="comment"># 数据库引擎</span></span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;DjangoDB&#x27;</span>, <span class="comment"># 数据库名称</span></span><br><span class="line">        <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="comment"># 数据库地址，本机 ip 地址 127.0.0.1 </span></span><br><span class="line">        <span class="string">&#x27;PORT&#x27;</span>: <span class="number">3306</span>, <span class="comment"># 端口 </span></span><br><span class="line">        <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;root&#x27;</span>,  <span class="comment"># 数据库用户名</span></span><br><span class="line">        <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;123456&#x27;</span>, <span class="comment"># 数据库密码</span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="运行-1"><a href="#运行-1" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">py manage.py migrate  <span class="comment"># 创建表结构</span></span><br><span class="line">py manage.py makemigrations [app_name] <span class="comment"># 告知Django模型的变更</span></span><br><span class="line">py manage.py migrate [app_name] <span class="comment"># 创建表结构</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>表名组成结构：应用名_类名（如：app01_Test）</li>
+<li>Django会自动添加一个id作为主键</li>
+</ol>
+<h3 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 数据库操作</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testdb</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="comment"># 初始化</span></span><br><span class="line">    response = <span class="string">&quot;&quot;</span></span><br><span class="line">    response1 = <span class="string">&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 通过objects这个模型管理器的all()获得所有数据行，相当于SQL中的SELECT * FROM</span></span><br><span class="line">    listTest = Test.objects.<span class="built_in">all</span>()</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># filter相当于SQL中的WHERE，可设置条件过滤结果</span></span><br><span class="line">    response2 = Test.objects.<span class="built_in">filter</span>(<span class="built_in">id</span>=<span class="number">1</span>) </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取单个对象</span></span><br><span class="line">    response3 = Test.objects.get(<span class="built_in">id</span>=<span class="number">1</span>) </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 限制返回的数据 相当于 SQL 中的 OFFSET 0 LIMIT 2;</span></span><br><span class="line">    Test.objects.order_by(<span class="string">&#x27;name&#x27;</span>)[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#数据排序</span></span><br><span class="line">    Test.objects.order_by(<span class="string">&quot;id&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 上面的方法可以连锁使用</span></span><br><span class="line">    Test.objects.<span class="built_in">filter</span>(name=<span class="string">&quot;runoob&quot;</span>).order_by(<span class="string">&quot;id&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 输出所有数据</span></span><br><span class="line">    <span class="keyword">for</span> var <span class="keyword">in</span> listTest:</span><br><span class="line">        response1 += var.name + <span class="string">&quot; &quot;</span></span><br><span class="line">    response = response1</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;&lt;p&gt;&quot;</span> + response + <span class="string">&quot;&lt;/p&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 数据库操作</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testdb</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="comment"># 修改其中一个id=1的name字段，再save，相当于SQL中的UPDATE</span></span><br><span class="line">    test1 = Test.objects.get(<span class="built_in">id</span>=<span class="number">1</span>)</span><br><span class="line">    test1.name = <span class="string">&#x27;Google&#x27;</span></span><br><span class="line">    test1.save()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 另外一种方式</span></span><br><span class="line">    <span class="comment">#Test.objects.filter(id=1).update(name=&#x27;Google&#x27;)</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 修改所有的列</span></span><br><span class="line">    <span class="comment"># Test.objects.all().update(name=&#x27;Google&#x27;)</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;&lt;p&gt;修改成功&lt;/p&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 数据库操作</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">testdb</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="comment"># 删除id=1的数据</span></span><br><span class="line">    test1 = Test.objects.get(<span class="built_in">id</span>=<span class="number">1</span>)</span><br><span class="line">    test1.delete()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 另外一种方式</span></span><br><span class="line">    <span class="comment"># Test.objects.filter(id=1).delete()</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 删除所有数据</span></span><br><span class="line">    <span class="comment"># Test.objects.all().delete()</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;&lt;p&gt;删除成功&lt;/p&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA"><span class="toc-number">2.</span> <span class="toc-text">创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.</span> <span class="toc-text">项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-number">2.2.</span> <span class="toc-text">运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF"><span class="toc-number">3.</span> <span class="toc-text">模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF"><span class="toc-number">3.1.</span> <span class="toc-text">创建模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE"><span class="toc-number">3.2.</span> <span class="toc-text">模板标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E7%AD%BE%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">3.3.</span> <span class="toc-text">自定义标签和过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6"><span class="toc-number">3.4.</span> <span class="toc-text">静态文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E7%BB%A7%E6%89%BF"><span class="toc-number">3.5.</span> <span class="toc-text">模板继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%88%B6%E6%A8%A1%E6%9D%BF"><span class="toc-number">3.5.1.</span> <span class="toc-text">父模板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E6%A8%A1%E7%89%88"><span class="toc-number">3.5.2.</span> <span class="toc-text">子模版</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.1.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">4.2.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C-1"><span class="toc-number">4.3.</span> <span class="toc-text">运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">4.4.</span> <span class="toc-text">获取数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="toc-number">4.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">4.6.</span> <span class="toc-text">删除数据</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&text=Python - Django Web开发（1）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&is_video=false&description=Python - Django Web开发（1）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python - Django Web开发（1）&body=Check out this article: https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&title=Python - Django Web开发（1）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&name=Python - Django Web开发（1）&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2024/06/19/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%881%EF%BC%89/&t=Python - Django Web开发（1）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
