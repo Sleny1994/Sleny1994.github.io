@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="表单">
+    <meta name="description" content="表单HTTP 请求HTTP 协议以“请求-回复”的方式工作，客户端发送请求时，可以在请求中附加数据，服务器通过解析请求获得客户端传来的数据，并根据 URL 来提供特定的服务。 GET 方法12345678910111213141516171819202122232425## search.pyfrom django.http import HttpResponsefrom django.short">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python - Django Web开发（2）">
 <meta property="og:url" content="https://sleny1994.github.io/2024/06/20/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%882%EF%BC%89/index.html">
 <meta property="og:site_name" content="一只摸鱼王の日常">
-<meta property="og:description" content="表单">
+<meta property="og:description" content="表单HTTP 请求HTTP 协议以“请求-回复”的方式工作，客户端发送请求时，可以在请求中附加数据，服务器通过解析请求获得客户端传来的数据，并根据 URL 来提供特定的服务。 GET 方法12345678910111213141516171819202122232425## search.pyfrom django.http import HttpResponsefrom django.short">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-20T02:22:54.366Z">
+<meta property="article:modified_time" content="2024-06-21T07:48:44.618Z">
 <meta property="article:author" content="Sleny">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Django">
@@ -112,7 +112,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">表单</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">表单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP-%E8%AF%B7%E6%B1%82"><span class="toc-number">1.1.</span> <span class="toc-text">HTTP 请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GET-%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">GET 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">POST 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Request-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.4.</span> <span class="toc-text">Request 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">1.4.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QueryDict-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.5.</span> <span class="toc-text">QueryDict 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1"><span class="toc-number">1.5.1.</span> <span class="toc-text">方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">视图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">视图函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AF%B9%E8%B1%A1%EF%BC%9AHttpRequest"><span class="toc-number">2.2.</span> <span class="toc-text">请求对象：HttpRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%AF%B9%E8%B1%A1%EF%BC%9AHttpResponse"><span class="toc-number">2.3.</span> <span class="toc-text">响应对象：HttpResponse</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1"><span class="toc-number">3.</span> <span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%B7%AF%E5%BE%84%E7%9A%84%E5%88%86%E7%BB%84"><span class="toc-number">3.1.</span> <span class="toc-text">正则路径的分组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E5%90%8D%E5%88%86%E7%BB%84"><span class="toc-number">3.1.1.</span> <span class="toc-text">无名分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E5%90%8D%E5%88%86%E7%BB%84"><span class="toc-number">3.1.2.</span> <span class="toc-text">有名分组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%88%86%E5%8F%91-include"><span class="toc-number">3.2.</span> <span class="toc-text">路由分发(include)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E8%A7%A3%E6%9E%90"><span class="toc-number">3.3.</span> <span class="toc-text">反向解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E8%B7%AF%E5%BE%84"><span class="toc-number">3.3.1.</span> <span class="toc-text">普通路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%B7%AF%E5%BE%84%EF%BC%88%E6%97%A0%E5%90%8D%E5%88%86%E7%BB%84%EF%BC%89"><span class="toc-number">3.3.2.</span> <span class="toc-text">正则路径（无名分组）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%B7%AF%E5%BE%84%EF%BC%88%E6%9C%89%E5%90%8D%E5%88%86%E7%BB%84%EF%BC%89"><span class="toc-number">3.3.3.</span> <span class="toc-text">正则路径（有名分组）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">3.4.</span> <span class="toc-text">命名空间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E8%B7%AF%E5%BE%84-1"><span class="toc-number">3.4.1.</span> <span class="toc-text">普通路径</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -161,7 +161,218 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2>
+    <h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><h3 id="HTTP-请求"><a href="#HTTP-请求" class="headerlink" title="HTTP 请求"></a>HTTP 请求</h3><p>HTTP 协议以“请求-回复”的方式工作，客户端发送请求时，可以在请求中附加数据，服务器通过解析请求获得客户端传来的数据，并根据 URL 来提供特定的服务。</p>
+<h3 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## search.py</span></span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"><span class="comment"># 表单</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">search_form</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&#x27;search_form.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 接收请求数据</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">request</span>):</span><br><span class="line">    request.encoding=<span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;query&#x27;</span> <span class="keyword">in</span> request.GET <span class="keyword">and</span> request.GET[<span class="string">&#x27;query&#x27;</span>]:</span><br><span class="line">        message = <span class="string">&#x27;你搜索的内容为: &#x27;</span> + request.GET[<span class="string">&#x27;query&#x27;</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        message = <span class="string">&#x27;你提交了空表单&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(message)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## urls.py</span></span><br><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> search</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r&#x27;^search-form/$&#x27;</span>, search.search_form),</span><br><span class="line">    url(<span class="string">r&#x27;^search/$&#x27;</span>, search.search),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--templates/search_form.html--&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Demo-Search<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/search/&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;query&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;搜索&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## search_post.py</span></span><br><span class="line"><span class="keyword">from</span> django.views.decorators <span class="keyword">import</span> csrf</span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"></span><br><span class="line"><span class="comment"># 接收POST请求数据</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">search_post</span>(<span class="params">request</span>):</span><br><span class="line">    ctx = &#123;&#125;</span><br><span class="line">    <span class="keyword">if</span> request.POST:</span><br><span class="line">        ctx[<span class="string">&#x27;rlt&#x27;</span>] = request.POST[<span class="string">&#x27;post_text&#x27;</span>]</span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">&quot;post_result.html&quot;</span>, ctx)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## urls.py</span></span><br><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> views,testdb,search,search2</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r&#x27;^search-post/$&#x27;</span>, search_post.search_post),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Request-对象"><a href="#Request-对象" class="headerlink" title="Request 对象"></a>Request 对象</h3><p>每个视图函数的第一个参数是一个 HttpRequest 对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">demo</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;Hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><ul>
+<li>path: 请求页面的全路径，不包括域名，例如：”&#x2F;index&#x2F;“</li>
+<li>method: 请求使用的 HTTP 方法，常用值包括：GET, POST</li>
+<li>encoding: 表单数据使用的编码，只有当请求的内容类型是<code>application/x-www-form-urlencoded</code>时才使用</li>
+<li>GET: 包含所有 HTTP GET 参数的类字典对象</li>
+<li>POST: 包含所有 HTTP POST 参数的类字典对象</li>
+<li>REQUEST: 是 GET 和 POST 的合体，但是有特殊性，先查找 POST 属性，然后再查找 GET 属性</li>
+<li>FILES: 包含所有上传文件的类字典对象（注：只有在请求方法是 POST，并且请求页面中<form>有 enctype&#x3D;”multipart&#x2F;form-data”属性时 FILES 才拥有数据。否则，FILES 是一个空字典。）,FILES 中的每个 Key 都是<input type="file" name="" />标签中 name 属性的值. FILES 中的每个 value 同时也是一个标准 Python 字典对象，包含下面三个 Keys:<ul>
+<li>filename: 上传文件名，含路径</li>
+<li>content-type: 上传文件内容类型</li>
+<li>content: 上传文件的原始内容</li>
+</ul>
+</li>
+<li>COOKIES: 包含所有 cookie 的标准 Python 字典对象，Keys 和 Values 都是字符串</li>
+<li>META: 包含所有 HTTP 头部信息的类字典对象<ul>
+<li>CONTENT_LENGTH</li>
+<li>CONTENT_TYPE</li>
+<li>QUERY_STRING: 未解析的原始查询字符串</li>
+<li>REMOTE_ADDR: 客户端 IP 地址</li>
+<li>REMOTE_HOST: 客户端主机名</li>
+<li>SERVER_NAME: 服务器主机名</li>
+<li>SERVER_PORT: 服务器端口</li>
+<li>HTTP_USER_AGENT: 客户端代理信息</li>
+<li>HTTP_REFERER: Referring URL</li>
+<li>HTTP_ACCEPT_ENCODING</li>
+<li>HTTP_ACCEPT_LANGUAGE</li>
+<li>HTTP_HOST: 客户发送的 HTTP 主机头信息</li>
+<li>HTTP_X_BENDER: X-Bender 头信息</li>
+</ul>
+</li>
+<li>user: 是一个 django.contrib.auth.models.User 对象，代表当前登录的用户，如果当前访问的用户没有登录，则 user 将被初始化为 django.contrib.auth.models.AnonymousUser 的实例，只有激活 Django 的 AuthenticationMiddleware 时才会生效。<ul>
+<li>user.is_authenticated(): 如果是已认证的用户(即用户已登录)，返回 True；否则返回 False</li>
+<li>user.is_staff(): 如果是超级用户，返回 True；否则返回 False</li>
+<li>user.is_active(): 如果是已激活的用户，返回 True；否则返回 False</li>
+<li>user.is_anonymous(): 如果是匿名用户，返回 True；否则返回 False</li>
+<li>user.get_username(): 返回用户名</li>
+<li>user_id: 当前登录用户的主键，int 类型</li>
+</ul>
+</li>
+<li>session: 当前会话的 SessionStore 对象，唯一可读写的属性，只有激活 Django 中的 session 支持时才可用。</li>
+<li>raw_post_data: 原始 HTTP POST 数据，为解析过，是一个字符串。</li>
+</ul>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><strong>getitem</strong>(key): 返回 GET 或 POST 的键值，先取 POST 后取 GET，如果没有则抛出 KeyError 异常</li>
+<li>has_key(): 检查 request.GET or request.POST 中是否包含参数指定的 Key</li>
+<li>get_full_path(): 返回包含查询字符串的完整路径</li>
+<li>is_secure(): 检查请求是否使用 HTTPS 协议，如果安全则返回 True</li>
+<li>is_ajax(): 判断请求是否是通过 XMLHttpRequest 发起的</li>
+<li>get_host(): 返回请求的主机部分</li>
+<li>get_port(): 返回请求使用的端口</li>
+<li>get_scheme(): 返回请求使用的协议，例如 http, https</li>
+<li>build_absolute_uri(location): 返回 location 参数在当前请求下完整的绝对路径</li>
+</ul>
+<h3 id="QueryDict-对象"><a href="#QueryDict-对象" class="headerlink" title="QueryDict 对象"></a>QueryDict 对象</h3><p>在 HttpRequest 对象中，GET 和 POST 属性是 django.http.QueryDict 类型的实例。<br>其类似字典的自定义类，用来处理单键对应多值的情况，实现所有的标准字典方法，还有一些特有方法。</p>
+<h4 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><strong>getitem</strong>: 和标准字典的不完全相同，如果 Key 对应多个 Value，则其返回最后一个 Value</li>
+<li><strong>setitem</strong>: 设置 Key 和 Value，如果 Key 已经存在，则对应的 Value 会被替换，只能在一个 mutable QueryDict 对象上被调用，就是通过 copy()产生的一个 QUeryDict 对象的拷贝</li>
+<li>get(): 如果 Key 对应多个 Value，则返回最后一个</li>
+<li>update(): 参数可以是 QueryDict，也可以是标准字典，和标准字典的 update 方法不同，其会保留 Key 对应的所有 Value，即添加 items 而不是替换。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = QueryDict(<span class="string">&#x27;a=1&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = q.copy() <span class="comment"># to make it mutable</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.update(&#123;<span class="string">&#x27;a&#x27;</span>: <span class="string">&#x27;2&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.getlist(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"></span><br><span class="line"> [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q[<span class="string">&#x27;a&#x27;</span>] <span class="comment"># returns the last</span></span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;2&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>items(): 该方法使用单值逻辑的<strong>getitem</strong>方法，返回一个二元元组列表，每个二元元组包含(key, value)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = QueryDict(<span class="string">&#x27;a=1&amp;a=2&amp;a=3&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.items()</span><br><span class="line"></span><br><span class="line">[(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;3&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>values():</li>
+<li>copy(): 返回对象的拷贝，底层实现使用的标准库的 copy.deepcopy()方法，是 mutable，可以更改该拷贝的值</li>
+<li>getlist(key): 返回和参数 Key 对应的所有值，作为一个 Python List 返回，如果 Key 不存在，则返回空列表</li>
+<li>setlist(key, list**): 设置 Key 的值为 list**</li>
+<li>setlistdefault(key, list): 和 setdefautl 不同，其接收 list 而不是单个 value 作为参数</li>
+<li>appendlist(key, value): 添加 item 和 key 关联到内部的 list</li>
+<li>lists(): 和 items()类似，但会返回 key 的所有值，作为一个 list</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = QueryDict(<span class="string">&#x27;a=1&amp;a=2&amp;a=3&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.lists()</span><br><span class="line"></span><br><span class="line">[(<span class="string">&#x27;a&#x27;</span>, [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>])]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>urlencode(): 返回一个字符串，表示对 QueryDict 中所有 Key 和 Value 的 URL 编码</li>
+</ul>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><h3 id="视图函数"><a href="#视图函数" class="headerlink" title="视图函数"></a>视图函数</h3><p>视图函数是一个简单的 Python 函数，它接受 Web 请求并返回 Web 响应。</p>
+<p>视图函数接收一个 HttpRequest 对象作为第一个参数，HttpRequest 对象包含了请求的元数据，比如请求方法、请求路径、请求头等。</p>
+<p>视图函数返回一个 HttpResponse 对象，HttpResponse 对象可以包含以下内容：</p>
+<ul>
+<li>响应头</li>
+<li>响应体</li>
+<li>响应状态码</li>
+</ul>
+<p>一般放在项目的 views.py 文件中，类似于 MVC 中的控制器。</p>
+<h3 id="请求对象：HttpRequest"><a href="#请求对象：HttpRequest" class="headerlink" title="请求对象：HttpRequest"></a>请求对象：HttpRequest</h3><ol>
+<li>GET<ul>
+<li>数据类型是 QueryDict</li>
+<li>包含 HTTP GET 请求的所有参数</li>
+<li>有相同的键，就将所有的值放到对应的列表里</li>
+<li>取值格式: 对象.方法</li>
+<li>get(): 返回字符串，如果该键对应有多个值，取出该键的最后一个值<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">demo_get</span>(<span class="params">request</span>):</span><br><span class="line">    name = request.GET.get(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;姓名：&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(name))</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>POST<ul>
+<li>数据类型是 QueryDict</li>
+<li>包含 HTTP POST 请求的所有参数</li>
+<li>常用于 form 表单，form 表单里的标签 name 属性对应参数的键，value 属性对应参数里的值</li>
+<li>取值格式: 对象.方法</li>
+<li>get(): 返回字符串，如果该键对应有多个值，取出该键的最后一个值<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">demo_post</span>(<span class="params">request</span>):</span><br><span class="line">    name = request.POST.get(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;姓名：&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(name))</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>body<ul>
+<li>数据类型是二进制字节流，是原生请求体里的参数内容</li>
+<li>在 HTTP 中用于 POST，因为 GET 没有请求体</li>
+<li>在 HTTP 中不常用，而在处理非 HTTP 形式的报文时非常有用，如：二进制图片、XML、JSON 等<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">demo_body</span>(<span class="params">request</span>):</span><br><span class="line">    name = request.body</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;测试：body&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>path<ul>
+<li>获取 URL 中的路径部分，数据类型是字符串<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">demo_path</span>(<span class="params">request</span>):</span><br><span class="line">    name = request.path</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;测试：path&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>method<ul>
+<li>获取当前请求的方式，数据类型是字符串，且结果为大写<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">demo_method</span>(<span class="params">request</span>):</span><br><span class="line">    name = request.method</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;测试：method&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="响应对象：HttpResponse"><a href="#响应对象：HttpResponse" class="headerlink" title="响应对象：HttpResponse"></a>响应对象：HttpResponse</h3><ol>
+<li>HttpResponse()<ul>
+<li>返回文本，参数为字符串，若含有 html 标签，也可以渲染<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">demo_res</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="comment"># return HttpResponse(&quot;测试res&quot;)</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;&lt;a href=&#x27;https://www.baidu.com/&#x27;&gt;百度一下&lt;/a&gt;&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>render()<ul>
+<li>返回文本，第一个参数 request，第二个参数为字符串（页面名称），第三个参数为字典（可选参数，向页面传递的参数：键为页面的参数名，值为 views 的参数名）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">demo_render</span>(<span class="params">request</span>):</span><br><span class="line">    name =<span class="string">&quot;测试: render&quot;</span></span><br><span class="line">    <span class="keyword">return</span> render(request,<span class="string">&quot;index.html&quot;</span>,&#123;<span class="string">&quot;name&quot;</span>:name&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>redirect()<ul>
+<li>重定向，跳转新页面，参数为字符串，字符串填写页面路径</li>
+<li>一般用于 form 表单提交后，跳转到新页面<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">demo_redirect</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">&quot;/index/&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>render 和 redirect 均是在 HttpResponse 的基础上封装的，底层返回的也是 HttpResponse 的对象</li>
+</ul>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><ul>
+<li>根据用户的请求链接来判断对应的处理函数，并返回处理结果，即将 URL 和视图建立映射关系</li>
+<li>在 Django 中，URL 的配置文件是 urls.py，每一条配置对应相应的处理方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> re_path</span><br><span class="line"><span class="comment"># 用re_path 需要引入</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># 普通路径</span></span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">    path(<span class="string">&#x27;index/&#x27;</span>, views.index),</span><br><span class="line">     <span class="comment"># 正则路径</span></span><br><span class="line">    re_path(<span class="string">r&#x27;^articles/([0-9]&#123;4&#125;)/$&#x27;</span>, views.articles),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="正则路径的分组"><a href="#正则路径的分组" class="headerlink" title="正则路径的分组"></a>正则路径的分组</h3><h4 id="无名分组"><a href="#无名分组" class="headerlink" title="无名分组"></a>无名分组</h4><ul>
+<li>按位置传参，一一对应</li>
+<li>views 中除了 request，其它形参的数量要与 urls 中的分组数量一致</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urls.py</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">    re_path(<span class="string">&quot;^index/([0-9]&#123;4&#125;)/$&quot;</span>, views.index),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">#views.py</span></span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">request, year</span>):</span><br><span class="line">    <span class="comment"># 一个形参代表路径中一个分组的内容，按顺序匹配</span></span><br><span class="line">    <span class="built_in">print</span>(year)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;测试&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="有名分组"><a href="#有名分组" class="headerlink" title="有名分组"></a>有名分组</h4><ul>
+<li>语法：(?P&lt;组名&gt;正则表达式)</li>
+<li>按关键字传参，与位置顺序无关</li>
+<li>views 中除了 request，其它形参的数量要与 urls 中的分组数量一致，并且 views 中的形参名称要与 urls 中的组名一致</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urls.py</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">    re_path(<span class="string">&quot;^index/(?P&lt;year&gt;[0-9]&#123;4&#125;)/$&quot;</span>, views.index),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> HttpResponse</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">request, year, month</span>):</span><br><span class="line">    <span class="comment"># 一个形参代表路径中一个分组的内容，按关键字对应匹配</span></span><br><span class="line">    <span class="built_in">print</span>(year,month)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;测试&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="路由分发-include"><a href="#路由分发-include" class="headerlink" title="路由分发(include)"></a>路由分发(include)</h3><p>Django 项目里多个 app 共用一个<code>urls.py</code>容易造成混乱，也不方便维护。<br>可以将每个 app 的 urls.py 拆分出来，在主 urls.py 中使用 include 进行导入</p>
+<ol>
+<li>在每个 app 里都创建一个 urls.py</li>
+<li>在项目名称目录下的 urls.py 文件里，统一将路径分发给各个 app 目录</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 项目urls.py</span></span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path,include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">    path(<span class="string">&quot;app01/&quot;</span>, include(<span class="string">&quot;app01.urls&quot;</span>)),</span><br><span class="line">    path(<span class="string">&quot;app02/&quot;</span>, include(<span class="string">&quot;app02.urls&quot;</span>)),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># app01/urls.py</span></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path,re_path</span><br><span class="line"><span class="keyword">from</span> app01 <span class="keyword">import</span> views <span class="comment"># 从自己的 app 目录引入 views</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    re_path(<span class="string">r&#x27;^login/(?P&lt;m&gt;[0-9]&#123;2&#125;)/$&#x27;</span>, views.index, ),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># app02/urls.py</span></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path,re_path</span><br><span class="line"><span class="keyword">from</span> app02 <span class="keyword">import</span> views <span class="comment"># 从自己的 app 目录引入views</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    re_path(<span class="string">&quot;^xxx/(?P[0-9]&#123;4&#125;)/$&quot;</span>, views.xxx),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="反向解析"><a href="#反向解析" class="headerlink" title="反向解析"></a>反向解析</h3><ul>
+<li>当路由层 url 发生改变，在视图层和模板层动态反向解析出更改后的 url，免去修改的操作</li>
+<li>一般用在模板中的超链接及视图中的重定向</li>
+</ul>
+<h4 id="普通路径"><a href="#普通路径" class="headerlink" title="普通路径"></a>普通路径</h4><ul>
+<li>在 urls.py 中给路由起别名，name&#x3D;”路由别名”</li>
+<li>在 views.py 中，利用 reverse(“路由别名”)反向解析</li>
+<li>在模板中的 html 文件内，利用<code>&#123;% url "路由别名" %&#125;</code>反向解析</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urls.py</span></span><br><span class="line">path(<span class="string">&quot;login1/&quot;</span>, views.login, name=<span class="string">&quot;login&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="keyword">return</span> redirect(reverse(<span class="string">&quot;login&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># template.html</span></span><br><span class="line">&lt;form action=<span class="string">&quot;&#123;% url &#x27;login&#x27; %&#125;&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="正则路径（无名分组）"><a href="#正则路径（无名分组）" class="headerlink" title="正则路径（无名分组）"></a>正则路径（无名分组）</h4><ul>
+<li>在 urls.py 中给路由起别名，name&#x3D;”路由别名”</li>
+<li>在 views.py 中，利用 reverse(“路由别名”, args&#x3D;(1, 符合正则匹配的参数))反向解析</li>
+<li>在模板中的 html 文件内，利用<code>&#123;% url "路由别名"  符合正则匹配的参数 %&#125;</code>反向解析</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urls.py</span></span><br><span class="line">re_path(<span class="string">r&quot;^login/([0-9]&#123;2&#125;)/$&quot;</span>, views.login, name=<span class="string">&quot;login&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="keyword">return</span> redirect(reverse(<span class="string">&quot;login&quot;</span>,args=(<span class="number">10</span>,)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># template.html</span></span><br><span class="line">&lt;form action=<span class="string">&quot;&#123;% url &#x27;login&#x27; 10 %&#125;&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="正则路径（有名分组）"><a href="#正则路径（有名分组）" class="headerlink" title="正则路径（有名分组）"></a>正则路径（有名分组）</h4><ul>
+<li>在 urls.py 中给路由起别名，name&#x3D;”路由别名”</li>
+<li>在 views.py 中，利用 reverse(“路由别名”, kwargs&#x3D;{“分组名”:符合正则匹配的参数})反向解析</li>
+<li>在模板中的 html 文件内，利用<code>&#123;% url "路由别名" 分组名=符合正则匹配的参数 %&#125;</code>反向解析</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># urls.py</span></span><br><span class="line">re_path(<span class="string">r&quot;^login/(?P&lt;year&gt;[0-9]&#123;4&#125;)/$&quot;</span>, views.login, name=<span class="string">&quot;login&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py</span></span><br><span class="line"><span class="keyword">return</span> redirect(reverse(<span class="string">&quot;login&quot;</span>,kwargs=&#123;<span class="string">&quot;year&quot;</span>:<span class="number">2333</span>&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment"># template.html</span></span><br><span class="line">&lt;form action=<span class="string">&quot;&#123;% url &#x27;login&#x27; year=2333 %&#125;&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><ul>
+<li>是用于表示标识符的可见范围</li>
+<li>一个标识符可以在多个命名空间中定义，它在不同命名空间中的含义是互不相干的</li>
+<li>一个新的命名空间中可以定义任何标识符，不会与任何重复的标识符发生冲突，因为重复的定义都处理其它命名空间中</li>
+<li>路由别名 name 没有作用域，反向解析时会在项目全局顺序搜索，当搜索到第一条匹配时立即返回，如果不同 app 目录下存在相同的路由别名时，会导致 URL 反向解析错误。</li>
+</ul>
+<h4 id="普通路径-1"><a href="#普通路径-1" class="headerlink" title="普通路径"></a>普通路径</h4><ul>
+<li>定义命名空间，include 里面是一个元组</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">include((<span class="string">&quot;app名称：urls&quot;</span>，<span class="string">&quot;app名称&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># e.g:</span></span><br><span class="line"><span class="comment"># 项目urls.py</span></span><br><span class="line">path(<span class="string">&quot;app01/&quot;</span>, include((<span class="string">&quot;app01.urls&quot;</span>,<span class="string">&quot;app01&quot;</span>)))</span><br><span class="line">path(<span class="string">&quot;app02/&quot;</span>, include((<span class="string">&quot;app02.urls&quot;</span>,<span class="string">&quot;app02&quot;</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># app01/urls.py</span></span><br><span class="line">path(<span class="string">&quot;login/&quot;</span>, views.login, name=<span class="string">&quot;login&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># app01/views.py</span></span><br><span class="line"><span class="comment">#reverse(&quot;app名称：路由别名&quot;)</span></span><br><span class="line"><span class="keyword">return</span> redirect(reverse(<span class="string">&quot;app01:login&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># app01/template.html</span></span><br><span class="line"><span class="comment"># &#123;% url &quot;app名称：路由别名&quot; %&#125;</span></span><br><span class="line">&lt;form action=<span class="string">&quot;&#123;% url &#x27;app01:login&#x27; %&#125;&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
   </div>
 </article>
 
@@ -186,7 +397,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">表单</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">表单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP-%E8%AF%B7%E6%B1%82"><span class="toc-number">1.1.</span> <span class="toc-text">HTTP 请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GET-%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">GET 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">POST 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Request-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.4.</span> <span class="toc-text">Request 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">1.4.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QueryDict-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.5.</span> <span class="toc-text">QueryDict 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1"><span class="toc-number">1.5.1.</span> <span class="toc-text">方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">视图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">视图函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AF%B9%E8%B1%A1%EF%BC%9AHttpRequest"><span class="toc-number">2.2.</span> <span class="toc-text">请求对象：HttpRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%AF%B9%E8%B1%A1%EF%BC%9AHttpResponse"><span class="toc-number">2.3.</span> <span class="toc-text">响应对象：HttpResponse</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1"><span class="toc-number">3.</span> <span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%B7%AF%E5%BE%84%E7%9A%84%E5%88%86%E7%BB%84"><span class="toc-number">3.1.</span> <span class="toc-text">正则路径的分组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E5%90%8D%E5%88%86%E7%BB%84"><span class="toc-number">3.1.1.</span> <span class="toc-text">无名分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E5%90%8D%E5%88%86%E7%BB%84"><span class="toc-number">3.1.2.</span> <span class="toc-text">有名分组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%88%86%E5%8F%91-include"><span class="toc-number">3.2.</span> <span class="toc-text">路由分发(include)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E8%A7%A3%E6%9E%90"><span class="toc-number">3.3.</span> <span class="toc-text">反向解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E8%B7%AF%E5%BE%84"><span class="toc-number">3.3.1.</span> <span class="toc-text">普通路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%B7%AF%E5%BE%84%EF%BC%88%E6%97%A0%E5%90%8D%E5%88%86%E7%BB%84%EF%BC%89"><span class="toc-number">3.3.2.</span> <span class="toc-text">正则路径（无名分组）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%B7%AF%E5%BE%84%EF%BC%88%E6%9C%89%E5%90%8D%E5%88%86%E7%BB%84%EF%BC%89"><span class="toc-number">3.3.3.</span> <span class="toc-text">正则路径（有名分组）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">3.4.</span> <span class="toc-text">命名空间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E8%B7%AF%E5%BE%84-1"><span class="toc-number">3.4.1.</span> <span class="toc-text">普通路径</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
