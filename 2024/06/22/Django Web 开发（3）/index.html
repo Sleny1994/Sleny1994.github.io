@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Admin 管理工具 Django 提供了内置的 Web 管理工具，用于管理数据库中的数据。 是 django.contrib 中的一部分，可以在项目的settings.py中的INSTALLED_APP中看到。  12345678INSTALLED_APPS &#x3D; (    &amp;#x27;django.contrib.admin&amp;#x27;,    &amp;#x27;django.contrib.auth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python - Django Web开发（3）">
+<meta property="og:url" content="https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/index.html">
+<meta property="og:site_name" content="一只摸鱼王の日常">
+<meta property="og:description" content="Admin 管理工具 Django 提供了内置的 Web 管理工具，用于管理数据库中的数据。 是 django.contrib 中的一部分，可以在项目的settings.py中的INSTALLED_APP中看到。  12345678INSTALLED_APPS &#x3D; (    &amp;#x27;django.contrib.admin&amp;#x27;,    &amp;#x27;django.contrib.auth">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-22T07:16:49.592Z">
+<meta property="article:author" content="Sleny">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Python - Django Web开发（3）</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/06/26/Sprint%20Boot%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%884%EF%BC%89/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&text=Python - Django Web开发（3）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&is_video=false&description=Python - Django Web开发（3）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python - Django Web开发（3）&body=Check out this article: https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&name=Python - Django Web开发（3）&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&t=Python - Django Web开发（3）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Admin-%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">Admin 管理工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">复杂模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E5%8D%95"><span class="toc-number">1.3.</span> <span class="toc-text">自定义表单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E8%81%94-Inline-%E6%98%BE%E7%A4%BA"><span class="toc-number">1.4.</span> <span class="toc-text">内联(Inline)显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E9%A1%B5%E7%9A%84%E6%98%BE%E7%A4%BA"><span class="toc-number">1.5.</span> <span class="toc-text">列表页的显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">1.6.</span> <span class="toc-text">注意</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Python - Django Web开发（3）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Sleny</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-06-21T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-06-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Django/" rel="tag">Django</a>, <a class="p-category" href="/tags/Python/" rel="tag">Python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Admin-管理工具"><a href="#Admin-管理工具" class="headerlink" title="Admin 管理工具"></a>Admin 管理工具</h2><ul>
+<li>Django 提供了内置的 Web 管理工具，用于管理数据库中的数据。</li>
+<li>是 django.contrib 中的一部分，可以在项目的<code>settings.py</code>中的<code>INSTALLED_APP</code>中看到。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = (</span><br><span class="line">    <span class="string">&#x27;django.contrib.admin&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.contenttypes&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.staticfiles&#x27;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li>启动 Django 项目</li>
+<li>访问<code>http://127.0.0.1:8000/admin/</code>，输入用户名和密码，进入管理页面。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可以通过命令 py manage.py createsuperuser 创建超级用户</span></span><br><span class="line">Username (leave blank to use <span class="string">&#x27;root&#x27;</span>): admin</span><br><span class="line">Email address: admin@admin.com</span><br><span class="line">Password:</span><br><span class="line">Password (again):</span><br><span class="line">Superuser created successfully.</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>创建模型类 - app01 中使用的模型</li>
+<li>注册模型类 - 在 app01&#x2F;admin.py 中注册模型</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test</span><br><span class="line"></span><br><span class="line">admin.site.register(Test)</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>再次访问<code>http://127.0.0.1:8000/admin/</code>，即可看到 Test 模型的数据表</li>
+</ol>
+<h3 id="复杂模型"><a href="#复杂模型" class="headerlink" title="复杂模型"></a>复杂模型</h3><p>管理页面非常强大，可以处理非常复杂的模型数据。</p>
+<ol>
+<li>先在 app01&#x2F;models.py 中创建一个复杂模型</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span>(models.Model):</span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Contact</span>(models.Model):</span><br><span class="line">    name   = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    age    = models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line">    email  = models.EmailField()</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__unicode__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.name</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Tag</span>(models.Model):</span><br><span class="line">    contact = models.ForeignKey(Contact, on_delete=models.CASCADE,)</span><br><span class="line">    name    = models.CharField(max_length=<span class="number">50</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__unicode__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.name</span><br></pre></td></tr></table></figure>
+
+<pre><code>- 上述代码中有两个表，Tag以Contact为外键，一个Contact可以对应多个Tag
+- IntegerField用于存储整数
+</code></pre>
+<ol start="2">
+<li>在 app01&#x2F;admin.py 中注册模型</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test,Contact,Tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># admin.site.register(Test)</span></span><br><span class="line"><span class="comment"># admin.site.register(Contact)</span></span><br><span class="line"><span class="comment"># admin.site.register(Tag)</span></span><br><span class="line">admin.site.register([Test, Contact, Tag])</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>再次访问<code>http://127.0.0.1:8000/admin/</code>，即可看到 Test 模型的数据表</li>
+<li>如果未创建表结构，可以通过以下命令创建</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">py manage.py makemigrations [appname]</span><br><span class="line">py manage.py migrate [appname]</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义表单"><a href="#自定义表单" class="headerlink" title="自定义表单"></a>自定义表单</h3><ul>
+<li>默认情况下，管理页面使用 Django 的表单，可以自定义表单。</li>
+<li>修改 app01&#x2F;admin.py</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test,Contact,Tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># Register your models here.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ContactAdmin</span>(admin.ModelAdmin):</span><br><span class="line">    fields = (<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;email&#x27;</span>)</span><br><span class="line"></span><br><span class="line">admin.site.register(Contact, ContactAdmin)</span><br><span class="line">admin.site.register([Test, Tag])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>再次访问<code>http://127.0.0.1:8000/admin/</code>，即可看到 Contact 的 add 页面，只有 name 和 email 字段</li>
+<li>也可以将输入栏分块，每个栏可以定义自己的格式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test,Contact,Tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># Register your models here.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ContactAdmin</span>(admin.ModelAdmin):</span><br><span class="line">    fieldsets = (</span><br><span class="line">        [<span class="string">&#x27;Main&#x27;</span>,&#123;</span><br><span class="line">            <span class="string">&#x27;fields&#x27;</span>:(<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;email&#x27;</span>),</span><br><span class="line">        &#125;],</span><br><span class="line">        [<span class="string">&#x27;Advance&#x27;</span>,&#123;</span><br><span class="line">            <span class="string">&#x27;classes&#x27;</span>: (<span class="string">&#x27;collapse&#x27;</span>,), <span class="comment"># CSS格式</span></span><br><span class="line">            <span class="string">&#x27;fields&#x27;</span>: (<span class="string">&#x27;age&#x27;</span>,),</span><br><span class="line">        &#125;]</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">admin.site.register(Contact, ContactAdmin)</span><br><span class="line">admin.site.register([Test, Tag])</span><br></pre></td></tr></table></figure>
+
+<h3 id="内联-Inline-显示"><a href="#内联-Inline-显示" class="headerlink" title="内联(Inline)显示"></a>内联(Inline)显示</h3><ul>
+<li>上面的 Contact 是 Tag 的外部键，所以有外部参考的关系</li>
+<li>在默认的页面中，两者被分离，无法体现出两者的从属关系，可以通过内联显示来解决这个问题</li>
+<li>修改 app01&#x2F;admin.py</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test,Contact,Tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># Register your models here.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TagInline</span>(admin.TabularInline):</span><br><span class="line">    model = Tag</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ContactAdmin</span>(admin.ModelAdmin):</span><br><span class="line">    inlines = [TagInline]  <span class="comment"># Inline</span></span><br><span class="line">    fieldsets = (</span><br><span class="line">        [<span class="string">&#x27;Main&#x27;</span>,&#123;</span><br><span class="line">            <span class="string">&#x27;fields&#x27;</span>:(<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;email&#x27;</span>),</span><br><span class="line">        &#125;],</span><br><span class="line">        [<span class="string">&#x27;Advance&#x27;</span>,&#123;</span><br><span class="line">            <span class="string">&#x27;classes&#x27;</span>: (<span class="string">&#x27;collapse&#x27;</span>,),</span><br><span class="line">            <span class="string">&#x27;fields&#x27;</span>: (<span class="string">&#x27;age&#x27;</span>,),</span><br><span class="line">        &#125;]</span><br><span class="line"></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">admin.site.register(Contact, ContactAdmin)</span><br><span class="line">admin.site.register([Test])</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表页的显示"><a href="#列表页的显示" class="headerlink" title="列表页的显示"></a>列表页的显示</h3><ul>
+<li>也可以自定义该页面的显示，比如在列表中显示更多的栏目，只需要在 ContactAdmin 中增加 list_display 属性即可</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test,Contact,Tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># Register your models here.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TagInline</span>(admin.TabularInline):</span><br><span class="line">    model = Tag</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ContactAdmin</span>(admin.ModelAdmin):</span><br><span class="line">    list_display = (<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;email&#x27;</span>) <span class="comment"># list</span></span><br><span class="line">    inlines = [TagInline]  <span class="comment"># Inline</span></span><br><span class="line">    fieldsets = (</span><br><span class="line">        [<span class="string">&#x27;Main&#x27;</span>,&#123;</span><br><span class="line">            <span class="string">&#x27;fields&#x27;</span>:(<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;email&#x27;</span>),</span><br><span class="line">        &#125;],</span><br><span class="line">        [<span class="string">&#x27;Advance&#x27;</span>,&#123;</span><br><span class="line">            <span class="string">&#x27;classes&#x27;</span>: (<span class="string">&#x27;collapse&#x27;</span>,),</span><br><span class="line">            <span class="string">&#x27;fields&#x27;</span>: (<span class="string">&#x27;age&#x27;</span>,),</span><br><span class="line">        &#125;]</span><br><span class="line"></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">admin.site.register(Contact, ContactAdmin)</span><br><span class="line">admin.site.register([Test])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>搜索功能的添加</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> app01.models <span class="keyword">import</span> Test,Contact,Tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># Register your models here.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TagInline</span>(admin.TabularInline):</span><br><span class="line">    model = Tag</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ContactAdmin</span>(admin.ModelAdmin):</span><br><span class="line">    list_display = (<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;email&#x27;</span>) <span class="comment"># list</span></span><br><span class="line">    search_fields = (<span class="string">&#x27;name&#x27;</span>,)</span><br><span class="line">    inlines = [TagInline]  <span class="comment"># Inline</span></span><br><span class="line">    fieldsets = (</span><br><span class="line">        [<span class="string">&#x27;Main&#x27;</span>,&#123;</span><br><span class="line">            <span class="string">&#x27;fields&#x27;</span>:(<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;email&#x27;</span>),</span><br><span class="line">        &#125;],</span><br><span class="line">        [<span class="string">&#x27;Advance&#x27;</span>,&#123;</span><br><span class="line">            <span class="string">&#x27;classes&#x27;</span>: (<span class="string">&#x27;collapse&#x27;</span>,),</span><br><span class="line">            <span class="string">&#x27;fields&#x27;</span>: (<span class="string">&#x27;age&#x27;</span>,),</span><br><span class="line">        &#125;]</span><br><span class="line"></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">admin.site.register(Contact, ContactAdmin)</span><br><span class="line">admin.site.register([Test])</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>on_delete 有<code>CASCADE/PROTECT/SET_NULL/SET_DEFAULT/SET</code>五个可选值<ul>
+<li>CASCADE：级联删除</li>
+<li>PROTECT：抛出 ProtectedError 异常</li>
+<li>SET_NULL：将外键字段设为 null，前提是该字段允许为 null</li>
+<li>SET_DEFAULT：将外键字段设为默认值</li>
+<li>SET：将外键字段设为指定值，指定值由参数指定，可以是一个函数，一般情况下使用 CASCADE 就可以</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Admin-%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">Admin 管理工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">复杂模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E5%8D%95"><span class="toc-number">1.3.</span> <span class="toc-text">自定义表单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E8%81%94-Inline-%E6%98%BE%E7%A4%BA"><span class="toc-number">1.4.</span> <span class="toc-text">内联(Inline)显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E9%A1%B5%E7%9A%84%E6%98%BE%E7%A4%BA"><span class="toc-number">1.5.</span> <span class="toc-text">列表页的显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">1.6.</span> <span class="toc-text">注意</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&text=Python - Django Web开发（3）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&is_video=false&description=Python - Django Web开发（3）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python - Django Web开发（3）&body=Check out this article: https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&title=Python - Django Web开发（3）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&name=Python - Django Web开发（3）&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sleny1994.github.io/2024/06/22/Django%20Web%20%E5%BC%80%E5%8F%91%EF%BC%883%EF%BC%89/&t=Python - Django Web开发（3）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2024
+    Sleny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/Sleny1994">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
